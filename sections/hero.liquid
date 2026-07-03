@@ -1,4 +1,8 @@
-
+<script
+  src="{{ 'hero.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
 
 {% liquid
   assign media_count = 0
@@ -458,7 +462,8 @@
 
 <div
   id="Hero-{{ section.id }}"
-  class="hero{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}{% if section.settings.stack_media_on_mobile %} hero--stack-mobile{% endif %}"
+  class="hero{% if section.settings.hero_layout_style == 'luxury-split' %} rt-hero--luxury-split{% endif %}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}{% if section.settings.stack_media_on_mobile %} hero--stack-mobile{% endif %}"
+  data-mouse-parallax="{% if section.settings.enable_mouse_parallax %}true{% else %}false{% endif %}"
   style="
     --hero-border-style: {{ section.settings.border }};
     --hero-border-width: {{ section.settings.border_width }}px;
@@ -471,6 +476,16 @@
     {% else %}
       --hero-min-height: var(--section-height-{{ section.settings.section_height }});
     {% endif %}
+
+    /* RoyalTick Premium Luxury Hero Custom Properties */
+    --rt-hero-bg: {{ section.settings.hero_bg_color | default: '#0b0b0b' }};
+    --rt-desktop-height: {{ section.settings.desktop_hero_height }}vh;
+    --rt-mobile-height: {{ section.settings.mobile_hero_height }}vh;
+    --rt-overlay-color: {{ section.settings.overlay_color | default: '#000000' }};
+    --rt-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --rt-content-width: {{ section.settings.content_max_width | default: 700 }}px;
+    --rt-content-align: {{ section.settings.content_alignment | default: 'left' }};
+    --rt-image-position: {{ section.settings.desktop_image_position | default: 'right' }};
   "
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
@@ -479,70 +494,205 @@
     data-blur-shadow="true"
   {% endif %}
 >
-  {% if section.settings.blurred_reflection %}
-    {% unless has_only_video %}
-      <div
-        class="hero__blurred-image hero__blurred-image--desktop"
-        data-testid="hero-blurred-image-desktop"
-      >
-        {{ media_blurred }}
+  {%- if section.settings.hero_layout_style == 'luxury-split' -%}
+    <!-- LUXURY HERO -->
+    <!-- RoyalTick Premium Luxury Split Hero Layout -->
+    <div class="rt-hero__overlay"></div>
+    <div class="rt-hero__container page-width">
+      <div class="rt-hero__split-grid">
+        
+        <!-- Left Column: Branding & Content -->
+        <div class="rt-hero__split-content">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="rt-hero__eyebrow rt-reveal" style="--rt-delay: 0.1s;">
+              {{- section.settings.eyebrow | escape -}}
+            </span>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="rt-hero__heading rt-reveal" style="--rt-delay: 0.2s;">
+              {{- section.settings.heading -}}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.description != blank -%}
+            <div class="rt-hero__description rt-reveal" style="--rt-delay: 0.3s;">
+              {{- section.settings.description -}}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.primary_btn_label != blank or section.settings.secondary_btn_label != blank -%}
+            <div class="rt-hero__buttons rt-reveal" style="--rt-delay: 0.4s;">
+              {%- if section.settings.primary_btn_label != blank -%}
+                <a
+                  href="{{ section.settings.primary_btn_link | default: '#' }}"
+                  class="rt-btn rt-btn--{{ section.settings.primary_btn_style }} rt-hero__btn"
+                  aria-label="{{ section.settings.primary_btn_label | escape }}"
+                >
+                  {{- section.settings.primary_btn_label | escape -}}
+                </a>
+              {%- endif -%}
+
+              {%- if section.settings.secondary_btn_label != blank -%}
+                <a
+                  href="{{ section.settings.secondary_btn_link | default: '#' }}"
+                  class="rt-btn rt-btn--{{ section.settings.secondary_btn_style }} rt-hero__btn"
+                  aria-label="{{ section.settings.secondary_btn_label | escape }}"
+                >
+                  {{- section.settings.secondary_btn_label | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <!-- Right Column: Media (Watch Showcase) -->
+        <div class="rt-hero__split-media rt-reveal" style="--rt-delay: 0.5s;">
+          <div class="rt-hero__media-glow"></div>
+          <div class="rt-hero__media-parallax">
+            {%- if section.settings.hero_image_desktop != blank or section.settings.hero_image_mobile != blank -%}
+              <picture class="rt-hero__media-picture">
+                {%- if section.settings.hero_image_mobile != blank -%}
+                  <source
+                    media="(max-width: 749px)"
+                    srcset="{{ section.settings.hero_image_mobile | image_url: width: 600 }} 600w, {{ section.settings.hero_image_mobile | image_url: width: 800 }} 800w, {{ section.settings.hero_image_mobile | image_url: width: 1200 }} 1200w"
+                    sizes="(max-width: 749px) 100vw, 45vw"
+                    width="{{ section.settings.hero_image_mobile.width }}"
+                    height="{{ section.settings.hero_image_mobile.height }}"
+                  >
+                {%- endif -%}
+                {%- liquid
+                  assign loading_attr = 'lazy'
+                  assign fetch_priority = 'auto'
+                  if section.index == 1
+                    assign loading_attr = 'eager'
+                    assign fetch_priority = 'high'
+                  endif
+                -%}
+                {%- if section.settings.hero_image_desktop != blank -%}
+                  {%- liquid
+                    assign desktop_alt = section.settings.hero_image_desktop.alt | default: section.settings.heading | escape
+                  -%}
+                  {{
+                    section.settings.hero_image_desktop
+                    | image_url: width: 2560
+                    | image_tag:
+                      width: section.settings.hero_image_desktop.width,
+                      widths: '832, 1200, 1600, 1920, 2560',
+                      height: section.settings.hero_image_desktop.height,
+                      alt: desktop_alt,
+                      class: 'rt-hero__image',
+                      sizes: '(min-width: 990px) 45vw, 100vw',
+                      loading: loading_attr,
+                      fetchpriority: fetch_priority
+                  }}
+                {%- else -%}
+                  {%- liquid
+                    assign mobile_alt = section.settings.hero_image_mobile.alt | default: section.settings.heading | escape
+                  -%}
+                  {{
+                    section.settings.hero_image_mobile
+                    | image_url: width: 2560
+                    | image_tag:
+                      width: section.settings.hero_image_mobile.width,
+                      height: section.settings.hero_image_mobile.height,
+                      alt: mobile_alt,
+                      class: 'rt-hero__image',
+                      sizes: '100vw',
+                      loading: loading_attr,
+                      fetchpriority: fetch_priority
+                  }}
+                {%- endif -%}
+              </picture>
+            {%- else -%}
+              <img
+                src="{{ 'luxury-watch-hero.png' | asset_url }}"
+                alt="RoyalTick Premium Luxury Watch"
+                class="rt-hero__image"
+                loading="eager"
+                width="1000"
+                height="1000"
+              >
+            {%- endif -%}
+          </div>
+        </div>
+
       </div>
-    {% endunless %}
-    {% if show_mobile_blurred_reflection %}
-      <div
-        class="hero__blurred-image hero__blurred-image--mobile"
-        data-testid="hero-blurred-image-mobile"
-      >
-        {{ mobile_media_blurred }}
-      </div>
+
+      <!-- Scroll Down Indicator -->
+      {%- if section.settings.enable_scroll_indicator -%}
+        <div class="rt-hero__scroll-indicator">
+          <span class="rt-hero__scroll-mouse">
+            <span class="rt-hero__scroll-wheel"></span>
+          </span>
+          <span class="rt-hero__scroll-text">Scroll Down</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+  {%- else -%}
+    <!-- DEFAULT HERO -->
+    <!-- Default Horizon Hero Layout -->
+    {% if section.settings.blurred_reflection %}
+      {% unless has_only_video %}
+        <div
+          class="hero__blurred-image hero__blurred-image--desktop"
+          data-testid="hero-blurred-image-desktop"
+        >
+          {{ media_blurred }}
+        </div>
+      {% endunless %}
+      {% if show_mobile_blurred_reflection %}
+        <div
+          class="hero__blurred-image hero__blurred-image--mobile"
+          data-testid="hero-blurred-image-mobile"
+        >
+          {{ mobile_media_blurred }}
+        </div>
+      {% endif %}
     {% endif %}
-  {% endif %}
 
-  {% comment %}
-    Hardcoded to section--full-width bc the media has to be full width in all cases.
-    hero__content-wrapper applies section_width.
-  {% endcomment %}
-
-  <div
-    class="hero__container spacing-style section section--full-width"
-    style="{% render 'spacing-style', settings: section.settings %}"
-  >
-    {%- if section.settings.link != blank -%}
-      <a
-        href="{{ section.settings.link }}"
-        class="hero__link"
-        {% if section.settings.open_in_new_tab %}
-          target="_blank" rel="noopener"
-        {% endif %}
-      ></a>
-    {%- endif -%}
     <div
-      class="hero__media-grid"
-      style="--hero-media-count: {{ media_count }};--hero-media-count-mobile: {{ media_count_mobile }};{%- if section.settings.image_1 != blank -%} --hero-media-aspect-ratio: {{ section.settings.image_1.aspect_ratio }};{% endif %}"
-      data-testid="hero-media-wrapper"
+      class="hero__container spacing-style section section--full-width"
+      style="{% render 'spacing-style', settings: section.settings %}"
     >
-      {% liquid
-        if section.settings.toggle_overlay
-          render 'overlay', settings: section.settings
-        endif
-      %}
-      {{ media }}
+      {%- if section.settings.link != blank -%}
+        <a
+          href="{{ section.settings.link }}"
+          class="hero__link"
+          {% if section.settings.open_in_new_tab %}
+            target="_blank" rel="noopener"
+          {% endif %}
+        ></a>
+      {%- endif -%}
+      <div
+        class="hero__media-grid"
+        style="--hero-media-count: {{ media_count }};--hero-media-count-mobile: {{ media_count_mobile }};{%- if section.settings.image_1 != blank -%} --hero-media-aspect-ratio: {{ section.settings.image_1.aspect_ratio }};{% endif %}"
+        data-testid="hero-media-wrapper"
+      >
+        {% liquid
+          if section.settings.toggle_overlay
+            render 'overlay', settings: section.settings
+          endif
+        %}
+        {{ media }}
+      </div>
+      <div
+        class="
+          hero__content-wrapper
+          layout-panel-flex
+          layout-panel-flex--{{ section.settings.content_direction }}
+          {% if section.settings.vertical_on_mobile %}mobile-column{% endif %}
+          section-content-wrapper
+          {{section.settings.section_width}}
+          {% if request.design_mode %}hero__content-wrapper--design-mode{% endif %}
+        "
+        style="{% render 'layout-panel-style', settings: section.settings %}"
+      >
+        {% content_for 'blocks' %}
+      </div>
     </div>
-    <div
-      class="
-        hero__content-wrapper
-        layout-panel-flex
-        layout-panel-flex--{{ section.settings.content_direction }}
-        {% if section.settings.vertical_on_mobile %}mobile-column{% endif %}
-        section-content-wrapper
-        {{section.settings.section_width}}
-        {% if request.design_mode %}hero__content-wrapper--design-mode{% endif %}
-      "
-      style="{% render 'layout-panel-style', settings: section.settings %}"
-    >
-      {% content_for 'blocks' %}
-    </div>
-  </div>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -1244,6 +1394,211 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "RoyalTick Luxury Hero Options"
+    },
+    {
+      "type": "select",
+      "id": "hero_layout_style",
+      "label": "Hero Layout Style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default (Text Overlay)"
+        },
+        {
+          "value": "luxury-split",
+          "label": "Luxury Split (Left Text, Right Image)"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_desktop",
+      "label": "Desktop Hero Image (Luxury Style)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Mobile Hero Image (Luxury Style)"
+    },
+    {
+      "type": "color",
+      "id": "hero_bg_color",
+      "label": "Hero Background Color",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "NEW COLLECTION 2026"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "MASTERPIECES OF TIME"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover handcrafted watches engineered for timeless elegance and precision.</p>"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_position",
+      "label": "Desktop Image Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "desktop_hero_height",
+      "label": "Desktop Hero Height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_hero_height",
+      "label": "Mobile Hero Height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 70
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_indicator",
+      "label": "Enable Scroll Indicator",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mouse_parallax",
+      "label": "Enable Mouse Parallax",
+      "default": false
+    },
+   
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content Max Width (Desktop)",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 700
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary Button Label",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "select",
+      "id": "primary_btn_style",
+      "label": "Primary Button Style",
+      "options": [
+        {
+          "value": "filled",
+          "label": "Filled"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "ghost",
+          "label": "Ghost"
+        }
+      ],
+      "default": "filled"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary Button Label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "select",
+      "id": "secondary_btn_style",
+      "label": "Secondary Button Style",
+      "options": [
+        {
+          "value": "filled",
+          "label": "Filled"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "ghost",
+          "label": "Ghost"
+        }
+      ],
+      "default": "outline"
     }
   ],
   "presets": [

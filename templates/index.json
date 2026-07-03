@@ -62,6 +62,10 @@
       ],
       "name": "t:names.hero",
       "settings": {
+        "hero_layout_style": "luxury-split",
+        "eyebrow": "THE ART OF HIGH HOROLOGY",
+        "heading": "THE APEX OF LUXURY TIMEPIECES",
+        "description": "<p>Engineered with Swiss precision, the RoyalTick collection represents the pinnacle of watchmaking artistry. Indulge in chronographs that harmonize heritage with uncompromising modernity.</p>",
         "media_type_1": "image",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
