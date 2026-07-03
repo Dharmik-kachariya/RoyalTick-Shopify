@@ -360,6 +360,15 @@
       --header-actions-font-weight: var(--font-{{ section.settings.actions_font | default: 'heading' }}--weight);
       --header-actions-text-case: {{ section.settings.actions_text_case | default: 'none' }};
     {% endif %}
+    --rt-desktop-height: {{ section.settings.desktop_header_height | default: 80 }}px;
+    --rt-mobile-height: {{ section.settings.mobile_header_height | default: 60 }}px;
+    --rt-logo-width: {{ section.settings.custom_logo_width | default: 120 }}px;
+    --rt-menu-spacing: {{ section.settings.desktop_menu_spacing | default: 28 }}px;
+    --rt-icon-spacing: {{ section.settings.icon_spacing | default: 28 }}px;
+    --rt-blur-on-scroll: {% if section.settings.blur_on_scroll %}blur(12px){% else %}none{% endif %};
+    --rt-shadow-on-scroll: {% if section.settings.shadow_on_scroll %}0 4px 30px rgba(0, 0, 0, 0.4){% else %}none{% endif %};
+    --rt-sticky-bg: {{ section.settings.sticky_background_color | default: '#0b0b0b' }};
+    --rt-hover-color: {{ section.settings.header_hover_color | default: '#c9a227' }};
   "
 >
   <div class="header__underlay header__underlay-closed"></div>
@@ -1747,6 +1756,84 @@
       "label": "t:settings.text_color_transparent",
       "placeholder": "t:settings.default",
       "visible_if": "{{ section.settings.enable_transparent_header_collection }}"
+    },
+    {
+      "type": "header",
+      "content": "Premium Luxury Styling"
+    },
+    {
+      "type": "range",
+      "id": "desktop_header_height",
+      "label": "Header Height (Desktop)",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_header_height",
+      "label": "Header Height (Mobile)",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "custom_logo_width",
+      "label": "Logo Width",
+      "min": 50,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "desktop_menu_spacing",
+      "label": "Desktop Menu Spacing",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "label": "Icon Spacing",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "checkbox",
+      "id": "blur_on_scroll",
+      "label": "Blur on Scroll",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "shadow_on_scroll",
+      "label": "Shadow on Scroll",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "sticky_background_color",
+      "label": "Sticky Background Color",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "color",
+      "id": "header_hover_color",
+      "label": "Header Hover Color",
+      "default": "#c9a227"
     }
   ],
   "presets": []

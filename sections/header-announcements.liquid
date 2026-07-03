@@ -1,5 +1,6 @@
 
 
+{% if section.settings.enable_announcements %}
 {% if section.blocks.size > 1 %}
   <script
     src="{{ 'announcement-bar.js' | asset_url }}"
@@ -35,10 +36,28 @@
     {% endif %}
 
     <div class="announcement-bar__slides">
-      {% content_for 'blocks' %}
+      {% if section.blocks.size > 0 %}
+        {% content_for 'blocks' %}
+      {% elsif section.settings.announcement_text != blank %}
+        <slideshow-slide
+          class="announcement-bar__slide text-block text-block--align-center text-block--full-width"
+          style="{% if section.settings.announcement_text_color != blank %}--color: {{ section.settings.announcement_text_color }};{% endif %} --width: 100%; --text-align: center; --line-height: 1;"
+        >
+          <p class="announcement-bar__text">
+            {{ section.settings.announcement_text }}
+          </p>
+          {% if section.settings.announcement_link != blank %}
+            <a class="announcement-bar__link" href="{{ section.settings.announcement_link }}">
+              <span class="visually-hidden">{{ section.settings.announcement_text | strip_html }}</span>
+            </a>
+          {% endif %}
+        </slideshow-slide>
+      {% endif %}
     </div>
   </announcement-bar-component>
 </aside>
+{% endif %}
+
 
 {% stylesheet %}
   .announcement-bar {
@@ -137,6 +156,29 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_announcements",
+      "label": "Enable Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "Shop our latest arrivals"
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement Link"
+    },
+    {
+      "type": "color",
+      "id": "announcement_text_color",
+      "label": "Text Color",
+      "placeholder": "t:settings.default"
+    },
     {
       "type": "range",
       "id": "speed",
