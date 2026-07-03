@@ -1,0 +1,479 @@
+/*
+ * RoyalTick - Global Design System
+ * Premium Luxury Watch Store Stylesheet
+ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  /* Colors */
+  --rt-bg: #0B0B0B;
+  --rt-surface: #161616;
+  --rt-card: #1F1F1F;
+  --rt-gold: #C9A227;
+  --rt-gold-hover: #D4AF37;
+  --rt-white: #FFFFFF;
+  --rt-gray: #A4A4A4;
+  --rt-border: rgba(255, 255, 255, 0.08);
+
+  /* Typography Fonts */
+  --rt-font-heading: 'Cormorant Garamond', serif;
+  --rt-font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --rt-container-padding-desktop: 4rem;
+  --rt-container-padding-tablet: 2.5rem;
+  --rt-container-padding-mobile: 1.5rem;
+  --rt-section-spacing-desktop: 8rem;
+  --rt-section-spacing-tablet: 6rem;
+  --rt-section-spacing-mobile: 4rem;
+
+  /* Borders & Radii */
+  --rt-radius-sm: 2px;
+  --rt-radius-md: 4px;
+  --rt-radius-lg: 8px;
+  --rt-radius-circle: 50%;
+
+  /* Shadows */
+  --rt-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --rt-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
+  --rt-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.8);
+  --rt-shadow-gold: 0 0 15px rgba(201, 162, 39, 0.15);
+
+  /* Transition & Easing */
+  --rt-transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --rt-transition-normal: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --rt-transition-slow: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Selection & Scrollbar --- */
+::selection {
+  background-color: var(--rt-gold);
+  color: var(--rt-bg);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--rt-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rt-surface);
+  border: 2px solid var(--rt-bg);
+  border-radius: var(--rt-radius-md);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--rt-gold);
+}
+
+/* --- Reusable Container / Spacing --- */
+.rt-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--rt-container-padding-mobile);
+  padding-right: var(--rt-container-padding-mobile);
+}
+
+@media screen and (min-width: 768px) {
+  .rt-container {
+    padding-left: var(--rt-container-padding-tablet);
+    padding-right: var(--rt-container-padding-tablet);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .rt-container {
+    padding-left: var(--rt-container-padding-desktop);
+    padding-right: var(--rt-container-padding-desktop);
+  }
+}
+
+/* Section padding utilities */
+.rt-section {
+  padding-top: var(--rt-section-spacing-mobile);
+  padding-bottom: var(--rt-section-spacing-mobile);
+}
+
+@media screen and (min-width: 768px) {
+  .rt-section {
+    padding-top: var(--rt-section-spacing-tablet);
+    padding-bottom: var(--rt-section-spacing-tablet);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .rt-section {
+    padding-top: var(--rt-section-spacing-desktop);
+    padding-bottom: var(--rt-section-spacing-desktop);
+  }
+}
+
+/* --- Reusable Button Styles --- */
+.rt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--rt-font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border-radius: var(--rt-radius-sm);
+  cursor: pointer;
+  transition: all var(--rt-transition-normal);
+  text-decoration: none;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  z-index: 1;
+}
+
+/* Primary Button: Solid Gold with Black Text */
+.rt-btn--primary {
+  background-color: var(--rt-gold);
+  color: var(--rt-bg);
+  box-shadow: var(--rt-shadow-sm);
+}
+
+.rt-btn--primary:hover {
+  background-color: var(--rt-gold-hover);
+  box-shadow: var(--rt-shadow-gold);
+  transform: translateY(-2px);
+}
+
+.rt-btn--primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button: Solid Gray/Black with white border */
+.rt-btn--secondary {
+  background-color: var(--rt-surface);
+  color: var(--rt-white);
+  border-color: var(--rt-border);
+}
+
+.rt-btn--secondary:hover {
+  background-color: var(--rt-card);
+  border-color: var(--rt-gold);
+  color: var(--rt-gold);
+  transform: translateY(-2px);
+}
+
+.rt-btn--secondary:active {
+  transform: translateY(0);
+}
+
+/* Outline Button: Transparent with gold border and fill-in hover */
+.rt-btn--outline {
+  background-color: transparent;
+  color: var(--rt-gold);
+  border-color: var(--rt-gold);
+}
+
+.rt-btn--outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--rt-gold);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--rt-transition-normal);
+}
+
+.rt-btn--outline:hover {
+  color: var(--rt-bg);
+}
+
+.rt-btn--outline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.rt-btn--outline:hover {
+  transform: translateY(-2px);
+}
+
+.rt-btn--outline:active {
+  transform: translateY(0);
+}
+
+/* --- Input Fields & Labels --- */
+.rt-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.rt-label {
+  font-family: var(--rt-font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rt-gray);
+  transition: color var(--rt-transition-fast);
+}
+
+.rt-input {
+  width: 100%;
+  background-color: var(--rt-surface);
+  color: var(--rt-white);
+  border: 1px solid var(--rt-border);
+  border-radius: var(--rt-radius-sm);
+  padding: 1rem 1.25rem;
+  font-family: var(--rt-font-body);
+  font-size: 0.9rem;
+  caret-color: var(--rt-gold);
+  transition: border-color var(--rt-transition-normal), box-shadow var(--rt-transition-normal);
+  outline: none;
+}
+
+.rt-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Focus state with animated border and subtle glow */
+.rt-input:focus {
+  border-color: var(--rt-gold);
+  box-shadow: var(--rt-shadow-gold);
+}
+
+.rt-form-group:focus-within .rt-label {
+  color: var(--rt-gold);
+}
+
+/* --- Luxury Cards --- */
+.rt-card {
+  background-color: var(--rt-card);
+  border: 1px solid var(--rt-border);
+  border-radius: var(--rt-radius-sm);
+  padding: 1.5rem;
+  transition: transform var(--rt-transition-normal), border-color var(--rt-transition-normal), box-shadow var(--rt-transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.rt-card:hover {
+  border-color: var(--rt-gold);
+  box-shadow: var(--rt-shadow-md), var(--rt-shadow-gold);
+  transform: translateY(-4px);
+}
+
+/* --- Links & Hover States --- */
+.rt-link {
+  color: var(--rt-white);
+  font-family: var(--rt-font-body);
+  font-size: 0.875rem;
+  text-decoration: none;
+  position: relative;
+  transition: color var(--rt-transition-fast);
+  cursor: pointer;
+}
+
+.rt-link:hover {
+  color: var(--rt-gold);
+}
+
+.rt-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--rt-gold);
+  transform-origin: bottom right;
+  transition: transform var(--rt-transition-normal);
+}
+
+.rt-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* --- Focus States for accessibility --- */
+.rt-focus:focus-visible {
+  outline: 2px solid var(--rt-gold);
+  outline-offset: 4px;
+}
+
+/* --- Utility Classes --- */
+.rt-text-heading {
+  font-family: var(--rt-font-heading);
+}
+
+.rt-text-body {
+  font-family: var(--rt-font-body);
+}
+
+.rt-color-gold {
+  color: var(--rt-gold);
+}
+
+.rt-color-gray {
+  color: var(--rt-gray);
+}
+
+/* --- Animations --- */
+@keyframes rtFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rtFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rtScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rt-animate-fade-up {
+  animation: rtFadeUp var(--rt-transition-slow) forwards;
+}
+
+.rt-animate-fade-in {
+  animation: rtFadeIn var(--rt-transition-normal) forwards;
+}
+
+.rt-animate-scale {
+  animation: rtScale var(--rt-transition-normal) forwards;
+}
+
+/* ==========================================================================
+   RoyalTick Premium Luxury Visual Header Enhancements (Aesthetic Only)
+   ========================================================================== */
+
+/* --- Spacing & Layout Alignment (Desktop & Mobile) --- */
+#header-component .header__columns {
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+  align-items: center !important;
+}
+
+@media screen and (max-width: 749px) {
+  #header-component .header__columns {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+}
+
+/* --- Logo Alignment --- */
+#header-component .logo-section {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* --- Main Navigation Spacing & Typography --- */
+#header-component .menu-list__list {
+  gap: 1.75rem !important; /* Spacious, luxury layout */
+  align-items: center !important;
+}
+
+#header-component .menu-list__link {
+  font-family: var(--rt-font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  padding: 0.75rem 0 !important; /* Space navigation items */
+  color: inherit !important;
+  transition: color var(--rt-transition-normal) !important;
+}
+
+/* --- Smooth Hover Transitions & Underline Slide --- */
+#header-component .menu-list__link-title {
+  position: relative;
+  display: inline-block;
+}
+
+#header-component .menu-list__link-title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--rt-gold);
+  transform-origin: bottom right;
+  transition: transform var(--rt-transition-normal);
+}
+
+#header-component .menu-list__list-item:hover .menu-list__link-title::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+#header-component .menu-list__link--active .menu-list__link-title::after {
+  transform: scaleX(1);
+  background-color: var(--rt-gold);
+}
+
+/* --- Action Icons & Spacing --- */
+#header-component header-actions {
+  gap: 1.75rem !important; /* Clean spacious action layout */
+  align-items: center !important;
+}
+
+#header-component .header-actions__action {
+  color: inherit !important;
+  transition: color var(--rt-transition-normal), transform var(--rt-transition-normal) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.5rem !important;
+}
+
+#header-component .header-actions__action:hover {
+  color: var(--rt-gold) !important;
+  transform: translateY(-1px);
+}
+
+#header-component .header-actions__action svg {
+  width: 18px !important;
+  height: auto !important;
+  transition: stroke var(--rt-transition-normal) !important;
+}
+
+/* --- Focus States Accessibility --- */
+#header-component *:focus-visible {
+  outline: 1.5px solid var(--rt-gold) !important;
+  outline-offset: 4px !important;
+}
+
+
+
