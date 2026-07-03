@@ -1,12 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
     "hero_jVaWmY": {
       "type": "hero",
@@ -280,10 +272,145 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "featured_collections_rt": {
+      "type": "rt-featured-collections",
+      "blocks": {
+        "block_1": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Luxury Watches",
+            "description": "High-end Swiss watch collection."
+          }
+        },
+        "block_2": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Swiss Collection",
+            "description": "Crafted in Switzerland with precision."
+          }
+        },
+        "block_3": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Sports Collection",
+            "description": "Rugged, durable and high-performing."
+          }
+        },
+        "block_4": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Classic Collection",
+            "description": "Elegant models for formal occasions."
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2",
+        "block_3",
+        "block_4"
+      ],
+      "settings": {
+        "rt_section_eyebrow": "EXCLUSIVE COLLECTIONS",
+        "rt_section_heading": "Discover Timeless Masterpieces",
+        "rt_section_description": "Explore watches crafted with precision, luxury and heritage.",
+        "rt_columns_desktop": 4,
+        "rt_columns_mobile": "1",
+        "rt_show_button": true,
+        "rt_enable_animation": true,
+        "rt_card_radius": 12,
+        "rt_overlay_opacity": 40,
+        "rt_background_color": "#0b0b0b",
+        "rt_accent_color": "#c9a227",
+        "rt_section_spacing_top": 80,
+        "rt_section_spacing_bottom": 80
+      }
+    },
+    "featured_products_rt": {
+      "type": "rt-featured-products",
+      "settings": {
+        "rt_eyebrow": "FEATURED WATCHES",
+        "rt_heading": "Crafted For Generations",
+        "rt_description": "Every RoyalTick timepiece is engineered with exceptional precision, timeless elegance, and unmatched craftsmanship.",
+        "rt_collection": "all",
+        "rt_products_limit": 8,
+        "rt_columns": 4,
+        "rt_enable_slider": true,
+        "rt_enable_quickview": true,
+        "rt_enable_wishlist": true,
+        "rt_enable_compare_price": true,
+        "rt_enable_rating": true,
+        "rt_enable_badges": true,
+        "rt_enable_hover_image": true,
+        "rt_enable_autoplay": false,
+        "rt_autoplay_speed": 5,
+        "rt_show_brand": true,
+        "rt_show_stock": true,
+        "rt_background_color": "#0b0b0b",
+        "rt_accent_color": "#c9a227"
+      }
+    },
+    "brand_story_rt": {
+      "type": "rt-brand-story",
+      "settings": {
+        "rt_eyebrow": "OUR HERITAGE",
+        "rt_heading": "Crafted With Passion.<br>Designed For Eternity.",
+        "rt_description": "<p>At RoyalTick, every watch represents decades of precision engineering, timeless craftsmanship, and uncompromising luxury. Every detail is refined to create a masterpiece that lasts generations.</p>",
+        "rt_enable_counters": true,
+        "rt_background_color": "#080808",
+        "rt_accent_color": "#c9a227",
+        "rt_enable_animation": true,
+        "rt_image_position": "left",
+        "rt_section_spacing_top": 80,
+        "rt_section_spacing_bottom": 80
+      }
+    },
+    "brand_showcase_rt": {
+      "type": "rt-brand-showcase",
+      "settings": {
+        "rt_eyebrow": "TRUSTED WORLDWIDE",
+        "rt_heading": "Authorized Luxury Watch Destination",
+        "rt_description": "<p>We proudly curate the world's finest luxury timepieces from internationally recognized brands, backed by authenticity, premium service and worldwide delivery.</p>",
+        "rt_enable_marquee": true,
+        "rt_marquee_speed": "medium",
+        "rt_pause_on_hover": true,
+        "rt_enable_cards": true,
+        "rt_show_icons": true,
+        "rt_card_radius": 12,
+        "rt_background_color": "#0b0b0b",
+        "rt_enable_animation": true,
+        "rt_section_spacing_top": 80,
+        "rt_section_spacing_bottom": 80
+      }
+    },
+    "limited_edition_rt": {
+      "type": "rt-limited-edition",
+      "settings": {
+        "rt_heading": "RoyalTick Signature Collection",
+        "rt_description": "<p>Experience uncompromising craftsmanship with our most exclusive timepiece, created in limited quantities for collectors who value precision and prestige.</p>",
+        "rt_price": "$4,950",
+        "rt_compare_price": "$7,500",
+        "rt_inventory_left": 12,
+        "rt_enable_countdown": true,
+        "rt_countdown_date": "2026-12-31T23:59:59",
+        "rt_button_primary": "Reserve Now",
+        "rt_button_secondary": "Explore Collection",
+        "rt_background_color": "#060606",
+        "rt_accent_color": "#c9a227",
+        "rt_enable_animation": true,
+        "rt_section_spacing_top": 80,
+        "rt_section_spacing_bottom": 80
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
+    "featured_collections_rt",
+    "featured_products_rt",
+    "brand_story_rt",
+    "brand_showcase_rt",
+    "limited_edition_rt",
     "product_list_fa6P9H"
   ]
 }

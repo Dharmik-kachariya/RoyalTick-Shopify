@@ -1,0 +1,523 @@
+{% comment %}
+  RoyalTick Premium Featured Products Section
+  A custom, world-class product showcase section designed for luxury watch stores.
+{% endcomment %}
+
+{{ 'rt-featured-products.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign bg_color = section.settings.rt_background_color | default: '#0b0b0b'
+  assign accent_color = section.settings.rt_accent_color | default: '#c9a227'
+  assign featured_collection = collections[section.settings.rt_collection]
+  assign products_limit = section.settings.rt_products_limit | default: 8
+  assign columns_desktop = section.settings.rt_columns | default: 4
+%}
+
+<style>
+  #rt-featured-products-{{ section.id }} {
+    --rt-bg-color: {{ bg_color }};
+    --rt-accent-color: {{ accent_color }};
+  }
+</style>
+
+<section 
+  id="rt-featured-products-{{ section.id }}" 
+  class="rt-featured-products"
+  data-section-id="{{ section.id }}"
+  data-enable-slider="{{ section.settings.rt_enable_slider }}"
+  data-autoplay="{{ section.settings.rt_enable_autoplay }}"
+  data-autoplay-speed="{{ section.settings.rt_autoplay_speed | times: 1000 }}"
+>
+  <div class="rt-container">
+    
+    <!-- Section Header -->
+    <div class="rt-section-header">
+      {% if section.settings.rt_eyebrow != blank %}
+        <span class="rt-eyebrow">{{ section.settings.rt_eyebrow | escape }}</span>
+      {% endif %}
+      {% if section.settings.rt_heading != blank %}
+        <h2 class="rt-heading">{{ section.settings.rt_heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.rt_description != blank %}
+        <p class="rt-description">{{ section.settings.rt_description | escape }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Product Slider / Grid Container -->
+    <div class="rt-products-wrapper">
+      
+      {% if section.settings.rt_enable_slider %}
+        <button class="rt-slider-arrow rt-slider-arrow--prev" aria-label="Previous products" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      {% endif %}
+
+      <div 
+        class="rt-products-grid {% if section.settings.rt_enable_slider %}rt-products-grid--slider{% else %}rt-products-grid--grid{% endif %}"
+        style="--columns-desktop: {{ columns_desktop }};"
+        role="region" 
+        aria-label="Product Gallery"
+      >
+        {% if section.settings.rt_collection != blank and featured_collection.products.size > 0 %}
+          {% for product in featured_collection.products limit: products_limit %}
+            {% liquid
+              assign on_sale = false
+              if product.compare_at_price > product.price
+                assign on_sale = true
+              endif
+              
+              assign sold_out = true
+              if product.available
+                assign sold_out = false
+              endif
+
+              assign badge_text = ""
+              if section.settings.rt_enable_badges
+                if sold_out
+                  assign badge_text = "Sold Out"
+                elsif product.tags contains 'badge:New' or product.tags contains 'New' or product.tags contains 'new'
+                  assign badge_text = "New"
+                elsif product.tags contains 'badge:Best Seller' or product.tags contains 'Best Seller' or product.tags contains 'best-seller'
+                  assign badge_text = "Best Seller"
+                elsif product.tags contains 'badge:Limited Edition' or product.tags contains 'Limited Edition' or product.tags contains 'limited-edition'
+                  assign badge_text = "Limited Edition"
+                elsif product.tags contains 'badge:Exclusive' or product.tags contains 'Exclusive' or product.tags contains 'exclusive'
+                  assign badge_text = "Exclusive"
+                elsif on_sale
+                  assign badge_text = "Sale"
+                endif
+              endif
+
+              # Review / Rating setup
+              # Horizon uses Shopify reviews or default metafields, we read and fallback to elegant dummy rating if empty
+              assign rating_val = product.metafields.reviews.rating.value.rating | default: 4.8
+              assign review_count = product.metafields.reviews.rating.value.scale_max | default: 18
+
+              # Stock status
+              assign qty = 0
+              for variant in product.variants
+                if variant.inventory_quantity > 0
+                  assign qty = qty | plus: variant.inventory_quantity
+                endif
+              endfor
+              
+              assign stock_status = "In Stock"
+              assign stock_class = "in-stock"
+              if sold_out
+                assign stock_status = "Sold Out"
+                assign stock_class = "sold-out"
+              elsif qty > 0 and qty < 5
+                assign stock_status = "Only " | append: qty | append: " left"
+                assign stock_class = "low-stock"
+              endif
+            %}
+
+            <div 
+              class="rt-product-card" 
+              data-product-id="{{ product.id }}"
+              style="--card-index: {{ forloop.index0 }};"
+            >
+              <!-- Card Media Wrapper -->
+              <div class="rt-product-card__media">
+                
+                <!-- Badges -->
+                {% if badge_text != "" %}
+                  <span class="rt-badge rt-badge--{{ badge_text | handleize }}">{{ badge_text }}</span>
+                {% endif %}
+
+                <!-- Wishlist Button -->
+                {% if section.settings.rt_enable_wishlist %}
+                  <button 
+                    class="rt-btn-wishlist" 
+                    data-product-handle="{{ product.handle }}" 
+                    data-product-id="{{ product.id }}"
+                    aria-label="Add to Wishlist"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="rt-icon-heart">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                  </button>
+                {% endif %}
+
+                <!-- Product Link -->
+                <a href="{{ product.url }}" class="rt-product-card__link" aria-label="View {{ product.title | escape }}">
+                  {% if product.featured_media != blank %}
+                    <img 
+                      srcset="{{ product.featured_media | image_url: width: 375 }} 375w,
+                              {{ product.featured_media | image_url: width: 550 }} 550w,
+                              {{ product.featured_media | image_url: width: 750 }} 750w,
+                              {{ product.featured_media | image_url: width: 900 }} 900w"
+                      src="{{ product.featured_media | image_url: width: 550 }}"
+                      sizes="(min-width: 990px) calc((100vw - 120px) / {{ columns_desktop }}), (min-width: 750px) 50vw, 100vw"
+                      alt="{{ product.title | escape }}"
+                      loading="lazy"
+                      class="rt-product-card__image rt-product-card__image--primary"
+                      width="{{ product.featured_media.width }}"
+                      height="{{ product.featured_media.height }}"
+                    >
+                    {% if section.settings.rt_enable_hover_image and product.images[1] != blank %}
+                      <img 
+                        srcset="{{ product.images[1] | image_url: width: 375 }} 375w,
+                                {{ product.images[1] | image_url: width: 550 }} 550w,
+                                {{ product.images[1] | image_url: width: 750 }} 750w"
+                        src="{{ product.images[1] | image_url: width: 550 }}"
+                        sizes="(min-width: 990px) calc((100vw - 120px) / {{ columns_desktop }}), (min-width: 750px) 50vw, 100vw"
+                        alt="{{ product.title | escape }}"
+                        loading="lazy"
+                        class="rt-product-card__image rt-product-card__image--secondary"
+                        width="{{ product.images[1].width }}"
+                        height="{{ product.images[1].height }}"
+                      >
+                    {% endif %}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'rt-placeholder-svg' }}
+                  {% endif %}
+                </a>
+
+                <!-- Hover Quick Actions Container -->
+                <div class="rt-product-card__hover-actions">
+                  {% if section.settings.rt_enable_quickview %}
+                    <button class="rt-btn-quick-action rt-btn-quickview" data-product-handle="{{ product.handle }}" aria-label="Quick view product">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      <span>Quick View</span>
+                    </button>
+                  {% endif %}
+                  
+                  <button class="rt-btn-quick-action rt-btn-quickadd" data-variant-id="{{ product.first_available_variant.id }}" {% if sold_out %}disabled{% endif %} aria-label="Add to cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span>{% if sold_out %}Sold Out{% else %}Quick Add{% endif %}</span>
+                  </button>
+
+                  <button class="rt-btn-quick-action rt-btn-share" data-product-title="{{ product.title | escape }}" data-product-url="{{ shop.url | append: product.url }}" aria-label="Share product">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="18" cy="5" r="3"></circle>
+                      <circle cx="6" cy="12" r="3"></circle>
+                      <circle cx="18" cy="19" r="3"></circle>
+                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
+                    <span>Share</span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- Info Area -->
+              <div class="rt-product-card__info">
+                
+                {% if section.settings.rt_show_brand and product.vendor != blank %}
+                  <span class="rt-product-card__brand">{{ product.vendor | escape }}</span>
+                {% endif %}
+
+                <h3 class="rt-product-card__title">
+                  <a href="{{ product.url }}">{{ product.title | escape }}</a>
+                </h3>
+
+                <p class="rt-product-card__short-desc">
+                  {{ product.description | strip_html | truncatewords: 10 }}
+                </p>
+
+                <!-- Stars rating -->
+                {% if section.settings.rt_enable_rating %}
+                  <div class="rt-product-card__rating" aria-label="{{ rating_val }} stars across {{ review_count }} reviews">
+                    <div class="rt-stars">
+                      {% for i in (1..5) %}
+                        {% assign rating_floor = rating_val | floor %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="{% if i <= rating_floor %}var(--rt-accent-color){% else %}none{% endif %}" stroke="var(--rt-accent-color)" stroke-width="2">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                      {% endfor %}
+                    </div>
+                    <span class="rt-review-count">({{ review_count }})</span>
+                  </div>
+                {% endif %}
+
+                <div class="rt-product-card__price-wrap">
+                  <span class="rt-price">{{ product.price | money }}</span>
+                  {% if section.settings.rt_enable_compare_price and on_sale %}
+                    <span class="rt-compare-price">{{ product.compare_at_price | money }}</span>
+                    <span class="rt-discount-percent">-{{ percent_saved }}%</span>
+                  {% endif %}
+                </div>
+
+                {% if section.settings.rt_show_stock %}
+                  <div class="rt-stock-badge rt-stock-badge--{{ stock_class }}">
+                    <span class="rt-stock-dot"></span>
+                    <span class="rt-stock-text">{{ stock_status }}</span>
+                  </div>
+                {% endif %}
+
+              </div>
+
+              <!-- Product details script block for Quick View parsing -->
+              <script type="application/json" class="rt-product-json">
+                {
+                  "id": {{ product.id }},
+                  "title": {{ product.title | json }},
+                  "vendor": {{ product.vendor | json }},
+                  "url": {{ product.url | json }},
+                  "description": {{ product.description | strip_html | truncatewords: 35 | json }},
+                  "price": "{{ product.price | money }}",
+                  "compare_at_price": {% if on_sale %}"{{ product.compare_at_price | money }}"{% else %}null{% endif %},
+                  "available": {{ product.available | json }},
+                  "featured_image": "{{ product.featured_media | image_url: width: 800 }}",
+                  "images": [
+                    {% for image in product.images %}
+                      "{{ image | image_url: width: 800 }}"{% unless forloop.last %},{% endunless %}
+                    {% endfor -%}
+                  ],
+                  "options": [
+                    {% for option in product.options_with_values %}
+                      {
+                        "name": {{ option.name | json }},
+                        "position": {{ option.position }},
+                        "values": {{ option.values | json }}
+                      }{% unless forloop.last %},{% endunless %}
+                    {% endfor -%}
+                  ],
+                  "variants": [
+                    {% for variant in product.variants %}
+                      {
+                        "id": {{ variant.id }},
+                        "title": {{ variant.title | json }},
+                        "option1": {{ variant.option1 | json }},
+                        "option2": {{ variant.option2 | json }},
+                        "option3": {{ variant.option3 | json }},
+                        "price": "{{ variant.price | money }}",
+                        "compare_at_price": {% if variant.compare_at_price %}"{{ variant.compare_at_price | money }}"{% else %}null{% endif %},
+                        "available": {{ variant.available | json }},
+                        "inventory_quantity": {{ variant.inventory_quantity | default: 0 }},
+                        "featured_image": {% if variant.featured_image %}"{{ variant.featured_image | image_url: width: 800 }}"{% else %}null{% endif %}
+                      }{% unless forloop.last %},{% endunless %}
+                    {% endfor -%}
+                  ]
+                }
+              </script>
+
+            </div>
+          {% endfor %}
+        {% else %}
+          <!-- Placeholder state -->
+          {% for i in (1..products_limit) %}
+            <div class="rt-product-card rt-product-card--placeholder">
+              <div class="rt-product-card__media">
+                {% capture placeholder_index %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'product-' | append: placeholder_index | placeholder_svg_tag: 'rt-placeholder-svg' }}
+              </div>
+              <div class="rt-product-card__info">
+                <span class="rt-product-card__brand">RoyalTick</span>
+                <h3 class="rt-product-card__title">Luxury Timepiece {{ i }}</h3>
+                <div class="rt-product-card__price">
+                  <span class="rt-price">$9,500.00</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      {% if section.settings.rt_enable_slider %}
+        <button class="rt-slider-arrow rt-slider-arrow--next" aria-label="Next products">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      {% endif %}
+
+    </div>
+
+    <!-- Slider Pagination Dots -->
+    {% if section.settings.rt_enable_slider %}
+      <div class="rt-slider-pagination"></div>
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- Shared Quick View Modal -->
+{% if section.settings.rt_enable_quickview %}
+  <div id="rt-quickview-modal-{{ section.id }}" class="rt-quickview-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="rt-quickview-modal__overlay"></div>
+    <div class="rt-quickview-modal__container">
+      <button class="rt-quickview-modal__close" aria-label="Close quick view">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="rt-quickview-modal__body">
+        <!-- Content will be injected dynamically via JS -->
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<script src="{{ 'rt-featured-products.js' | asset_url }}" type="module" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "RT Featured Products",
+  "class": "rt-featured-products-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Titles"
+    },
+    {
+      "type": "text",
+      "id": "rt_eyebrow",
+      "label": "Section Eyebrow",
+      "default": "FEATURED WATCHES"
+    },
+    {
+      "type": "text",
+      "id": "rt_heading",
+      "label": "Heading",
+      "default": "Crafted For Generations"
+    },
+    {
+      "type": "textarea",
+      "id": "rt_description",
+      "label": "Description",
+      "default": "Every RoyalTick timepiece is engineered with exceptional precision, timeless elegance, and unmatched craftsmanship."
+    },
+    {
+      "type": "header",
+      "content": "Source Collection"
+    },
+    {
+      "type": "collection",
+      "id": "rt_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "rt_products_limit",
+      "label": "Maximum Products to Show",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "rt_columns",
+      "label": "Desktop Columns (Non-slider layout)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Layout Controls"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_slider",
+      "label": "Enable Product Slider",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_autoplay",
+      "label": "Slider Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "rt_autoplay_speed",
+      "label": "Autoplay Speed (seconds)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Feature Toggles"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_quickview",
+      "label": "Enable Quick View",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_wishlist",
+      "label": "Enable Wishlist Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_compare_price",
+      "label": "Show Compare-at Price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_rating",
+      "label": "Show Product Ratings",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_badges",
+      "label": "Show Luxury Badges",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_hover_image",
+      "label": "Enable Hover Image Swap",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_show_brand",
+      "label": "Show Vendor Name",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_show_stock",
+      "label": "Show Stock Status",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "rt_background_color",
+      "label": "Background Color",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "color",
+      "id": "rt_accent_color",
+      "label": "Accent Color (Gold)",
+      "default": "#c9a227"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RT Featured Products"
+    }
+  ]
+}
+{% endschema %}

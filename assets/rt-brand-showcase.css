@@ -1,0 +1,311 @@
+/* 
+ * RoyalTick - Brand Showcase & Trust Cards Styles
+ * Premium, high-trust, luxury theme integration.
+ */
+
+.rt-brand-showcase {
+  --rt-bg-color: #0b0b0b;
+  --rt-accent-color: #c9a227;
+  --rt-accent-glow: rgba(201, 162, 39, 0.15);
+  --rt-text-primary: #ffffff;
+  --rt-text-secondary: #a0a0a0;
+  --rt-border-color: rgba(255, 255, 255, 0.08);
+  --rt-card-bg: rgba(255, 255, 255, 0.02);
+  --rt-card-border: rgba(255, 255, 255, 0.05);
+  --rt-card-radius: 12px;
+  
+  background-color: var(--rt-bg-color);
+  color: var(--rt-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.rt-brand-showcase__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- Top Content (Header) --- */
+.rt-brand-showcase__header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+}
+
+.rt-brand-showcase__eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--rt-accent-color);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.rt-brand-showcase__heading {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.3;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.01em;
+}
+
+.rt-brand-showcase__heading strong,
+.rt-brand-showcase__heading b {
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff 40%, #e8c86c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rt-brand-showcase__description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--rt-text-secondary);
+}
+
+.rt-brand-showcase__divider {
+  height: 1px;
+  width: 60px;
+  background: var(--rt-accent-color);
+  margin: 1.8rem auto 0 auto;
+}
+
+/* --- Brand Logo Marquee Slider --- */
+.rt-brand-showcase__marquee-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 5rem;
+  overflow: hidden;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--rt-border-color);
+  border-bottom: 1px solid var(--rt-border-color);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+/* Masking edges for soft blur effect */
+.rt-brand-showcase__marquee-wrapper::before,
+.rt-brand-showcase__marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.rt-brand-showcase__marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--rt-bg-color) 0%, transparent 100%);
+}
+
+.rt-brand-showcase__marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--rt-bg-color) 0%, transparent 100%);
+}
+
+.rt-brand-showcase__marquee-inner {
+  display: flex;
+  width: max-content;
+}
+
+.rt-brand-showcase__marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  padding-right: 6rem;
+  animation: rt-marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+/* Speed modifiers */
+.rt-brand-showcase__marquee-track--slow {
+  animation-duration: 45s;
+}
+
+.rt-brand-showcase__marquee-track--fast {
+  animation-duration: 15s;
+}
+
+/* Pause on Hover */
+.rt-brand-showcase__marquee-wrapper--pause-hover:hover .rt-brand-showcase__marquee-track {
+  animation-play-state: paused;
+}
+
+.rt-brand-showcase__logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.rt-brand-showcase__logo-img,
+.rt-brand-showcase__logo-svg {
+  height: 100%;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.45);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.rt-brand-showcase__logo-item:hover .rt-brand-showcase__logo-img,
+.rt-brand-showcase__logo-item:hover .rt-brand-showcase__logo-svg {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.05);
+}
+
+.rt-brand-showcase__logo-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--rt-text-secondary);
+  opacity: 0.45;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.rt-brand-showcase__logo-item:hover .rt-brand-showcase__logo-text {
+  color: var(--rt-accent-color);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* --- Trust Cards Grid --- */
+.rt-brand-showcase__cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
+}
+
+.rt-brand-showcase__card {
+  background: var(--rt-card-bg);
+  border: 1px solid var(--rt-card-border);
+  border-radius: var(--rt-card-radius);
+  padding: 2.2rem 1.8rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Border Glow Accent on Hover */
+.rt-brand-showcase__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(201, 162, 39, 0.06), transparent 40%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.rt-brand-showcase__card:hover::before {
+  opacity: 1;
+}
+
+.rt-brand-showcase__card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(201, 162, 39, 0.35);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(201, 162, 39, 0.1);
+}
+
+.rt-brand-showcase__card-icon {
+  color: var(--rt-accent-color);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rt-brand-showcase__card:hover .rt-brand-showcase__card-icon {
+  transform: scale(1.15) rotate(3deg);
+}
+
+.rt-brand-showcase__card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.rt-brand-showcase__card-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--rt-text-secondary);
+  margin: 0;
+}
+
+/* --- Animations system --- */
+.rt-brand-showcase-anim {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.rt-brand-showcase-anim.rt-fade-up {
+  transform: translateY(30px);
+  transition: transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), opacity 0.8s ease;
+}
+
+.rt-brand-showcase-anim.rt-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keyframes scroll loop */
+@keyframes rt-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media screen and (max-width: 1199px) {
+  .rt-brand-showcase__cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .rt-brand-showcase__container {
+    padding: 0 1.5rem;
+  }
+  
+  .rt-brand-showcase__marquee-track {
+    gap: 4rem;
+    padding-right: 4rem;
+  }
+  
+  .rt-brand-showcase__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .rt-brand-showcase__card {
+    padding: 1.8rem 1.4rem;
+  }
+  
+  .rt-brand-showcase__header {
+    margin-bottom: 3rem;
+  }
+}

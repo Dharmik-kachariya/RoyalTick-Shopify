@@ -1,0 +1,357 @@
+{{ 'rt-brand-story.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'rt-brand-story.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.rt_section_spacing_top }}px;
+    padding-bottom: {{ section.settings.rt_section_spacing_bottom }}px;
+  }
+  #rt-brand-story-{{ section.id }} {
+    --rt-bg-color: {{ section.settings.rt_background_color }};
+    --rt-accent-color: {{ section.settings.rt_accent_color }};
+    --rt-accent-glow: {{ section.settings.rt_accent_color | color_modify: 'alpha', 0.15 }};
+  }
+{%- endstyle -%}
+
+<div 
+  id="rt-brand-story-{{ section.id }}" 
+  class="rt-brand-story section-{{ section.id }}-padding"
+  data-enable-animation="{{ section.settings.rt_enable_animation }}"
+>
+  <div class="rt-brand-story__container">
+    <div class="rt-brand-story__grid{% if section.settings.rt_image_position == 'right' %} rt-brand-story__grid--reverse{% endif %}">
+      
+      <!-- Media Column -->
+      <div class="rt-brand-story__media-col rt-brand-story-anim {% if section.settings.rt_image_position == 'right' %}rt-slide-right{% else %}rt-slide-left{% endif %}">
+        <div class="rt-brand-story__media-glow"></div>
+        <div class="rt-brand-story__media-wrapper rt-brand-story__media-wrapper--floating">
+          {%- if section.settings.rt_enable_video and section.settings.rt_video != blank -%}
+            {{ section.settings.rt_video | video_tag: 
+              autoplay: true, 
+              loop: true, 
+              muted: true, 
+              playsinline: true, 
+              controls: false, 
+              class: 'rt-brand-story__video' 
+            }}
+          {%- elsif section.settings.rt_enable_video and section.settings.rt_video_url != blank -%}
+            <video 
+              src="{{ section.settings.rt_video_url }}" 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              class="rt-brand-story__video"
+            ></video>
+          {%- elsif section.settings.rt_image != blank -%}
+            {{ section.settings.rt_image | image_url: width: 1200 | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '400, 600, 800, 1000, 1200',
+              class: 'rt-brand-story__image',
+              alt: section.settings.rt_image.alt | default: section.settings.rt_heading | escape
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'rt-brand-story__image rt-brand-story__placeholder' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="rt-brand-story__content-col rt-brand-story-anim {% if section.settings.rt_image_position == 'right' %}rt-slide-left{% else %}rt-slide-right{% endif %}">
+        {%- if section.settings.rt_eyebrow != blank -%}
+          <span class="rt-brand-story__eyebrow">{{ section.settings.rt_eyebrow | escape }}</span>
+        {%- endif -%}
+        
+        {%- if section.settings.rt_heading != blank -%}
+          <h2 class="rt-brand-story__heading">
+            {{ section.settings.rt_heading }}
+          </h2>
+        {%- endif -%}
+
+        <div class="rt-brand-story__divider"></div>
+
+        {%- if section.settings.rt_description != blank -%}
+          <div class="rt-brand-story__description rte">
+            {{ section.settings.rt_description }}
+          </div>
+        {%- endif -%}
+
+        <!-- Feature List -->
+        <div class="rt-brand-story__features">
+          
+          <!-- Swiss Precision -->
+          <div class="rt-brand-story__feature-item">
+            <span class="rt-brand-story__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+            </span>
+            <span class="rt-brand-story__feature-text">Swiss Precision</span>
+          </div>
+
+          <!-- Premium Materials -->
+          <div class="rt-brand-story__feature-item">
+            <span class="rt-brand-story__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3h12l4 6-10 13L2 9z"></path>
+                <path d="M11 3 8 9l3 13h2l3-13-3-6"></path>
+                <path d="M2 9h20"></path>
+              </svg>
+            </span>
+            <span class="rt-brand-story__feature-text">Premium Materials</span>
+          </div>
+
+          <!-- 5-Year Warranty -->
+          <div class="rt-brand-story__feature-item">
+            <span class="rt-brand-story__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </span>
+            <span class="rt-brand-story__feature-text">5-Year Warranty</span>
+          </div>
+
+          <!-- Worldwide Shipping -->
+          <div class="rt-brand-story__feature-item">
+            <span class="rt-brand-story__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </span>
+            <span class="rt-brand-story__feature-text">Worldwide Shipping</span>
+          </div>
+
+          <!-- Luxury Packaging -->
+          <div class="rt-brand-story__feature-item">
+            <span class="rt-brand-story__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                <rect x="1" y="3" width="22" height="5"></rect>
+                <line x1="10" y1="12" x2="14" y2="12"></line>
+              </svg>
+            </span>
+            <span class="rt-brand-story__feature-text">Luxury Packaging</span>
+          </div>
+
+          <!-- Certified Authentic -->
+          <div class="rt-brand-story__feature-item">
+            <span class="rt-brand-story__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <span class="rt-brand-story__feature-text">Certified Authentic</span>
+          </div>
+
+        </div>
+
+        <!-- Buttons -->
+        {%- if section.settings.rt_primary_button_text != blank or section.settings.rt_secondary_button_text != blank -%}
+          <div class="rt-brand-story__actions">
+            {%- if section.settings.rt_primary_button_text != blank -%}
+              <a href="{{ section.settings.rt_primary_button_link | default: '#' }}" class="rt-brand-story__btn rt-brand-story__btn--primary">
+                {{ section.settings.rt_primary_button_text | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.rt_secondary_button_text != blank -%}
+              <a href="{{ section.settings.rt_secondary_button_link | default: '#' }}" class="rt-brand-story__btn rt-brand-story__btn--secondary">
+                {{ section.settings.rt_secondary_button_text | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Counters -->
+        {%- if section.settings.rt_enable_counters -%}
+          <div class="rt-brand-story__counters">
+            <div class="rt-brand-story__counter-card">
+              <span class="rt-brand-story__counter-number">15+</span>
+              <span class="rt-brand-story__counter-label">Years of Heritage</span>
+            </div>
+            <div class="rt-brand-story__counter-card">
+              <span class="rt-brand-story__counter-number">50K+</span>
+              <span class="rt-brand-story__counter-label">Happy Customers</span>
+            </div>
+            <div class="rt-brand-story__counter-card">
+              <span class="rt-brand-story__counter-number">120+</span>
+              <span class="rt-brand-story__counter-label">Luxury Models</span>
+            </div>
+            <div class="rt-brand-story__counter-card">
+              <span class="rt-brand-story__counter-number">40+</span>
+              <span class="rt-brand-story__counter-label">Countries Served</span>
+            </div>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "RoyalTick Brand Story",
+  "tag": "section",
+  "class": "rt-brand-story-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "rt_eyebrow",
+      "label": "Eyebrow Text",
+      "default": "OUR HERITAGE"
+    },
+    {
+      "type": "text",
+      "id": "rt_heading",
+      "label": "Heading",
+      "default": "Crafted With Passion. Designed For Eternity."
+    },
+    {
+      "type": "richtext",
+      "id": "rt_description",
+      "label": "Description",
+      "default": "<p>At RoyalTick, every watch represents decades of precision engineering, timeless craftsmanship, and uncompromising luxury. Every detail is refined to create a masterpiece that lasts generations.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Media Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "rt_image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "rt_video",
+      "label": "Shopify Hosted Video"
+    },
+    {
+      "type": "text",
+      "id": "rt_video_url",
+      "label": "Direct MP4 Video URL (Fallback)",
+      "info": "Useful for external hosting or CDN assets"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_video",
+      "label": "Enable Video",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "rt_image_position",
+      "label": "Image / Video Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Call To Actions"
+    },
+    {
+      "type": "text",
+      "id": "rt_primary_button_text",
+      "label": "Primary Button Text",
+      "default": "Discover Our Story"
+    },
+    {
+      "type": "url",
+      "id": "rt_primary_button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "rt_secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "rt_secondary_button_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Counters Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_counters",
+      "label": "Show Counters Block",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Design & Animations"
+    },
+    {
+      "type": "color",
+      "id": "rt_background_color",
+      "label": "Background Color",
+      "default": "#080808"
+    },
+    {
+      "type": "color",
+      "id": "rt_accent_color",
+      "label": "Accent / Gold Color",
+      "default": "#c9a227"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_animation",
+      "label": "Enable Entrance Animations",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rt_section_spacing_top",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Spacing Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "rt_section_spacing_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Spacing Bottom",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "RoyalTick Brand Story",
+      "settings": {
+        "rt_eyebrow": "OUR HERITAGE",
+        "rt_heading": "Crafted With Passion. Designed For Eternity."
+      }
+    }
+  ]
+}
+{% endschema %}

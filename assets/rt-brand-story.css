@@ -1,0 +1,369 @@
+/* 
+ * RoyalTick - Brand Story Section Styles
+ * Luxury watchmaking aesthetic inspired by Rolex, Patek Philippe, and AP.
+ */
+
+.rt-brand-story {
+  --rt-bg-color: #080808;
+  --rt-accent-color: #c9a227;
+  --rt-accent-glow: rgba(201, 162, 39, 0.15);
+  --rt-text-primary: #ffffff;
+  --rt-text-secondary: #a0a0a0;
+  --rt-border-color: rgba(255, 255, 255, 0.08);
+  --rt-card-bg: rgba(255, 255, 255, 0.03);
+  --rt-card-border: rgba(255, 255, 255, 0.05);
+  
+  background-color: var(--rt-bg-color);
+  color: var(--rt-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.rt-brand-story__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.rt-brand-story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.rt-brand-story__grid--reverse {
+  direction: rtl;
+}
+
+.rt-brand-story__grid--reverse > * {
+  direction: ltr; /* Reset text direction for inner components */
+}
+
+/* --- Media Column (Left) --- */
+.rt-brand-story__media-col {
+  position: relative;
+  width: 100%;
+}
+
+.rt-brand-story__media-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, var(--rt-accent-glow) 0%, rgba(0,0,0,0) 70%);
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.rt-brand-story__media-wrapper {
+  position: relative;
+  z-index: 2;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--rt-card-border);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  background: #111;
+  aspect-ratio: 4/5;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.rt-brand-story__media-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.rt-brand-story__image,
+.rt-brand-story__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Floating animation option */
+.rt-brand-story__media-wrapper--floating {
+  animation: rt-float 6s ease-in-out infinite alternate;
+}
+
+/* --- Content Column (Right) --- */
+.rt-brand-story__content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.rt-brand-story__eyebrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--rt-accent-color);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: inline-block;
+}
+
+.rt-brand-story__heading {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 0 0 1.8rem 0;
+  letter-spacing: -0.02em;
+}
+
+.rt-brand-story__heading strong,
+.rt-brand-story__heading b {
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff 40%, #e8c86c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rt-brand-story__description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--rt-text-secondary);
+  margin-bottom: 2.5rem;
+}
+
+/* Gold Divider */
+.rt-brand-story__divider {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--rt-accent-color), transparent);
+  margin-bottom: 2.5rem;
+}
+
+/* --- Features Block --- */
+.rt-brand-story__features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.rt-brand-story__feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--rt-card-bg);
+  border: 1px solid var(--rt-card-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.rt-brand-story__feature-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(201, 162, 39, 0.3);
+  transform: translateY(-2px);
+}
+
+.rt-brand-story__feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rt-accent-color);
+  flex-shrink: 0;
+}
+
+.rt-brand-story__feature-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--rt-text-primary);
+}
+
+/* --- Action Buttons --- */
+.rt-brand-story__actions {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.rt-brand-story__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
+}
+
+.rt-brand-story__btn--primary {
+  background-color: var(--rt-accent-color);
+  color: #000000;
+  border: 1px solid var(--rt-accent-color);
+}
+
+.rt-brand-story__btn--primary:hover {
+  background-color: transparent;
+  color: var(--rt-accent-color);
+  box-shadow: 0 0 20px var(--rt-accent-glow);
+}
+
+.rt-brand-story__btn--secondary {
+  background-color: transparent;
+  color: var(--rt-text-primary);
+  border: 1px solid var(--rt-border-color);
+}
+
+.rt-brand-story__btn--secondary:hover {
+  border-color: var(--rt-text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Counters Block --- */
+.rt-brand-story__counters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  border-top: 1px solid var(--rt-border-color);
+  padding-top: 2.5rem;
+}
+
+.rt-brand-story__counter-card {
+  padding: 1.2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--rt-card-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.rt-brand-story__counter-card:hover {
+  border-color: rgba(201, 162, 39, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.rt-brand-story__counter-number {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 700;
+  color: var(--rt-accent-color);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.03em;
+  display: block;
+}
+
+.rt-brand-story__counter-label {
+  font-size: 0.85rem;
+  color: var(--rt-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --- Animations system --- */
+.rt-brand-story-anim {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.rt-brand-story-anim.rt-fade-up {
+  transform: translateY(40px);
+  transition: transform 0.9s cubic-bezier(0.215, 0.610, 0.355, 1), opacity 0.9s ease;
+}
+
+.rt-brand-story-anim.rt-slide-left {
+  transform: translateX(-40px);
+  transition: transform 0.9s cubic-bezier(0.215, 0.610, 0.355, 1), opacity 0.9s ease;
+}
+
+.rt-brand-story-anim.rt-slide-right {
+  transform: translateX(40px);
+  transition: transform 0.9s cubic-bezier(0.215, 0.610, 0.355, 1), opacity 0.9s ease;
+}
+
+.rt-brand-story-anim.rt-animate {
+  opacity: 1;
+  transform: translate(0) !important;
+}
+
+/* KEYFRAMES */
+@keyframes rt-float {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-12px);
+  }
+}
+
+/* --- Responsive Adjustments --- */
+@media screen and (max-width: 1199px) {
+  .rt-brand-story__grid {
+    gap: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .rt-brand-story__grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    direction: ltr !important;
+  }
+  
+  .rt-brand-story__grid--reverse > * {
+    direction: ltr;
+  }
+  
+  .rt-brand-story__media-wrapper {
+    aspect-ratio: 16/9;
+  }
+  
+  .rt-brand-story__content-col {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .rt-brand-story__divider {
+    margin: 0 auto 2rem auto;
+    width: 120px;
+  }
+  
+  .rt-brand-story__actions {
+    justify-content: center;
+  }
+  
+  .rt-brand-story__features {
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .rt-brand-story__container {
+    padding: 0 1.5rem;
+  }
+  
+  .rt-brand-story__counters {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .rt-brand-story__features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .rt-brand-story__actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .rt-brand-story__btn {
+    width: 100%;
+  }
+}

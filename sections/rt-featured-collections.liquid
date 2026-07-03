@@ -1,0 +1,333 @@
+{% comment %}
+  RoyalTick Featured Collections Section
+  A premium collections grid designed for high-end luxury watch storefronts.
+{% endcomment %}
+
+{{ 'rt-featured-collections.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign bg_color = section.settings.rt_background_color | default: '#0b0b0b'
+  assign accent_color = section.settings.rt_accent_color | default: '#c9a227'
+  assign radius = section.settings.rt_card_radius | default: 12
+  assign overlay = section.settings.rt_overlay_opacity | default: 40 | times: 0.01
+%}
+
+<style>
+  #rt-featured-collections-{{ section.id }} {
+    --rt-bg-color: {{ bg_color }};
+    --rt-accent-color: {{ accent_color }};
+    --rt-card-radius: {{ radius }}px;
+    --rt-overlay-opacity: {{ overlay }};
+    --rt-spacing-top: {{ section.settings.rt_section_spacing_top | default: 80 }}px;
+    --rt-spacing-bottom: {{ section.settings.rt_section_spacing_bottom | default: 80 }}px;
+  }
+</style>
+
+<section 
+  id="rt-featured-collections-{{ section.id }}" 
+  class="rt-featured-collections"
+  data-animation-enabled="{{ section.settings.rt_enable_animation }}"
+>
+  <div class="rt-container">
+    
+    <!-- Section Header -->
+    <div class="rt-section-header {% if section.settings.rt_enable_animation %}rt-fade-up{% endif %}">
+      {% if section.settings.rt_section_eyebrow != blank %}
+        <span class="rt-eyebrow">{{ section.settings.rt_section_eyebrow | escape }}</span>
+      {% endif %}
+      {% if section.settings.rt_section_heading != blank %}
+        <h2 class="rt-heading">{{ section.settings.rt_section_heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.rt_section_description != blank %}
+        <p class="rt-description">{{ section.settings.rt_section_description | escape }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="rt-grid rt-grid--desktop-{{ section.settings.rt_columns_desktop | default: 4 }} rt-grid--mobile-{{ section.settings.rt_columns_mobile | default: 1 }}">
+      {% for block in section.blocks %}
+        {% liquid
+          assign col = block.settings.collection
+          assign custom_title = block.settings.title
+          assign custom_desc = block.settings.description
+          assign custom_img = block.settings.image
+          
+          assign title = custom_title | default: col.title | default: "Luxury Collection"
+          assign desc = custom_desc | default: col.description | default: "Exquisite models crafted with high-horology heritage."
+          assign img = custom_img | default: col.featured_image
+          assign url = block.settings.button_link | default: col.url | default: "#"
+          assign count = col.all_products_count | default: 0
+        %}
+        
+        <div 
+          class="rt-card {% if section.settings.rt_enable_animation %}rt-fade-up{% endif %}" 
+          {{ block.shopify_attributes }}
+          data-index="{{ forloop.index0 }}"
+          style="--card-index: {{ forloop.index0 }};"
+        >
+          <!-- Card Image & Overlay wrapper -->
+          <a href="{{ url }}" class="rt-card__link" aria-label="{{ title | escape }}">
+            <div class="rt-card__media">
+              {% if img != blank %}
+                <img 
+                  srcset="{{ img | image_url: width: 375 }} 375w,
+                          {{ img | image_url: width: 550 }} 550w,
+                          {{ img | image_url: width: 750 }} 750w,
+                          {{ img | image_url: width: 1100 }} 1100w"
+                  src="{{ img | image_url: width: 550 }}"
+                  sizes="(min-width: 990px) calc((100vw - 100px) / {{ section.settings.rt_columns_desktop | default: 4 }}), (min-width: 750px) 50vw, 100vw"
+                  alt="{{ title | escape }}"
+                  loading="lazy"
+                  class="rt-card__image"
+                  width="{{ img.width }}"
+                  height="{{ img.height }}"
+                >
+              {% else %}
+                {% capture placeholder_index %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'rt-placeholder-svg' }}
+              {% endif %}
+              <div class="rt-card__overlay"></div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="rt-card__content">
+              <span class="rt-card__count">{{ count }} {{ 'content.products_count' | t | default: 'Products' }}</span>
+              <h3 class="rt-card__title">{{ title | escape }}</h3>
+              <p class="rt-card__desc">{{ desc | escape }}</p>
+              
+              {% if section.settings.rt_show_button %}
+                <span class="rt-card__btn">
+                  <span class="rt-card__btn-text">{{ block.settings.button_text | default: "Explore" | escape }}</span>
+                  <span class="rt-card__btn-arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </span>
+              {% endif %}
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% if section.settings.rt_enable_animation %}
+  <script src="{{ 'rt-featured-collections.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "RoyalTick Collections",
+  "class": "rt-featured-collections-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Title & Labels"
+    },
+    {
+      "type": "text",
+      "id": "rt_section_eyebrow",
+      "label": "Top Label",
+      "default": "EXCLUSIVE COLLECTIONS"
+    },
+    {
+      "type": "text",
+      "id": "rt_section_heading",
+      "label": "Heading",
+      "default": "Discover Timeless Masterpieces"
+    },
+    {
+      "type": "textarea",
+      "id": "rt_section_description",
+      "label": "Description",
+      "default": "Explore watches crafted with precision, luxury and heritage."
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "rt_columns_desktop",
+      "label": "Desktop Columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "rt_columns_mobile",
+      "label": "Mobile Columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 Column"
+        },
+        {
+          "value": "2",
+          "label": "2 Columns"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_show_button",
+      "label": "Show Explore Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_animation",
+      "label": "Enable Fade Up Animation",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card Styling Options"
+    },
+    {
+      "type": "range",
+      "id": "rt_card_radius",
+      "label": "Card Border Radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "rt_overlay_opacity",
+      "label": "Card Hover Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Color Schemes"
+    },
+    {
+      "type": "color",
+      "id": "rt_background_color",
+      "label": "Background Color",
+      "default": "#0b0b0b"
+    },
+    {
+      "type": "color",
+      "id": "rt_accent_color",
+      "label": "Accent Gold Color",
+      "default": "#c9a227"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "rt_section_spacing_top",
+      "label": "Top Spacing",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "rt_section_spacing_bottom",
+      "label": "Bottom Spacing",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Choose Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Custom Image Override"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Collection Name Override"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Custom Short Description Override"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Custom Button Link Override"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RoyalTick Featured Collections",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Luxury Watches",
+            "description": "High-end Swiss watch collection."
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Swiss Collection",
+            "description": "Crafted in Switzerland with precision."
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Sports Collection",
+            "description": "Rugged, durable and high-performing."
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "title": "Classic Collection",
+            "description": "Elegant models for formal occasions."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

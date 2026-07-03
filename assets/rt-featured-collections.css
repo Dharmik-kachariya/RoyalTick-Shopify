@@ -1,0 +1,290 @@
+/* ==========================================================================
+   RoyalTick Premium Luxury Featured Collections Section CSS
+   Inspired by Audemars Piguet, Rolex, and Apple design.
+   ========================================================================== */
+
+.rt-featured-collections {
+  background-color: var(--rt-bg-color, #0b0b0b);
+  background: var(--rt-bg-color, #0b0b0b);
+  padding-top: var(--rt-spacing-top, 80px);
+  padding-bottom: var(--rt-spacing-bottom, 80px);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  color: #ffffff;
+}
+
+.rt-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Header styling */
+.rt-section-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rt-eyebrow {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--rt-accent-color, #c9a227);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.rt-heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 1.25rem 0;
+  text-transform: none;
+  font-family: inherit;
+}
+
+.rt-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #a5a5a5;
+  margin: 0;
+}
+
+/* Responsive Grid setup */
+.rt-grid {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Desktop Grid columns dynamic mappings */
+.rt-grid--desktop-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rt-grid--desktop-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.rt-grid--desktop-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.rt-grid--desktop-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.rt-grid--desktop-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+/* Collection Card styling */
+.rt-card {
+  position: relative;
+  border-radius: var(--rt-card-radius, 12px);
+  overflow: hidden;
+  background-color: #121212;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.rt-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.rt-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.rt-card__image,
+.rt-placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rt-placeholder-svg {
+  background-color: #1a1a1a;
+  fill: #2a2a2a;
+}
+
+.rt-card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* Card Content positioning */
+.rt-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.25rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: none; /* Let parent handles link triggers */
+}
+
+.rt-card__count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--rt-accent-color, #c9a227);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.rt-card__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.rt-card__desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #b0b0b0;
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rt-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--rt-accent-color, #c9a227);
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rt-card__btn-arrow svg {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Card Hover Interactions */
+@media (hover: hover) {
+  .rt-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 
+                0 0 25px rgba(201, 162, 39, 0.15);
+    border-color: rgba(201, 162, 39, 0.35);
+  }
+
+  .rt-card:hover .rt-card__image {
+    transform: scale(1.08);
+  }
+
+  .rt-card:hover .rt-card__overlay {
+    opacity: var(--rt-overlay-opacity, 0.4);
+  }
+
+  .rt-card:hover .rt-card__desc {
+    max-height: 80px;
+    opacity: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .rt-card:hover .rt-card__btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rt-card:hover .rt-card__btn-arrow svg {
+    transform: translateX(4px);
+  }
+}
+
+/* Mobile Fallbacks for Hover-based content */
+@media (hover: none) {
+  .rt-card__desc {
+    max-height: 80px;
+    opacity: 1;
+    margin-bottom: 0.5rem;
+  }
+  .rt-card__btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 989px) {
+  .rt-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  .rt-section-header {
+    margin-bottom: 3rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .rt-grid--mobile-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  .rt-grid--mobile-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .rt-container {
+    padding: 0 1.25rem;
+  }
+
+  .rt-section-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .rt-card__content {
+    padding: 1.5rem;
+  }
+}
+
+/* Fade Up & Staggered Scroll Animations */
+.rt-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rt-fade-up.rt-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add stagger delay for grid items */
+.rt-grid .rt-card.rt-fade-up {
+  transition-delay: calc(var(--card-index, 0) * 0.1s);
+}

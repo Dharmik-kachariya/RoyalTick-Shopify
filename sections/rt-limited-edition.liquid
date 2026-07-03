@@ -1,0 +1,343 @@
+{{ 'rt-limited-edition.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'rt-limited-edition.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.rt_section_spacing_top }}px;
+    padding-bottom: {{ section.settings.rt_section_spacing_bottom }}px;
+  }
+  #rt-limited-edition-{{ section.id }} {
+    --rt-bg-color: {{ section.settings.rt_background_color }};
+    --rt-accent-color: {{ section.settings.rt_accent_color }};
+    --rt-accent-glow: {{ section.settings.rt_accent_color | color_modify: 'alpha', 0.18 }};
+  }
+{%- endstyle -%}
+
+<div 
+  id="rt-limited-edition-{{ section.id }}" 
+  class="rt-limited-edition section-{{ section.id }}-padding"
+  data-enable-animation="{{ section.settings.rt_enable_animation }}"
+>
+  <div class="rt-limited-edition__container">
+    <div class="rt-limited-edition__grid">
+      
+      <!-- Left Column: Product Media -->
+      <div class="rt-limited-edition__media-col rt-limited-edition-anim rt-slide-left">
+        <div class="rt-limited-edition__media-glow"></div>
+        <div class="rt-limited-edition__media-wrapper">
+          {%- if section.settings.rt_image != blank -%}
+            {{ section.settings.rt_image | image_url: width: 1000 | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '300, 500, 700, 900, 1000',
+              class: 'rt-limited-edition__image',
+              alt: section.settings.rt_image.alt | default: section.settings.rt_heading | escape
+            }}
+          {%- else -%}
+            {{ 'product-5' | placeholder_svg_tag: 'rt-limited-edition__placeholder' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Right Column: Product Content -->
+      <div class="rt-limited-edition__content-col rt-limited-edition-anim rt-fade-up">
+        
+        <span class="rt-limited-edition__badge">Limited Edition</span>
+        
+        {%- if section.settings.rt_heading != blank -%}
+          <h2 class="rt-limited-edition__heading">
+            {{ section.settings.rt_heading }}
+          </h2>
+        {%- endif -%}
+
+        <div class="rt-limited-edition__divider"></div>
+
+        {%- if section.settings.rt_description != blank -%}
+          <div class="rt-limited-edition__description rte">
+            {{ section.settings.rt_description }}
+          </div>
+        {%- endif -%}
+
+        <!-- Features Checklist -->
+        <div class="rt-limited-edition__features">
+          
+          <!-- Swiss Automatic Movement -->
+          <div class="rt-limited-edition__feature-item">
+            <span class="rt-limited-edition__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </span>
+            <span class="rt-limited-edition__feature-text">Swiss Automatic Movement</span>
+          </div>
+
+          <!-- Sapphire Crystal -->
+          <div class="rt-limited-edition__feature-item">
+            <span class="rt-limited-edition__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3h12l4 6-10 13L2 9z"></path>
+              </svg>
+            </span>
+            <span class="rt-limited-edition__feature-text">Sapphire Crystal</span>
+          </div>
+
+          <!-- 316L Stainless Steel -->
+          <div class="rt-limited-edition__feature-item">
+            <span class="rt-limited-edition__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </span>
+            <span class="rt-limited-edition__feature-text">316L Stainless Steel</span>
+          </div>
+
+          <!-- Water Resistant -->
+          <div class="rt-limited-edition__feature-item">
+            <span class="rt-limited-edition__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </span>
+            <span class="rt-limited-edition__feature-text">Water Resistant</span>
+          </div>
+
+          <!-- Limited Production -->
+          <div class="rt-limited-edition__feature-item">
+            <span class="rt-limited-edition__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </span>
+            <span class="rt-limited-edition__feature-text">Limited Production</span>
+          </div>
+
+          <!-- Lifetime Service Support -->
+          <div class="rt-limited-edition__feature-item">
+            <span class="rt-limited-edition__feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+            </span>
+            <span class="rt-limited-edition__feature-text">Lifetime Support</span>
+          </div>
+
+        </div>
+
+        <!-- Price Area & Urgency Bar -->
+        <div class="rt-limited-edition__price-urgency">
+          <div class="rt-limited-edition__price-row">
+            {%- if section.settings.rt_price != blank -%}
+              <span class="rt-limited-edition__price">{{ section.settings.rt_price | escape }}</span>
+            {%- endif -%}
+            {%- if section.settings.rt_compare_price != blank -%}
+              <span class="rt-limited-edition__compare-price">{{ section.settings.rt_compare_price | escape }}</span>
+            {%- endif -%}
+          </div>
+          
+          {%- if section.settings.rt_inventory_left > 0 -%}
+            <div class="rt-limited-edition__urgency">
+              <span class="rt-limited-edition__urgency-text">Only {{ section.settings.rt_inventory_left }} Pieces Left</span>
+              <div class="rt-limited-edition__urgency-bar">
+                <div class="rt-limited-edition__urgency-progress" style="width: {{ section.settings.rt_inventory_left }}%;"></div>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <!-- Countdown Timer -->
+        {%- if section.settings.rt_enable_countdown and section.settings.rt_countdown_date != blank -%}
+          <div class="rt-limited-edition__countdown">
+            <span class="rt-limited-edition__countdown-label">Exclusivity window closing in</span>
+            <div class="rt-limited-edition__timer" data-expiry="{{ section.settings.rt_countdown_date }}">
+              <div class="rt-limited-edition__timer-box">
+                <span class="rt-limited-edition__timer-val" data-days>00</span>
+                <span class="rt-limited-edition__timer-unit">Days</span>
+              </div>
+              <div class="rt-limited-edition__timer-box">
+                <span class="rt-limited-edition__timer-val" data-hours>00</span>
+                <span class="rt-limited-edition__timer-unit">Hrs</span>
+              </div>
+              <div class="rt-limited-edition__timer-box">
+                <span class="rt-limited-edition__timer-val" data-minutes>00</span>
+                <span class="rt-limited-edition__timer-unit">Min</span>
+              </div>
+              <div class="rt-limited-edition__timer-box">
+                <span class="rt-limited-edition__timer-val" data-seconds>00</span>
+                <span class="rt-limited-edition__timer-unit">Sec</span>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- CTA Buttons -->
+        {%- if section.settings.rt_button_primary != blank or section.settings.rt_button_secondary != blank -%}
+          <div class="rt-limited-edition__actions">
+            {%- if section.settings.rt_button_primary != blank -%}
+              <a href="{{ section.settings.rt_button_primary_link | default: '#' }}" class="rt-limited-edition__btn rt-limited-edition__btn--primary">
+                {{ section.settings.rt_button_primary | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.rt_button_secondary != blank -%}
+              <a href="{{ section.settings.rt_button_secondary_link | default: '#' }}" class="rt-limited-edition__btn rt-limited-edition__btn--secondary">
+                {{ section.settings.rt_button_secondary | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "RoyalTick Limited Edition",
+  "tag": "section",
+  "class": "rt-limited-edition-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Showcase"
+    },
+    {
+      "type": "text",
+      "id": "rt_heading",
+      "label": "Heading",
+      "default": "RoyalTick Signature Collection"
+    },
+    {
+      "type": "richtext",
+      "id": "rt_description",
+      "label": "Description",
+      "default": "<p>Experience uncompromising craftsmanship with our most exclusive timepiece, created in limited quantities for collectors who value precision and prestige.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "rt_image",
+      "label": "Luxury Watch Image"
+    },
+    {
+      "type": "header",
+      "content": "Pricing & Inventory"
+    },
+    {
+      "type": "text",
+      "id": "rt_price",
+      "label": "Current Price",
+      "default": "$4,950"
+    },
+    {
+      "type": "text",
+      "id": "rt_compare_price",
+      "label": "Compare At Price",
+      "default": "$7,500"
+    },
+    {
+      "type": "range",
+      "id": "rt_inventory_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "label": "Inventory Remaining Count",
+      "info": "Controls urgency progress bar width",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Countdown Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_countdown",
+      "label": "Enable Countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rt_countdown_date",
+      "label": "Expiry Date String",
+      "info": "Format: YYYY-MM-DDTHH:MM:SS (e.g. 2026-12-31T23:59:59)",
+      "default": "2026-12-31T23:59:59"
+    },
+    {
+      "type": "header",
+      "content": "Call To Actions"
+    },
+    {
+      "type": "text",
+      "id": "rt_button_primary",
+      "label": "Primary Button Text",
+      "default": "Reserve Now"
+    },
+    {
+      "type": "url",
+      "id": "rt_button_primary_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "rt_button_secondary",
+      "label": "Secondary Button Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "rt_button_secondary_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "rt_background_color",
+      "label": "Background Color",
+      "default": "#060606"
+    },
+    {
+      "type": "color",
+      "id": "rt_accent_color",
+      "label": "Accent Color (Gold)",
+      "default": "#c9a227"
+    },
+    {
+      "type": "checkbox",
+      "id": "rt_enable_animation",
+      "label": "Enable Viewport Animations",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rt_section_spacing_top",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Spacing Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "rt_section_spacing_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Section Spacing Bottom",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "RoyalTick Limited Edition",
+      "settings": {
+        "rt_heading": "RoyalTick Signature Collection"
+      }
+    }
+  ]
+}
+{% endschema %}
