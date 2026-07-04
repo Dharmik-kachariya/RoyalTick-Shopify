@@ -51,11 +51,20 @@
   "
   {{ block.shopify_attributes }}
 >
-  {% render 'price',
-    show_unit_price: true,
-    product_resource: product_resource,
-    show_sale_price_first: block_settings.show_sale_price_first
-  %}
+  <div class="rt-luxury-price">
+    {% render 'price',
+      show_unit_price: true,
+      product_resource: product_resource,
+      show_sale_price_first: block_settings.show_sale_price_first
+    %}
+    
+    {%- if selected_variant.compare_at_price > selected_variant.price -%}
+      {%- assign savings = selected_variant.compare_at_price | minus: selected_variant.price | money -%}
+      <div class="rt-luxury-savings">
+        Save {{ savings }}
+      </div>
+    {%- endif -%}
+  </div>
 
   {% if block_settings.show_tax_info %}
     <div class="tax-note">

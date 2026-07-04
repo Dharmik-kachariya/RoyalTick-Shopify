@@ -1,0 +1,99 @@
+<div id="rt-luxury-search-overlay" class="rt-search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+  
+  <button type="button" class="rt-search-close" aria-label="Close search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </button>
+
+  <div class="rt-search-container">
+    <form action="{{ routes.search_url }}" method="get" class="rt-search-input-wrapper">
+      <input type="hidden" name="options[prefix]" value="last">
+      <input 
+        type="search" 
+        name="q" 
+        class="rt-search-input" 
+        placeholder="Search watches, collections, brands..." 
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      >
+      <button type="submit" class="rt-search-submit" aria-label="Submit search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+    </form>
+
+    <div class="rt-search-body">
+      
+      <!-- EMPTY STATE -->
+      <div class="rt-search-empty-state">
+        
+        <!-- RECENT SEARCHES -->
+        <div class="rt-search-section">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
+            <h3 class="rt-search-section-title" style="margin-bottom: 0; border: none; padding: 0;">Recent Searches</h3>
+            <button type="button" class="rt-search-clear-all">Clear All</button>
+          </div>
+          <div class="rt-search-chips rt-recent-searches-list">
+            <!-- JS populated -->
+          </div>
+        </div>
+
+        <!-- TRENDING SEARCHES -->
+        <div class="rt-search-section">
+          <h3 class="rt-search-section-title">Trending Searches</h3>
+          <div class="rt-search-chips">
+            {% assign trending = 'Rolex Style,Skeleton,Chronograph,Classic,Limited Edition,Gold Watches,Automatic,Luxury Dress,Sports' | split: ',' %}
+            {% for item in trending %}
+              <div class="rt-search-chip" onclick="document.querySelector('.rt-search-input').value='{{ item }}'; document.querySelector('.rt-search-input').dispatchEvent(new Event('input'));">
+                <span class="rt-chip-text">{{ item }}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- POPULAR COLLECTIONS (Hardcoded for speed, can be dynamic later) -->
+        <div class="rt-search-section" style="margin-top: 40px;">
+          <h3 class="rt-search-section-title">Popular Collections</h3>
+          <div class="rt-search-grid">
+            {%- for collection in collections limit: 4 -%}
+              {% if collection.title != blank %}
+                <a href="{{ collection.url }}" class="rt-search-product-card" style="aspect-ratio: 16/9; justify-content: center; align-items: center; text-align: center; position: relative;">
+                  {% if collection.image %}
+                    <img src="{{ collection.image | img_url: '400x' }}" alt="{{ collection.title }}" class="rt-search-product-image" style="position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+                  {% endif %}
+                  <h4 class="rt-search-product-title" style="position: relative; z-index: 1;">{{ collection.title }}</h4>
+                </a>
+              {% endif %}
+            {%- endfor -%}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RESULTS STATE -->
+      <div class="rt-search-results-state rt-d-none">
+        
+        <div class="rt-results-products">
+          <!-- JS populated products -->
+        </div>
+
+        <div class="rt-results-categories" style="margin-top: 40px;">
+          <!-- JS populated pages, collections, articles -->
+        </div>
+
+        <div class="rt-search-no-results rt-d-none">
+          <svg style="width: 64px; height: 64px; color: var(--rt-search-muted); margin-bottom: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <h3>No watches found</h3>
+          <p>Try another keyword or browse our premium collections.</p>
+          <div style="margin-top: 32px; display: flex; gap: 16px; justify-content: center;">
+            <a href="{{ routes.collections_url }}" class="button" style="border: 1px solid var(--rt-search-gold); padding: 12px 24px; border-radius: 8px; color: #000; background: var(--rt-search-gold); text-decoration: none;">Browse Collections</a>
+            <a href="{{ routes.root_url }}" class="button" style="border: 1px solid rgba(255,255,255,0.2); padding: 12px 24px; border-radius: 8px; color: #fff; text-decoration: none;">Return Home</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

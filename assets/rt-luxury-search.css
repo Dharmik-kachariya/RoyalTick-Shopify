@@ -1,0 +1,349 @@
+/* =====================================================
+   ROYALTICK LUXURY SEARCH
+   ===================================================== */
+
+:root {
+  --rt-search-bg: rgba(11, 11, 11, 0.85); /* #0B0B0B with transparency */
+  --rt-search-card: #151515;
+  --rt-search-text: #FFFFFF;
+  --rt-search-muted: #A0A0A0;
+  --rt-search-gold: #C9A227;
+  --rt-search-border: rgba(255, 255, 255, 0.08);
+  
+  --rt-search-font-sans: 'Inter', sans-serif;
+  --rt-search-font-serif: 'Cormorant Garamond', serif;
+}
+
+/* =====================================================
+   OVERLAY MODAL
+   ===================================================== */
+.rt-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--rt-search-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 999999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: 40px 20px;
+}
+
+.rt-search-overlay.is-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+body.rt-search-active {
+  overflow: hidden;
+}
+
+/* Close Button */
+.rt-search-close {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--rt-search-border);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rt-search-text);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+.rt-search-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+.rt-search-close svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* =====================================================
+   SEARCH INPUT
+   ===================================================== */
+.rt-search-container {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 60px;
+}
+
+.rt-search-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.rt-search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--rt-search-border);
+  padding: 20px 60px 20px 0;
+  font-family: var(--rt-search-font-serif);
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--rt-search-text);
+  transition: border-color 0.3s ease;
+}
+
+.rt-search-input:focus {
+  outline: none;
+  border-color: var(--rt-search-gold);
+}
+
+.rt-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.rt-search-submit {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--rt-search-text);
+  cursor: pointer;
+}
+.rt-search-submit svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* =====================================================
+   BODY / RESULTS CONTAINER
+   ===================================================== */
+.rt-search-body {
+  margin-top: 60px;
+  width: 100%;
+}
+
+.rt-search-section-title {
+  font-family: var(--rt-search-font-serif);
+  font-size: 24px;
+  color: var(--rt-search-text);
+  margin-bottom: 24px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--rt-search-border);
+  padding-bottom: 12px;
+}
+
+/* =====================================================
+   CHIPS (Recent / Trending)
+   ===================================================== */
+.rt-search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.rt-search-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--rt-search-border);
+  color: var(--rt-search-muted);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: var(--rt-search-font-sans);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rt-search-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--rt-search-text);
+  border-color: var(--rt-search-gold);
+}
+.rt-search-chip-remove {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  opacity: 0.5;
+}
+.rt-search-chip-remove:hover {
+  opacity: 1;
+}
+
+.rt-search-clear-all {
+  background: none;
+  border: none;
+  color: var(--rt-search-muted);
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 8px 16px;
+}
+
+/* =====================================================
+   PRODUCT GRID
+   ===================================================== */
+.rt-search-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 992px) { .rt-search-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .rt-search-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.rt-search-product-card {
+  background: var(--rt-search-card);
+  border-radius: 16px;
+  border: 1px solid var(--rt-search-border);
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.rt-search-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.rt-search-product-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #000;
+}
+
+.rt-search-product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.rt-search-product-vendor {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rt-search-muted);
+  margin-bottom: 4px;
+}
+
+.rt-search-product-title {
+  font-family: var(--rt-search-font-serif);
+  font-size: 18px;
+  color: var(--rt-search-text);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.rt-search-product-price {
+  font-family: var(--rt-search-font-sans);
+  font-size: 14px;
+  color: var(--rt-search-gold);
+  margin-top: auto;
+}
+
+.rt-search-product-price del {
+  color: var(--rt-search-muted);
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+/* =====================================================
+   PAGES / ARTICLES
+   ===================================================== */
+.rt-search-pages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rt-search-page-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  padding: 16px;
+  background: var(--rt-search-card);
+  border-radius: 12px;
+  border: 1px solid var(--rt-search-border);
+  transition: all 0.2s ease;
+}
+.rt-search-page-item:hover {
+  border-color: var(--rt-search-gold);
+  background: rgba(255, 255, 255, 0.03);
+}
+.rt-search-page-title {
+  color: var(--rt-search-text);
+  font-size: 16px;
+  font-family: var(--rt-search-font-serif);
+}
+
+/* =====================================================
+   EMPTY STATE / NO RESULTS
+   ===================================================== */
+.rt-search-no-results {
+  text-align: center;
+  padding: 60px 0;
+}
+.rt-search-no-results h3 {
+  font-family: var(--rt-search-font-serif);
+  font-size: 32px;
+  color: var(--rt-search-text);
+  margin-bottom: 16px;
+}
+.rt-search-no-results p {
+  color: var(--rt-search-muted);
+  font-size: 15px;
+}
+
+/* Utilities */
+.rt-d-none { display: none !important; }
+
+/* =====================================================
+   SEARCH RESULTS PAGE OVERRIDES
+   ===================================================== */
+.template-search .section-background { background: var(--rt-search-bg) !important; }
+.template-search h1, .template-search h2 { color: var(--rt-search-text) !important; font-family: var(--rt-search-font-serif); }
+.template-search .filters { background: var(--rt-search-card) !important; border-color: var(--rt-search-border) !important; color: #fff !important; }
+.template-search .filters summary { color: #fff !important; }
+.template-search .filters input { accent-color: var(--rt-search-gold) !important; }
+
+
+.rt-search-container form, .rt-search-input-wrapper, .rt-search-input {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+
+.rt-search-overlay * {
+  background-color: transparent;
+}
+.rt-search-overlay {
+  background: rgba(11, 11, 11, 0.85) !important; /* ensure dark */
+}
+.rt-search-input, .rt-search-input:focus {
+  background: #151515 !important;
+  color: #ffffff !important;
+}
+.rt-search-chip {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.template-search {
+  background-color: #0B0B0B !important;
+  color: #FFFFFF !important;
+}
+

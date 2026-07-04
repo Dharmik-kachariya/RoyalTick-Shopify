@@ -10,7 +10,7 @@
 %}
 
 {%- capture cart_summary_inner_class -%}
-  cart-summary__inner
+  cart-summary__inner luxury-summary-card
   {% if block_settings.extend_summary == false and custom_color %} color-custom-{{ block.id }} inherit-parent-scheme--mobile{% endif %}
   {% if block_settings.extend_summary == false and block_settings.border_radius > 0 %} has-border-radius{% endif %}
 {%- endcapture -%}
@@ -33,6 +33,7 @@
   {{ block.shopify_attributes }}
 >
   <div class="{{ cart_summary_inner_class }}">
+    <h2 class="luxury-summary-title">Order Summary</h2>
     {% render 'cart-summary', accelerated_checkout_buttons_layout: 'vertical', section_id: section.id %}
   </div>
 </div>

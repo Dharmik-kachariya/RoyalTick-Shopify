@@ -5,14 +5,35 @@
   {% assign product_title = '<p role="heading" aria-level="3">' | append: text | append: '</p>' %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% else %}
-  {% assign product_title = '<p role="heading" aria-level="3">' | append: closest.product.title | append: '</p>' %}
-  <a
-    class="contents user-select-text"
-    ref="productTitleLink"
-    href="{{ closest.product.selected_or_first_available_variant.url }}"
-  >
-    {% render 'text', fallback_text: product_title, block: block %}
-  </a>
+  <div class="rt-luxury-header">
+    <div class="rt-luxury-header__brand-row">
+      <span class="rt-luxury-brand">{{ closest.product.vendor | default: 'RoyalTick' }}</span>
+      {% if closest.product.collections.first %}
+        <span class="rt-luxury-collection">{{ closest.product.collections.first.title }}</span>
+      {% endif %}
+    </div>
+    
+    <a class="contents user-select-text" ref="productTitleLink" href="{{ closest.product.selected_or_first_available_variant.url }}">
+      <h1 class="rt-luxury-title">{{ closest.product.title }}</h1>
+    </a>
+    
+    <p class="rt-luxury-tagline">Crafted for perfection. A timeless masterpiece.</p>
+    
+    <div class="rt-luxury-meta">
+      <span class="rt-meta-item">SKU: <strong>{{ closest.product.selected_or_first_available_variant.sku | default: 'RT-8849' }}</strong></span>
+      <span class="rt-meta-separator">|</span>
+      <span class="rt-meta-item">Availability: <strong>{% if closest.product.available %}In Stock{% else %}Out of Stock{% endif %}</strong></span>
+    </div>
+
+    <!-- Watch Information Chips -->
+    <div class="rt-luxury-chips">
+      <span class="rt-chip">Swiss Made</span>
+      <span class="rt-chip">Automatic</span>
+      <span class="rt-chip">42 mm</span>
+      <span class="rt-chip">Sapphire Crystal</span>
+      <span class="rt-chip">316L Steel</span>
+    </div>
+  </div>
 {% endif %}
 
 {% schema %}

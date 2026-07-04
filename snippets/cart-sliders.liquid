@@ -1,0 +1,162 @@
+{%- unless cart.empty? -%}
+  <div class="rt-cart-sliders-wrapper">
+    <!-- People Also Bought -->
+    {% assign first_item_id = cart.items.first.product_id %}
+    {% if first_item_id %}
+      <div class="rt-cart-slider-section">
+        <h2 class="rt-cart-slider-title">People Also Bought</h2>
+        <div id="rt-cart-recommendations" data-product-id="{{ first_item_id }}" data-limit="4">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Recently Viewed -->
+    <div class="rt-cart-slider-section" id="rt-recently-viewed-wrapper" style="display:none;">
+      <h2 class="rt-cart-slider-title">Recently Viewed</h2>
+      <div id="rt-cart-recently-viewed">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .rt-cart-sliders-wrapper {
+      margin-top: 80px;
+      padding-top: 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      grid-column: 1 / -1;
+    }
+    .rt-cart-slider-section {
+      margin-bottom: 60px;
+    }
+    .rt-cart-slider-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      color: #FFF;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .rt-cart-slider-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1024px) {
+      .rt-cart-slider-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 767px) {
+      .rt-cart-slider-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .rt-cart-slider-card {
+      background: #151515;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+      display: block;
+    }
+    .rt-cart-slider-card:hover {
+      transform: translateY(-4px);
+    }
+    .rt-cart-slider-card img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .rt-cart-slider-card h3 {
+      font-size: 16px;
+      color: #FFF;
+      margin: 0 0 8px 0;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .rt-cart-slider-card .price {
+      color: #C9A227;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const formatMoney = (cents) => {
+        return '₹' + (cents / 100).toFixed(2);
+      };
+
+      // 1. Load Recommendations
+      const recContainer = document.getElementById("rt-cart-recommendations");
+      if (recContainer) {
+        const productId = recContainer.getAttribute("data-product-id");
+        const limit = recContainer.getAttribute("data-limit");
+        
+        fetch(`/recommendations/products.json?product_id=${productId}&limit=${limit}&intent=related`)
+          .then(res => res.json())
+          .then(data => {
+            const products = data.products;
+            if (products && products.length > 0) {
+              let html = '<div class="rt-cart-slider-grid">';
+              products.forEach(p => {
+                html += `
+                  <a href="${p.url}" class="rt-cart-slider-card">
+                    <img src="${p.featured_image}" alt="${p.title}" />
+                    <h3>${p.title}</h3>
+                    <div class="price">${formatMoney(p.price)}</div>
+                  </a>
+                `;
+              });
+              html += '</div>';
+              recContainer.innerHTML = html;
+            } else {
+              recContainer.parentElement.style.display = 'none';
+            }
+          })
+          .catch(e => console.error("Error loading recommendations", e));
+      }
+
+      // 2. Load Recently Viewed
+      const recentlyViewedStr = localStorage.getItem('rt_recently_viewed');
+      const recentlyViewedWrapper = document.getElementById("rt-recently-viewed-wrapper");
+      const recentlyViewedContainer = document.getElementById("rt-cart-recently-viewed");
+      
+      if (recentlyViewedStr && recentlyViewedWrapper && recentlyViewedContainer) {
+        let handles = [];
+        try {
+          handles = JSON.parse(recentlyViewedStr);
+        } catch(e) {}
+        
+        if (handles.length > 0) {
+          recentlyViewedWrapper.style.display = 'block';
+          // Limit to 4
+          handles = handles.slice(0, 4);
+          
+          let promises = handles.map(handle => fetch(`/products/${handle}.js`).then(r => r.json()).catch(e => null));
+          Promise.all(promises).then(results => {
+            let html = '<div class="rt-cart-slider-grid">';
+            results.forEach(p => {
+              if (p) {
+                html += `
+                  <a href="${p.url}" class="rt-cart-slider-card">
+                    <img src="${p.featured_image || p.images[0]}" alt="${p.title}" />
+                    <h3>${p.title}</h3>
+                    <div class="price">${formatMoney(p.price)}</div>
+                  </a>
+                `;
+              }
+            });
+            html += '</div>';
+            recentlyViewedContainer.innerHTML = html;
+          });
+        }
+      }
+    });
+  </script>
+{%- endunless -%}

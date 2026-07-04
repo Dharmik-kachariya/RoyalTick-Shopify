@@ -14,6 +14,9 @@
   {% render 'cart-items-component', children: cart_content, is_drawer: true, section_id: section.id %}
 {% enddoc %}
 
+<script src="{{ 'component-cart-items.js' | asset_url }}" type="module" defer="defer"></script>
+<script src="{{ 'component-cart-quantity-selector.js' | asset_url }}" type="module" defer="defer"></script>
+
 <cart-items-component
   class="cart-items-component"
   {% if is_drawer %}

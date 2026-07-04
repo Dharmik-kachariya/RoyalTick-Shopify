@@ -173,6 +173,66 @@ export class ProductCard extends ProductCardLink {
         this.#preloadNextPreviewImage();
       }
     });
+
+    // Wishlist toggle interaction
+    const wishlistBtn = this.querySelector('.rt-card-wishlist-btn');
+    if (wishlistBtn) {
+      wishlistBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        wishlistBtn.classList.toggle('rt-wishlist-active');
+        const heartSvg = wishlistBtn.querySelector('svg');
+        if (heartSvg) {
+          if (wishlistBtn.classList.contains('rt-wishlist-active')) {
+            heartSvg.setAttribute('fill', 'currentColor');
+          } else {
+            heartSvg.setAttribute('fill', 'none');
+          }
+        }
+      });
+    }
+
+    // Quick View click handler
+    const quickViewBtn = this.querySelector('.rt-card-quick-view-btn');
+    if (quickViewBtn) {
+      quickViewBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Quick View clicked for:', quickViewBtn.getAttribute('data-product-handle'));
+        this.dispatchEvent(new CustomEvent('rt:quickview', {
+          bubbles: true,
+          detail: { handle: quickViewBtn.getAttribute('data-product-handle') }
+        }));
+      });
+    }
+
+    // Compare button interaction (markup/UI feedback only)
+    const compareBtn = this.querySelector('.rt-card-compare-btn');
+    if (compareBtn) {
+      compareBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        compareBtn.classList.toggle('rt-compare-active');
+        console.log('Compare clicked for product:', this.getAttribute('data-product-id'));
+      });
+    }
+
+    // Choose Options redirect / click trigger
+    const chooseOptionsBtn = this.querySelector('.rt-card-choose-options-btn');
+    if (chooseOptionsBtn) {
+      chooseOptionsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // Find native quick-add choose button and click it
+        const nativeChooseBtn = this.querySelector('.quick-add__button--choose');
+        if (nativeChooseBtn) {
+          nativeChooseBtn.click();
+        } else {
+          // Fallback: navigate to PDP if native choose button is not found
+          window.location.href = this.productPageUrl;
+        }
+      });
+    }
   }
 
   disconnectedCallback() {

@@ -638,3 +638,553 @@
   background-color: #050505 !important;
 }
 
+/* ====================================================
+   ROYALTICK PREMIUM LUXURY PRODUCT CARD GLOBAL STYLES
+   ==================================================== */
+
+.product-card {
+  position: relative !important;
+  background: linear-gradient(180deg, #0B0B0B 0%, #111111 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 24px !important;
+  padding: 20px !important;
+  overflow: hidden !important;
+  transition: transform 450ms cubic-bezier(.22, .61, .36, 1), 
+              border-color 450ms cubic-bezier(.22, .61, .36, 1), 
+              box-shadow 450ms cubic-bezier(.22, .61, .36, 1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.product-card:hover {
+  transform: translateY(-10px) !important;
+  border-color: rgba(200, 163, 77, 0.45) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.65), 0 0 25px rgba(200, 163, 77, 0.15) !important;
+}
+
+/* Spotlight behind card image & Glass Reflection Effect */
+.product-card .card-gallery {
+  position: relative !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  background: radial-gradient(circle at center, rgba(200, 163, 77, 0.12) 0%, rgba(17, 17, 17, 0) 70%), 
+              linear-gradient(135deg, #0a0a0a 0%, #151515 100%) !important;
+  aspect-ratio: 1/1 !important;
+  border: none !important;
+  margin-bottom: 20px !important;
+  padding: 0 !important;
+}
+
+/* Glass reflection gloss overlay */
+.product-card .card-gallery::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -150% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  transform: skewX(-30deg) !important;
+  transition: all 0.75s ease !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+}
+
+.product-card:hover .card-gallery::before {
+  left: 150% !important;
+}
+
+/* Luxury Image zoom, rotation, and floating animations */
+.product-card .card-gallery img,
+.product-card .product-media img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 18px !important;
+  transition: transform 600ms cubic-bezier(.22, .61, .36, 1) !important;
+  transform-origin: center center !important;
+}
+
+.product-card:hover .card-gallery img,
+.product-card:hover .product-media img {
+  transform: scale(1.08) rotate(1deg) !important;
+  animation: rtFloat 4s ease-in-out infinite alternate !important;
+}
+
+@keyframes rtFloat {
+  0% { transform: scale(1.08) rotate(1deg) translateY(0px); }
+  100% { transform: scale(1.08) rotate(1deg) translateY(-4px); }
+}
+
+/* Second Image cross-fade override */
+.product-card slideshow-slide:nth-of-type(2) {
+  opacity: 0 !important;
+  transition: opacity 600ms cubic-bezier(.22, .61, .36, 1) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+}
+
+.product-card:hover slideshow-slide:nth-of-type(2) {
+  opacity: 1 !important;
+}
+
+/* Top Right Circular Glass Buttons */
+.rt-card-top-right-actions {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  z-index: 15 !important;
+}
+
+.rt-card-action-btn {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #C8A34D !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 300ms cubic-bezier(.22, .61, .36, 1) !important;
+}
+
+.rt-card-action-btn:hover {
+  background: rgba(200, 163, 77, 0.15) !important;
+  border-color: #C8A34D !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(200, 163, 77, 0.2) !important;
+}
+
+.rt-card-action-btn svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
+/* Active buttons state */
+.rt-card-action-btn.rt-wishlist-active,
+.rt-card-action-btn.rt-compare-active {
+  background: #C8A34D !important;
+  border-color: #C8A34D !important;
+  color: #000000 !important;
+}
+
+.rt-card-action-btn.rt-wishlist-active svg {
+  fill: currentColor !important;
+}
+
+/* Badges (Top Left pills) */
+.rt-card-badges {
+  position: absolute !important;
+  top: 15px !important;
+  left: 15px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  z-index: 12 !important;
+}
+
+.rt-card-badge {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  padding: 6px 12px !important;
+  border-radius: 30px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Gold badges */
+.rt-card-badge--badge-limited-edition,
+.rt-card-badge--badge-swiss-made,
+.rt-card-badge--badge-automatic {
+  background-color: rgba(200, 163, 77, 0.1) !important;
+  color: #C8A34D !important;
+  border-color: rgba(200, 163, 77, 0.3) !important;
+}
+
+/* Red / Sale badges */
+.rt-card-badge--sale,
+.rt-card-badge--badge-hot {
+  background-color: rgba(217, 30, 24, 0.1) !important;
+  color: #d91e18 !important;
+  border-color: rgba(217, 30, 24, 0.3) !important;
+}
+
+/* Black / New badges */
+.rt-card-badge--badge-new,
+.rt-card-badge--badge-best-seller,
+.rt-card-badge--sold-out {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: #ffffff !important;
+}
+
+/* Brand (Vendor) */
+.rt-card-vendor {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #C8A34D !important;
+  margin-bottom: 8px !important;
+}
+
+/* Product Title */
+.product-card .product-title,
+.product-card [role="heading"],
+.product-card .product-title p {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  color: #ffffff !important;
+  margin: 0 0 8px 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  height: 2.5em !important;
+  position: relative !important;
+}
+
+/* Animated title underline on hover */
+.product-card::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 20px !important;
+  right: 20px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(200,163,77,0.3), transparent) !important;
+  transform: scaleX(0) !important;
+  transition: transform 0.4s ease !important;
+}
+
+.product-card:hover::after {
+  transform: scaleX(1) !important;
+}
+
+/* Subtitle */
+.rt-card-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  color: #8E8E93 !important;
+  margin-bottom: 12px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 1 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Luxury Star Ratings block */
+.rt-card-rating {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 12px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.rt-rating-stars {
+  color: #C8A34D !important;
+  letter-spacing: 2px !important;
+  font-size: 13px !important;
+}
+
+.rt-review-count {
+  font-size: 12px !important;
+  color: #636366 !important;
+}
+
+.rt-verified-badge {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: rgba(200, 163, 77, 0.8) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Price */
+.product-card .price {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  margin-bottom: 16px !important;
+}
+
+.product-card .price__compare,
+.product-card .price s {
+  font-size: 16px !important;
+  color: #636366 !important;
+  text-decoration: line-through !important;
+  margin-left: 10px !important;
+}
+
+/* Savings Gold Pill */
+.rt-card-savings-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  background-color: rgba(200, 163, 77, 0.1) !important;
+  border: 1px solid rgba(200, 163, 77, 0.2) !important;
+  color: #C8A34D !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border-radius: 30px !important;
+  width: fit-content !important;
+  margin-bottom: 16px !important;
+}
+
+/* Color Variant Swatches */
+product-swatches {
+  margin-bottom: 16px !important;
+}
+
+product-swatches overflow-list::part(list) {
+  gap: 8px !important;
+}
+
+/* Bottom Actions container layout */
+.rt-card-bottom-actions {
+  display: flex !important;
+  gap: 10px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-top: auto !important;
+  
+  @media screen and (min-width: 750px) {
+    transform: translateY(15px) !important;
+    opacity: 0 !important;
+    transition: transform 450ms cubic-bezier(.22, .61, .36, 1), opacity 450ms ease !important;
+  }
+}
+
+.product-card:hover .rt-card-bottom-actions {
+  @media screen and (min-width: 750px) {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Button general presets */
+.rt-card-btn {
+  flex: 1 1 50% !important;
+  height: 44px !important;
+  border-radius: 14px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 300ms ease !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+}
+
+/* View Details: Outline White */
+.rt-card-btn--details {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+.rt-card-btn--details:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: #ffffff !important;
+}
+
+/* Add to Cart: Gold Filled */
+.rt-card-btn--atc {
+  background: #C8A34D !important;
+  border: 1px solid #C8A34D !important;
+  color: #000000 !important;
+}
+
+.rt-card-btn--atc:hover {
+  background: #b28f3c !important;
+  border-color: #b28f3c !important;
+  box-shadow: 0 0 12px rgba(200, 163, 77, 0.25) !important;
+}
+
+/* Form component container styling for side-by-side buttons */
+.rt-card-bottom-actions product-form-component {
+  flex: 1 1 50% !important;
+  display: block !important;
+}
+
+.rt-card-bottom-actions form {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Disable styles */
+.rt-card-btn--disabled {
+  background: #2c2c2e !important;
+  border-color: #2c2c2e !important;
+  color: #8e8e93 !important;
+  cursor: not-allowed !important;
+}
+
+/* Spacing under card content to prevent overlapping on hover actions */
+.product-card__content {
+  flex-grow: 1 !important;
+  padding-bottom: 24px !important;
+  
+  @media screen and (max-width: 749px) {
+    padding-bottom: 54px !important;
+  }
+}
+
+/* Hide native quick add component because we replaced it with dual buttons */
+.product-card quick-add-component {
+  display: none !important;
+}
+
+/* Responsive Grid columns count matching requirements */
+.product-grid,
+.rt-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important; /* Mobile default */
+  gap: 24px !important;
+  
+  @media screen and (min-width: 480px) {
+    grid-template-columns: repeat(2, 1fr) !important; /* Tablet */
+  }
+  @media screen and (min-width: 750px) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  @media screen and (min-width: 990px) {
+    grid-template-columns: repeat(3, 1fr) !important; /* Laptop */
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr) !important; /* Desktop */
+  }
+  @media screen and (max-width: 380px) {
+    grid-template-columns: 1fr !important; /* Small mobile */
+  }
+}
+
+/* Star rating colors */
+.product-card .rating-star,
+.product-card .icon-star,
+.product-card .review-stars {
+  color: #C8A34D !important;
+  fill: currentColor !important;
+}
+
+/* =========================================================================
+   ROYALTICK PRODUCT CARD OVERRIDES (FOR SEARCH & COLLECTION GRIDS)
+   ========================================================================= */
+
+.product-card .rt-luxury-header {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  text-align: left !important;
+  margin-bottom: 12px !important;
+}
+
+.product-card .rt-luxury-header__brand-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 11px !important;
+  margin-bottom: 4px !important;
+}
+
+.product-card .rt-luxury-brand {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #C8A34D !important;
+}
+
+.product-card .rt-luxury-collection {
+  font-family: 'Inter', sans-serif !important;
+  color: #8E8E93 !important;
+}
+
+.product-card .rt-luxury-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  color: #ffffff !important;
+  margin: 4px 0 8px 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  height: 2.5em !important;
+}
+
+.product-card .rt-luxury-tagline {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  color: #8E8E93 !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  height: 2.8em !important;
+}
+
+.product-card .rt-luxury-meta {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  color: #636366 !important;
+  margin-bottom: 12px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  align-items: center !important;
+}
+
+.product-card .rt-luxury-meta strong {
+  color: #FFFFFF !important;
+}
+
+.product-card .rt-meta-separator {
+  color: rgba(255,255,255,0.15) !important;
+}
+
+.product-card .rt-luxury-chips {
+  display: none !important; /* Hide technical chips inside grid cards for cleaner premium look */
+}
+
+
+
+

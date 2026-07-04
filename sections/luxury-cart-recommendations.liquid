@@ -1,0 +1,197 @@
+{% stylesheet %}
+.luxury-recommendations-section {
+  max-width: 1600px;
+  margin: 64px auto;
+  padding: 0 40px;
+  background-color: transparent;
+}
+.luxury-recommendations-title {
+  color: var(--rt-text-primary);
+  font-family: var(--rt-font-serif);
+  font-size: 28px;
+  margin-bottom: 32px;
+  text-align: left;
+  letter-spacing: 0.05em;
+}
+.luxury-recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1200px) {
+  .luxury-recommendations-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 990px) {
+  .luxury-recommendations-grid { grid-template-columns: repeat(2, 1fr); }
+  .luxury-recommendations-section { padding: 0 24px; }
+}
+@media (max-width: 767px) {
+  .luxury-recommendations-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .luxury-recommendations-section { padding: 0 16px; }
+  .luxury-recommendations-title { font-size: 22px; }
+}
+
+.luxury-rec-card {
+  background: var(--rt-bg-card);
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform var(--rt-transition-fast), box-shadow var(--rt-transition-fast);
+}
+.luxury-rec-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.luxury-rec-card-link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+.luxury-rec-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  object-fit: cover;
+  background: #000;
+}
+.luxury-rec-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.luxury-rec-vendor {
+  color: var(--rt-accent-gold);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.luxury-rec-title {
+  color: var(--rt-text-primary);
+  font-family: var(--rt-font-serif);
+  font-size: 16px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.luxury-rec-price {
+  color: var(--rt-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.luxury-rec-add {
+  margin-top: auto;
+  width: 100%;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--rt-text-primary);
+  border: 1px solid var(--rt-border-color);
+  border-radius: 8px;
+  font-family: var(--rt-font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--rt-transition-fast);
+}
+.luxury-rec-add:hover {
+  background: var(--rt-accent-gold);
+  color: #000;
+  border-color: var(--rt-accent-gold);
+}
+{% endstylesheet %}
+
+<div class="luxury-recommendations-section">
+  <h2 class="luxury-recommendations-title">{{ section.settings.title }}</h2>
+  
+  <luxury-product-recommendations class="luxury-recommendations-wrapper" data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.limit }}&section_id={{ section.id }}&product_id={{ cart.items.first.product.id }}">
+    {% if recommendations.performed and recommendations.products_count > 0 %}
+      <div class="luxury-recommendations-grid">
+        {% for product in recommendations.products %}
+          <div class="luxury-rec-card">
+            <a href="{{ product.url }}" class="luxury-rec-card-link">
+              <img src="{{ product.featured_image | image_url: width: 400 }}" class="luxury-rec-image" alt="{{ product.title | escape }}" loading="lazy">
+              <div class="luxury-rec-info">
+                {% if product.vendor %}
+                  <span class="luxury-rec-vendor">{{ product.vendor }}</span>
+                {% endif %}
+                <h3 class="luxury-rec-title">{{ product.title }}</h3>
+                <span class="luxury-rec-price">{{ product.price | money }}</span>
+              </div>
+            </a>
+            
+            <product-form-component data-section-id="{{ section.id }}" data-product-id="{{ product.id }}">
+              {%- form 'product', product -%}
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit" class="luxury-rec-add">Add to Cart</button>
+              {%- endform -%}
+            </product-form-component>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </luxury-product-recommendations>
+</div>
+
+<script>
+  class LuxuryProductRecommendations extends HTMLElement {
+    constructor() {
+      super();
+      const handleIntersection = (entries, observer) => {
+        if (!entries[0].isIntersecting) return;
+        observer.unobserve(this);
+
+        fetch(this.dataset.url)
+          .then(response => response.text())
+          .then(text => {
+            const html = document.createElement('div');
+            html.innerHTML = text;
+            const recommendations = html.querySelector('.luxury-recommendations-grid');
+            if (recommendations && recommendations.innerHTML.trim().length) {
+              this.innerHTML = recommendations.outerHTML;
+            }
+          })
+          .catch(e => {
+            console.error(e);
+          });
+      }
+      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
+    }
+  }
+  if (!customElements.get('luxury-product-recommendations')) {
+    customElements.define('luxury-product-recommendations', LuxuryProductRecommendations);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Luxury Recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You May Also Like"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Maximum products to show",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury Recommendations"
+    }
+  ]
+}
+{% endschema %}

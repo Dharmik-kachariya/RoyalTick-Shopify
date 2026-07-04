@@ -1,7 +1,22 @@
-
+{{ 'rt-pdp.css' | asset_url | stylesheet_tag }}
 
 <script type="application/ld+json">
   {{ closest.product | structured_data }}
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof Storage !== "undefined") {
+      const handle = "{{ closest.product.handle }}";
+      if (handle) {
+        let rv = localStorage.getItem('rt_recently_viewed');
+        let rvArr = rv ? JSON.parse(rv) : [];
+        rvArr = rvArr.filter(h => h !== handle);
+        rvArr.unshift(handle);
+        localStorage.setItem('rt_recently_viewed', JSON.stringify(rvArr.slice(0, 10)));
+      }
+    }
+  });
 </script>
 
 {% capture media_gallery %}

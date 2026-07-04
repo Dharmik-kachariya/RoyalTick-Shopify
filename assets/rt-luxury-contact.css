@@ -1,0 +1,360 @@
+/* =====================================================
+   ROYALTICK LUXURY CONTACT PAGE
+   ===================================================== */
+
+:root {
+  --rt-bg-main: #0B0B0B;
+  --rt-bg-card: #151515;
+  --rt-bg-input: rgba(255, 255, 255, 0.03);
+  
+  --rt-text-primary: #FFFFFF;
+  --rt-text-secondary: #A0A0A0;
+  --rt-text-muted: #666666;
+  
+  --rt-accent-gold: #C9A227;
+  --rt-accent-gold-hover: #DDB841;
+  
+  --rt-border-color: rgba(255, 255, 255, 0.08);
+  --rt-border-light: rgba(255, 255, 255, 0.12);
+
+  --rt-font-serif: 'Cormorant Garamond', serif;
+  --rt-font-sans: 'Inter', sans-serif;
+  
+  --rt-transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --rt-transition-smooth: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  --rt-shadow-card: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.luxury-contact-wrapper {
+  background: var(--rt-bg-main);
+  color: var(--rt-text-primary);
+  font-family: var(--rt-font-sans);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* =====================================================
+   HERO BANNER
+   ===================================================== */
+.luxury-contact-hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeUp var(--rt-transition-smooth) forwards;
+}
+
+.luxury-contact-title {
+  font-family: var(--rt-font-serif);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 600;
+  color: var(--rt-text-primary);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.luxury-contact-subtitle {
+  font-size: 16px;
+  color: var(--rt-text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   CONTACT CARDS (GRID)
+   ===================================================== */
+.luxury-contact-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+
+.luxury-contact-card {
+  background: var(--rt-bg-card);
+  border: 1px solid var(--rt-border-color);
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--rt-text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: transform var(--rt-transition-fast), border-color var(--rt-transition-fast), box-shadow var(--rt-transition-fast);
+}
+
+.luxury-contact-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--rt-accent-gold);
+  box-shadow: var(--rt-shadow-card);
+}
+
+.luxury-contact-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rt-accent-gold);
+}
+.luxury-contact-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.luxury-contact-card-title {
+  font-family: var(--rt-font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.luxury-contact-card-text {
+  font-size: 14px;
+  color: var(--rt-text-secondary);
+  line-height: 1.5;
+}
+
+.luxury-contact-card-action {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--rt-accent-gold);
+  font-weight: 600;
+  margin-top: auto;
+}
+
+/* =====================================================
+   SPLIT LAYOUT (FAQ & FORM)
+   ===================================================== */
+.luxury-contact-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+
+.luxury-contact-section-title {
+  font-family: var(--rt-font-serif);
+  font-size: 32px;
+  color: var(--rt-text-primary);
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   FAQ ACCORDION
+   ===================================================== */
+.luxury-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.luxury-faq-item {
+  background: var(--rt-bg-card);
+  border: 1px solid var(--rt-border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.luxury-faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--rt-text-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: var(--rt-font-sans);
+}
+
+.luxury-faq-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.luxury-faq-icon::before,
+.luxury-faq-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--rt-text-secondary);
+  transition: transform var(--rt-transition-fast);
+}
+.luxury-faq-icon::before {
+  top: 9px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+}
+.luxury-faq-icon::after {
+  top: 0;
+  left: 9px;
+  width: 2px;
+  height: 20px;
+}
+.luxury-faq-item.active .luxury-faq-icon::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+.luxury-faq-answer {
+  padding: 0 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--rt-transition-smooth), padding var(--rt-transition-smooth);
+}
+.luxury-faq-item.active .luxury-faq-answer {
+  padding: 0 24px 24px;
+  max-height: 500px;
+}
+.luxury-faq-answer p {
+  color: var(--rt-text-secondary);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =====================================================
+   PREMIUM CONTACT FORM
+   ===================================================== */
+.luxury-contact-form-wrapper {
+  background: var(--rt-bg-card);
+  border: 1px solid var(--rt-border-color);
+  border-radius: 20px;
+  padding: 48px;
+  box-shadow: var(--rt-shadow-card);
+}
+
+.luxury-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.luxury-form-group {
+  margin-bottom: 24px;
+}
+
+.luxury-input {
+  width: 100%;
+  background: var(--rt-bg-input);
+  border: 1px solid var(--rt-border-color);
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: var(--rt-text-primary);
+  font-family: var(--rt-font-sans);
+  font-size: 15px;
+  transition: border-color var(--rt-transition-fast), background var(--rt-transition-fast);
+}
+.luxury-input:focus {
+  outline: none;
+  border-color: var(--rt-accent-gold);
+  background: rgba(255, 255, 255, 0.05);
+}
+.luxury-input::placeholder {
+  color: var(--rt-text-muted);
+}
+textarea.luxury-input {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.luxury-btn-submit {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(135deg, var(--rt-accent-gold) 0%, #A68032 100%);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--rt-font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: transform var(--rt-transition-fast), box-shadow var(--rt-transition-fast);
+}
+.luxury-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201, 162, 39, 0.3);
+}
+
+.form-status-message {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--rt-accent-gold);
+  color: var(--rt-text-primary);
+  font-size: 14px;
+}
+
+/* =====================================================
+   GOOGLE MAP
+   ===================================================== */
+.luxury-map-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.luxury-map-iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 20px;
+  /* Dark mode filter for generic maps */
+  filter: grayscale(100%) invert(92%) contrast(1.2);
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+@media (max-width: 1200px) {
+  .luxury-contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 992px) {
+  .luxury-contact-split {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .luxury-contact-form-wrapper {
+    padding: 32px;
+  }
+}
+@media (max-width: 768px) {
+  .luxury-contact-cards {
+    grid-template-columns: 1fr;
+  }
+  .luxury-form-row {
+    grid-template-columns: 1fr;
+  }
+  .luxury-contact-title {
+    font-size: 36px;
+  }
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

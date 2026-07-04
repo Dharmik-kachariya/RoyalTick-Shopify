@@ -9,17 +9,25 @@
 
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
-  <div class="cart-totals__original-container cart-primary-typography">
-    {%- if cart.cart_level_discount_applications.size > 0 -%}
-      <span class="cart-totals__item cart-totals__original">
-        <span class="cart-totals__original-label">{{ 'content.cart_subtotal' | t }}</span>
-        <span
-          class="cart-totals__original-value cart-secondary-typography"
-          data-testid="cart-subtotal-value"
-        >
-          {{- cart.items_subtotal_price | money -}}
-        </span>
+  <div class="cart-totals__original-container cart-primary-typography" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+    <span class="cart-totals__item cart-totals__original">
+      <span class="cart-totals__original-label">Subtotal</span>
+      <span
+        class="cart-totals__original-value cart-secondary-typography"
+        data-testid="cart-subtotal-value"
+      >
+        {{- cart.items_subtotal_price | money -}}
       </span>
+    </span>
+
+    <span class="cart-totals__item cart-totals__original">
+      <span class="cart-totals__original-label">Shipping</span>
+      <span class="cart-totals__original-value cart-secondary-typography">
+        Calculated at checkout
+      </span>
+    </span>
+
+    {%- if cart.cart_level_discount_applications.size > 0 -%}
       <ul
         class="cart-discounts"
         role="list"
@@ -262,10 +270,11 @@
     id="checkout"
     class="cart__checkout-button button"
     name="checkout"
-    {% if cart == empty %}
+    {% if cart.item_count == 0 %}
       disabled
     {% endif %}
     form="cart-form"
+    onclick="window.location.href='/checkout'; return false;"
   >
     <span class="button-text">
       {{ 'content.checkout' | t }}

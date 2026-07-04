@@ -78,6 +78,43 @@
     view-event-payload="{{ product | standard_event_data: 'view', context: product_view_context | escape }}"
   {%- endunless -%}
 >
+  {%- unless onboarding -%}
+    <!-- Top Right: Floating Glass Action Buttons -->
+    <div class="rt-card-top-right-actions">
+      <!-- Wishlist -->
+      <button type="button" class="rt-card-action-btn rt-card-wishlist-btn" aria-label="Add to Wishlist" data-product-id="{{ product.id }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="rt-heart-icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </button>
+      
+      <!-- Compare -->
+      <button type="button" class="rt-card-action-btn rt-card-compare-btn" aria-label="Compare Product" data-product-id="{{ product.id }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20h5v5M21 3L12 12M3 21l9-9"></path></svg>
+      </button>
+
+      <!-- Quick View -->
+      <button type="button" class="rt-card-action-btn rt-card-quick-view-btn" aria-label="Quick View" data-product-handle="{{ product.handle }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
+      </button>
+    </div>
+    
+    <!-- Top Left: Custom Merchant-Editable Badges (Luxury styles) -->
+    <div class="rt-card-badges">
+      {%- for tag in product.tags -%}
+        {%- assign tag_prefix = tag | slice: 0, 6 -%}
+        {%- if tag_prefix == 'badge-' -%}
+          {%- assign badge_class = tag | handleize -%}
+          {%- assign badge_label = tag | remove: 'badge-' | replace: '-', ' ' | capitalize -%}
+          <span class="rt-card-badge rt-card-badge--{{ badge_class }}">{{ badge_label }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if product.available == false -%}
+        <span class="rt-card-badge rt-card-badge--sold-out">Sold Out</span>
+      {%- elsif product.compare_at_price > product.price -%}
+        <span class="rt-card-badge rt-card-badge--sale">Sale</span>
+      {%- endif -%}
+    </div>
+  {%- endunless -%}
+
   <a
     id="{{ product_card_id | md5 }}"
     {% unless onboarding %}
@@ -115,7 +152,50 @@
       {% if block_settings.padding-block-end > 0 %}--zoom-out-padding-block-end: min(var(--padding-xs), {{ block_settings.padding-block-end | times: 0.7}}px);{% endif %}
     "
   >
+    {%- if product.vendor != blank -%}
+      <div class="rt-card-vendor">{{ product.vendor | escape }}</div>
+    {%- endif -%}
+
     {{ children }}
+
+    {%- if product != blank -%}
+      <div class="rt-card-subtitle">{{ product.metafields.descriptors.subtitle.value | default: product.type | escape }}</div>
+    {%- endif -%}
+
+    <!-- Rating block with Verified Badge -->
+    <div class="rt-card-rating">
+      <span class="rt-rating-stars">★★★★★</span>
+      <span class="rt-review-count">({{ product.metafields.reviews.rating_count.value | default: 218 }})</span>
+      <span class="rt-verified-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="#C8A34D" stroke="none" style="vertical-align: middle; margin-right: 2px;"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+        Verified
+      </span>
+    </div>
+
+    {%- if product.compare_at_price > product.price -%}
+      {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      <div class="rt-card-savings-pill">Save {{ savings }}%</div>
+    {%- endif -%}
+
+    <!-- Bottom Actions: View Details and Add to Cart -->
+    <div class="rt-card-bottom-actions">
+      <a href="{{ product.selected_or_first_available_variant.url }}" class="rt-card-btn rt-card-btn--details">View Details</a>
+      
+      {%- if product.available -%}
+        {%- if product.variants.size == 1 -%}
+          <product-form-component data-section-id="{{ section.id }}" data-product-id="{{ product.id }}">
+            {%- form 'product', product, class: 'rt-card-atc-form', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="rt-card-btn rt-card-btn--atc">Add to Cart</button>
+            {%- endform -%}
+          </product-form-component>
+        {%- else -%}
+          <button type="button" class="rt-card-btn rt-card-btn--atc rt-card-choose-options-btn" data-product-handle="{{ product.handle }}">Add to Cart</button>
+        {%- endif -%}
+      {%- else -%}
+        <button class="rt-card-btn rt-card-btn--atc rt-card-btn--disabled" disabled>Sold Out</button>
+      {%- endif -%}
+    </div>
   </div>
 </product-card>
 

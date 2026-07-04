@@ -1,0 +1,249 @@
+{{ 'rt-luxury-contact.css' | asset_url | stylesheet_tag }}
+
+<div class="luxury-contact-wrapper">
+  
+  <!-- HERO BANNER -->
+  <div class="luxury-contact-hero">
+    <h1 class="luxury-contact-title">{{ section.settings.heading | default: 'Contact Us' }}</h1>
+    <p class="luxury-contact-subtitle">{{ section.settings.subheading }}</p>
+  </div>
+
+  <!-- CONTACT CARDS -->
+  <div class="luxury-contact-cards">
+    {% for block in section.blocks %}
+      {% if block.type == 'contact_card' %}
+        <a href="{{ block.settings.link }}" class="luxury-contact-card">
+          <div class="luxury-contact-icon">
+            {% if block.settings.icon == 'whatsapp' %}
+              <svg viewBox="0 0 24 24"><path d="M12.031 21.67l-2.91-1.09-3.79.94 1.25-3.66-1.12-2.78c-1.35-2.61-1.3-5.75.14-8.31C7.14 4.04 10.05 2.33 13.16 2.33c3.12 0 6.03 1.7 7.55 4.45 1.51 2.72 1.45 5.99-.15 8.65-1.55 2.58-4.32 4.21-7.3 4.42-.4.03-.81.04-1.23-.18zm-6.28 1.45l4.31-1.07c2.51.98 5.4.94 7.84-.26 2.4-1.17 4.1-3.35 4.67-6.04.57-2.69-.11-5.46-1.87-7.61-1.76-2.15-4.35-3.41-7.1-3.41-2.76 0-5.36 1.28-7.12 3.44C4.7 10.33 4.04 13.1 4.63 15.8L3 20.89l2.75 2.23zm10.74-5.26c-.19-.1-1.14-.56-1.32-.62-.18-.06-.31-.1-.44.1-.13.19-.5.62-.61.75-.12.12-.24.14-.43.04-.19-.1-.81-.3-1.54-.95-.57-.5-.95-1.12-1.06-1.31-.11-.19-.01-.3.08-.4.09-.09.19-.22.28-.33.1-.11.13-.19.19-.31.06-.13.03-.24-.02-.33-.05-.09-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33-.11 0-.24 0-.37 0s-.34.05-.52.24c-.18.19-.68.66-.68 1.63s.7 1.91.8 2.04c.1.13 1.4 2.14 3.39 3 .47.2.84.32 1.13.41.48.15.92.13 1.26.08.38-.05 1.14-.47 1.3-.92.16-.45.16-.84.11-.92-.05-.08-.18-.12-.37-.22z"/></svg>
+            {% elsif block.settings.icon == 'email' %}
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            {% elsif block.settings.icon == 'phone' %}
+              <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+            {% elsif block.settings.icon == 'location' %}
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            {% endif %}
+          </div>
+          <h3 class="luxury-contact-card-title">{{ block.settings.title }}</h3>
+          <p class="luxury-contact-card-text">{{ block.settings.text | newline_to_br }}</p>
+          <span class="luxury-contact-card-action">{{ block.settings.action_text }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- SPLIT LAYOUT -->
+  <div class="luxury-contact-split">
+    
+    <!-- LEFT: FAQ & BUSINESS HOURS -->
+    <div>
+      <h2 class="luxury-contact-section-title">Frequently Asked Questions</h2>
+      <div class="luxury-faq-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq' %}
+            <div class="luxury-faq-item">
+              <button class="luxury-faq-question" type="button" aria-expanded="false">
+                {{ block.settings.question }}
+                <span class="luxury-faq-icon"></span>
+              </button>
+              <div class="luxury-faq-answer">
+                <p>{{ block.settings.answer | newline_to_br }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- RIGHT: PREMIUM CONTACT FORM -->
+    <div>
+      <div class="luxury-contact-form-wrapper">
+        <h2 class="luxury-contact-section-title">Send a Message</h2>
+        
+        {%- form 'contact', id: 'ContactForm', class: 'luxury-contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="form-status-message" tabindex="-1" autofocus>
+              Thank you for contacting us. We will get back to you soon.
+            </div>
+          {%- elsif form.errors -%}
+            <div class="form-status-message" style="border-color: var(--rt-accent-error);" role="alert" tabindex="-1" autofocus>
+              Oops! There was an error submitting your form.
+            </div>
+          {%- endif -%}
+
+          <div class="luxury-form-row">
+            <div class="luxury-form-field">
+              <input class="luxury-input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="Name">
+            </div>
+            <div class="luxury-form-field">
+              <input
+                autocomplete="email"
+                type="email"
+                id="ContactForm-email"
+                class="luxury-input"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+                placeholder="Email*"
+                required
+              >
+            </div>
+          </div>
+          
+          <div class="luxury-form-group">
+            <input type="tel" id="ContactForm-phone" class="luxury-input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="Phone Number">
+          </div>
+          
+          <div class="luxury-form-group">
+            <textarea
+              rows="5"
+              id="ContactForm-body"
+              class="luxury-input"
+              name="contact[{{ 'templates.contact.form.comment' | t }}]"
+              placeholder="Message*"
+              required
+            >
+              {{- form.body -}}
+            </textarea>
+          </div>
+          
+          <button type="submit" class="luxury-btn-submit">
+            Send Message
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE MAP -->
+  {% if section.settings.map_iframe != blank %}
+    <div class="luxury-map-wrapper">
+      <h2 class="luxury-contact-section-title" style="text-align: center; margin-bottom: 40px;">Find Our Boutique</h2>
+      <div class="luxury-map-iframe-container">
+        {{ section.settings.map_iframe | replace: '<iframe', '<iframe class="luxury-map-iframe" loading="lazy" ' }}
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+
+<script>
+  // Simple FAQ Accordion Logic
+  document.querySelectorAll('.luxury-faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      // Close all
+      document.querySelectorAll('.luxury-faq-item').forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.luxury-faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Toggle current
+      if (!isActive) {
+        item.classList.add('active');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Luxury Contact Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact Us"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We are here to assist you with any inquiries. Reach out to us via your preferred channel."
+    },
+    {
+      "type": "html",
+      "id": "map_iframe",
+      "label": "Google Map Iframe Embed Code",
+      "info": "Go to Google Maps > Share > Embed a map > Copy HTML"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_card",
+      "name": "Contact Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "whatsapp", "label": "WhatsApp" },
+            { "value": "email", "label": "Email" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "location", "label": "Location" }
+          ],
+          "default": "email"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Email Us"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "info@royaltick.com"
+        },
+        {
+          "type": "text",
+          "id": "action_text",
+          "label": "Action Text",
+          "default": "Send Email"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What are your business hours?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "We are open Monday to Friday from 9 AM to 6 PM."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury Contact Page"
+    }
+  ]
+}
+{% endschema %}

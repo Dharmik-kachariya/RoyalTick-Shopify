@@ -36,6 +36,39 @@
     {% endif %}
 
     {{ content_for_header }}
+
+    {% if template.name == 'cart' %}
+      <style>
+        .template-cart #header-group, 
+        .template-cart .header-wrapper, 
+        .template-cart header-component, 
+        .template-cart .header {
+          background-color: #0B0B0B !important;
+        }
+        .template-cart .header__icon, 
+        .template-cart .header__icon *, 
+        .template-cart .header__menu-item, 
+        .template-cart .header__menu-item *, 
+        .template-cart .header__heading-link, 
+        .template-cart .header__heading-link *, 
+        .template-cart .menu-drawer__menu-item, 
+        .template-cart .header__heading-logo {
+          color: #FFFFFF !important;
+          fill: #FFFFFF !important;
+        }
+        .template-cart .header__icon svg path {
+          stroke: #FFFFFF !important;
+        }
+          .template-cart .header__heading-logo {
+             filter: invert(1) !important;
+          }
+        </style>
+      {% endif %}
+
+      <!-- ROYAL TICK LUXURY SEARCH -->
+      {{ 'rt-luxury-search.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'rt-luxury-search.js' | asset_url }}" defer="defer"></script>
+
   </head>
 
   <body class="template-{{ template.name }} page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
@@ -135,7 +168,7 @@
     {% render 'cart-drawer', render_wrapper: true %}
     {% render 'theme-drawer' %}
 
-    {% render 'search-modal' %}
+    {% render 'luxury-search-overlay' %}
 
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}

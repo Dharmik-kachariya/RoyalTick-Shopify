@@ -1,0 +1,43 @@
+<div class="rt-luxury-specs-accordion">
+  {%- assign t1 = spec_title_1 | default: 'Movement & Power' -%}
+  {%- assign d1 = spec_desc_1 | default: '<p>Calibre 3235 Manufacture. Perpetual, mechanical, self-winding.</p>' -%}
+  {%- if t1 != blank and d1 != blank -%}
+    <details class="rt-specs-item">
+      <summary class="rt-specs-summary">
+        {{ t1 }}
+        <svg class="rt-specs-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="rt-specs-content">
+        {{ d1 }}
+      </div>
+    </details>
+  {%- endif -%}
+
+  {%- assign t2 = spec_title_2 | default: 'Case & Dial' -%}
+  {%- assign d2 = spec_desc_2 | default: '<p>41mm 316L Stainless Steel case with scratch-resistant sapphire crystal.</p>' -%}
+  {%- if t2 != blank and d2 != blank -%}
+    <details class="rt-specs-item">
+      <summary class="rt-specs-summary">
+        {{ t2 }}
+        <svg class="rt-specs-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="rt-specs-content">
+        {{ d2 }}
+      </div>
+    </details>
+  {%- endif -%}
+
+  {%- assign t3 = spec_title_3 | default: 'Strap & Clasp' -%}
+  {%- assign d3 = spec_desc_3 | default: '<p>Premium oyster steel bracelet with folding safety clasp.</p>' -%}
+  {%- if t3 != blank and d3 != blank -%}
+    <details class="rt-specs-item">
+      <summary class="rt-specs-summary">
+        {{ t3 }}
+        <svg class="rt-specs-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="rt-specs-content">
+        {{ d3 }}
+      </div>
+    </details>
+  {%- endif -%}
+</div>

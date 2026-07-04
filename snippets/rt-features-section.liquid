@@ -1,0 +1,42 @@
+<div class="rt-luxury-features-grid">
+  {%- assign f1 = feature_1 | default: 'Swiss Movement' -%}
+  {%- if f1 != blank -%}
+    <div class="rt-feature-item">
+      <div class="rt-feature-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div class="rt-feature-text">{{ f1 }}</div>
+    </div>
+  {%- endif -%}
+
+  {%- assign f2 = feature_2 | default: 'Sapphire Crystal' -%}
+  {%- if f2 != blank -%}
+    <div class="rt-feature-item">
+      <div class="rt-feature-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div class="rt-feature-text">{{ f2 }}</div>
+    </div>
+  {%- endif -%}
+
+  {%- assign f3 = feature_3 | default: 'Water Resistant' -%}
+  {%- if f3 != blank -%}
+    <div class="rt-feature-item">
+      <div class="rt-feature-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div class="rt-feature-text">{{ f3 }}</div>
+    </div>
+  {%- endif -%}
+
+  {%- assign f4 = feature_4 | default: '316L Steel' -%}
+  {%- if f4 != blank -%}
+    <div class="rt-feature-item">
+      <div class="rt-feature-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div class="rt-feature-text">{{ f4 }}</div>
+    </div>
+  {%- endif -%}
+</div>
+
