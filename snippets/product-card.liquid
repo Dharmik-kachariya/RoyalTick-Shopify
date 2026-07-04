@@ -82,7 +82,7 @@
     <!-- Top Right: Floating Glass Action Buttons -->
     <div class="rt-card-top-right-actions">
       <!-- Wishlist -->
-      <button type="button" class="rt-card-action-btn rt-card-wishlist-btn" aria-label="Add to Wishlist" data-product-id="{{ product.id }}">
+      <button type="button" class="rt-card-action-btn rt-card-wishlist-btn" aria-label="Add to Wishlist" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="rt-heart-icon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
       </button>
       
@@ -152,34 +152,15 @@
       {% if block_settings.padding-block-end > 0 %}--zoom-out-padding-block-end: min(var(--padding-xs), {{ block_settings.padding-block-end | times: 0.7}}px);{% endif %}
     "
   >
-    {%- if product.vendor != blank -%}
-      <div class="rt-card-vendor">{{ product.vendor | escape }}</div>
-    {%- endif -%}
+
 
     {{ children }}
 
-    {%- if product != blank -%}
-      <div class="rt-card-subtitle">{{ product.metafields.descriptors.subtitle.value | default: product.type | escape }}</div>
-    {%- endif -%}
 
-    <!-- Rating block with Verified Badge -->
-    <div class="rt-card-rating">
-      <span class="rt-rating-stars">★★★★★</span>
-      <span class="rt-review-count">({{ product.metafields.reviews.rating_count.value | default: 218 }})</span>
-      <span class="rt-verified-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="#C8A34D" stroke="none" style="vertical-align: middle; margin-right: 2px;"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-        Verified
-      </span>
-    </div>
-
-    {%- if product.compare_at_price > product.price -%}
-      {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-      <div class="rt-card-savings-pill">Save {{ savings }}%</div>
-    {%- endif -%}
 
     <!-- Bottom Actions: View Details and Add to Cart -->
     <div class="rt-card-bottom-actions">
-      <a href="{{ product.selected_or_first_available_variant.url }}" class="rt-card-btn rt-card-btn--details">View Details</a>
+      <a href="{{ product.selected_or_first_available_variant.url }}" class="rt-card-btn rt-card-btn--details" onclick="event.stopPropagation(); window.location.href=this.href; return false;">View Details</a>
       
       {%- if product.available -%}
         {%- if product.variants.size == 1 -%}

@@ -69,6 +69,13 @@
       {{ 'rt-luxury-search.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'rt-luxury-search.js' | asset_url }}" defer="defer"></script>
 
+      <!-- ROYAL TICK WISHLIST -->
+      {{ 'rt-wishlist.css' | asset_url | stylesheet_tag }}
+      <script>
+        window.RT_CUSTOMER_LOGGED_IN = {% if customer %}true{% else %}false{% endif %};
+      </script>
+      <script src="{{ 'rt-wishlist.js' | asset_url }}" defer="defer"></script>
+
   </head>
 
   <body class="template-{{ template.name }} page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">

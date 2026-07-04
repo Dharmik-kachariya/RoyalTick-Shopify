@@ -1,0 +1,45 @@
+{% comment %} RoyalTick Premium Wishlist Section {% endcomment %}
+{{ 'rt-wishlist.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'rt-wishlist.js' | asset_url }}" defer="defer"></script>
+
+<div class="rt-wishlist" id="rt-wishlist-section">
+  <div class="page-width rt-wishlist__container">
+    <header class="rt-wishlist__header">
+      <h1 class="rt-wishlist__title">MY WISHLIST</h1>
+      <p class="rt-wishlist__subtitle">Your curated selection of exceptional timepieces.</p>
+    </header>
+
+    {%- if customer -%}
+      {% render 'rt-wishlist-card' %}
+      <!-- Dynamic Wishlist Grid -->
+      <div class="rt-wishlist__grid-wrapper" id="rt-wishlist-grid-wrapper" style="display: none;">
+        <div class="rt-wishlist__grid" id="rt-wishlist-grid">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div id="rt-wishlist-empty" style="display: none;">
+        {% render 'rt-empty-wishlist' %}
+      </div>
+    {%- else -%}
+      <!-- Guest Redirect/Notice State -->
+      <div class="rt-wishlist__guest-notice">
+        <h2 class="rt-wishlist-empty__heading">Please sign in to save your favourite timepieces</h2>
+        <p class="rt-wishlist-empty__description">Create an account or login to save your favorite watches for future purchases.</p>
+        <div class="rt-wishlist__guest-actions">
+          <a href="{{ routes.account_login_url }}" class="rt-wishlist-btn rt-wishlist-btn--primary">Sign In</a>
+          <a href="{{ routes.account_register_url }}" class="rt-wishlist-btn rt-wishlist-btn--secondary">Create Account</a>
+          <a href="{{ routes.all_products_collection_url }}" class="rt-wishlist-btn rt-wishlist-btn--tertiary">Continue Shopping</a>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Wishlist",
+  "settings": []
+}
+{% endschema %}

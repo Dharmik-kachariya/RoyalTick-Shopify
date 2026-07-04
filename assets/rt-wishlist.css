@@ -1,0 +1,591 @@
+/* rt-wishlist.css */
+
+.rt-wishlist {
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+  padding: 80px 0;
+  min-height: 70vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.rt-wishlist__container {
+  max-width: 1600px !important;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.rt-wishlist__header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.rt-wishlist__header::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  background-color: #C8A96A;
+  margin: 25px auto 0;
+}
+
+.rt-wishlist__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin: 0 0 12px 0;
+  color: #FFFFFF;
+}
+
+.rt-wishlist__subtitle {
+  font-size: clamp(13px, 1.2vw, 16px);
+  color: #a0a0a0;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+/* Wishlist Grid */
+.rt-wishlist__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media screen and (max-width: 1399px) {
+  .rt-wishlist__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .rt-wishlist__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .rt-wishlist__grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Wishlist Card */
+.rt-wishlist-card {
+  background-color: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.rt-wishlist-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(200, 169, 106, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.rt-wishlist-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-color: #1a1a1a;
+  overflow: hidden;
+}
+
+.rt-wishlist-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rt-wishlist-card:hover .rt-wishlist-card__image {
+  transform: scale(1.05);
+}
+
+.rt-wishlist-card__remove-btn-floating {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(21, 21, 21, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.rt-wishlist-card__remove-btn-floating:hover {
+  background: rgba(200, 169, 106, 0.2);
+  border-color: #C8A96A;
+  color: #C8A96A;
+  transform: scale(1.05);
+}
+
+.rt-wishlist-card__info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.rt-wishlist-card__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888888;
+  margin-bottom: 12px;
+}
+
+.rt-wishlist-card__vendor {
+  color: #C8A96A;
+}
+
+.rt-wishlist-card__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0 0 8px 0;
+  letter-spacing: 0.03em;
+}
+
+.rt-wishlist-card__title a {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.rt-wishlist-card__title a:hover {
+  color: #C8A96A;
+}
+
+.rt-wishlist-card__price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+
+.rt-wishlist-card__details {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 10px;
+  margin-bottom: 16px;
+}
+
+.rt-wishlist-card__detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.rt-wishlist-card__detail-label {
+  color: #888888;
+}
+
+.rt-wishlist-card__detail-value {
+  color: #FFFFFF;
+}
+
+.rt-wishlist-card__detail-value--stock {
+  color: #2ecc71;
+}
+
+/* Actions */
+.rt-wishlist-card__actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rt-wishlist-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 4px;
+}
+
+.rt-wishlist-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.rt-wishlist-card__btn--atc {
+  background-color: #C8A96A;
+  color: #000000;
+  border: 1px solid #C8A96A;
+  width: 100%;
+}
+
+.rt-wishlist-card__btn--atc:hover {
+  background-color: transparent;
+  color: #C8A96A;
+}
+
+.rt-wishlist-card__secondary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rt-wishlist-card__btn--view {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rt-wishlist-card__btn--view:hover {
+  border-color: #FFFFFF;
+}
+
+.rt-wishlist-card__btn--share {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rt-wishlist-card__btn--share:hover {
+  border-color: #FFFFFF;
+}
+
+/* Empty State */
+.rt-wishlist-empty {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.rt-wishlist-empty__icon {
+  margin-bottom: 24px;
+}
+
+.rt-wishlist-empty__heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0 0 12px 0;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+}
+
+.rt-wishlist-empty__description {
+  font-size: 15px;
+  color: #888888;
+  margin: 0 0 40px 0;
+  line-height: 1.6;
+}
+
+.rt-wishlist-btn--primary {
+  background-color: #C8A96A;
+  color: #000000;
+  border: 1px solid #C8A96A;
+}
+
+.rt-wishlist-btn--primary:hover {
+  background-color: transparent;
+  color: #C8A96A;
+}
+
+.rt-wishlist-btn--secondary {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rt-wishlist-btn--secondary:hover {
+  border-color: #FFFFFF;
+}
+
+.rt-wishlist-btn--tertiary {
+  background-color: transparent;
+  color: #888888;
+  border: none;
+}
+
+.rt-wishlist-btn--tertiary:hover {
+  color: #FFFFFF;
+}
+
+.rt-wishlist__guest-notice {
+  text-align: center;
+  padding: 60px 40px;
+  max-width: 550px;
+  margin: 0 auto;
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.rt-wishlist__guest-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* Glassmorphism Heart Button on Cards */
+.rt-card-wishlist-btn {
+  background: rgba(21, 21, 21, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rt-card-wishlist-btn:hover {
+  border-color: #C8A96A !important;
+  box-shadow: 0 0 15px rgba(200, 169, 106, 0.3) !important;
+  transform: scale(1.05);
+}
+
+.rt-card-wishlist-btn .rt-heart-icon {
+  stroke: #FFFFFF;
+  fill: none;
+  transition: fill 0.3s ease, stroke 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rt-card-wishlist-btn.is-active .rt-heart-icon {
+  stroke: #C8A96A;
+  fill: #C8A96A;
+  transform: scale(1.15);
+}
+
+/* Header Counter */
+.rt-header-wishlist {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.rt-header-wishlist:hover {
+  color: #C8A96A;
+}
+
+.rt-header-wishlist__counter {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #C8A96A;
+  color: #000000;
+  font-size: 9px;
+  font-weight: 700;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rt-header-wishlist__counter[data-count="0"] {
+  display: none;
+}
+
+/* PDP Button Styles */
+.rt-pdp-wishlist-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  margin-top: 15px;
+  font-family: 'Inter', sans-serif;
+}
+
+.rt-pdp-wishlist-btn:hover {
+  border-color: #C8A96A;
+  color: #C8A96A;
+  box-shadow: 0 0 15px rgba(200, 169, 106, 0.15);
+}
+
+.rt-pdp-wishlist-btn svg {
+  stroke: currentColor;
+  fill: none;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.rt-pdp-wishlist-btn.is-active svg {
+  fill: #C8A96A;
+  stroke: #C8A96A;
+}
+
+/* Fading card on removal animation */
+.rt-wishlist-card.is-removing {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Toast Notification */
+.rt-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(21, 21, 21, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 169, 106, 0.3);
+  color: #FFFFFF;
+  padding: 16px 24px;
+  border-radius: 8px;
+  z-index: 9999;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.rt-toast.is-show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Premium Login Modal */
+.rt-login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.rt-login-modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rt-login-modal {
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 40px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.rt-login-modal-overlay.is-open .rt-login-modal {
+  transform: scale(1);
+}
+
+.rt-login-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.rt-login-modal__close:hover {
+  color: #FFFFFF;
+}
+
+.rt-login-modal__icon {
+  margin-bottom: 24px;
+}
+
+.rt-login-modal__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  margin: 0 0 12px 0;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+}
+
+.rt-login-modal__text {
+  font-size: 14px;
+  color: #888888;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.rt-login-modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

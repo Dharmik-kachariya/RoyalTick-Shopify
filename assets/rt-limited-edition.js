@@ -1,7 +1,3 @@
-/**
- * RoyalTick - Limited Edition Showcase Controller
- * Handles viewport entry animations and countdown timer ticks.
- */
 
 (function () {
   let timerInterval = null;

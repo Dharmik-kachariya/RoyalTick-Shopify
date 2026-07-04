@@ -197,6 +197,7 @@
   z-index: 1;
   overflow: hidden;
   height: 260px;
+}
 
 /* Border Glow Accent on Hover */
 .rt-brand-showcase__card::before {
@@ -279,9 +280,9 @@
 }
 
 /* --- Responsive Adjustments --- */
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 989px) {
   .rt-brand-showcase__cards {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 }
@@ -297,7 +298,7 @@
   }
   
   .rt-brand-showcase__cards {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
   

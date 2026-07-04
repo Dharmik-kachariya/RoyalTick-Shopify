@@ -1,0 +1,53 @@
+<template id="rt-wishlist-card-template">
+  <div class="rt-wishlist-card" data-product-handle="${handle}" data-product-id="${id}">
+    <!-- Image -->
+    <div class="rt-wishlist-card__image-wrapper">
+      <a href="${url}" class="rt-wishlist-card__image-link">
+        <img src="${featured_image}" alt="${title}" loading="lazy" class="rt-wishlist-card__image">
+      </a>
+      <button type="button" class="rt-wishlist-card__remove-btn-floating" aria-label="Remove from Wishlist" data-remove-handle="${handle}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!-- Info -->
+    <div class="rt-wishlist-card__info">
+      <div class="rt-wishlist-card__meta">
+        <span class="rt-wishlist-card__vendor">${vendor}</span>
+        <span class="rt-wishlist-card__type">${type}</span>
+      </div>
+      
+      <h3 class="rt-wishlist-card__title">
+        <a href="${url}">${title}</a>
+      </h3>
+
+      <div class="rt-wishlist-card__price">${price}</div>
+      
+      <div class="rt-wishlist-card__details">
+        <div class="rt-wishlist-card__detail-item">
+          <span class="rt-wishlist-card__detail-label">Availability:</span>
+          <span class="rt-wishlist-card__detail-value rt-wishlist-card__detail-value--stock">${availability}</span>
+        </div>
+        <div class="rt-wishlist-card__detail-item">
+          <span class="rt-wishlist-card__detail-label">SKU:</span>
+          <span class="rt-wishlist-card__detail-value">${sku}</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="rt-wishlist-card__actions">
+        <button type="button" class="rt-wishlist-card__btn rt-wishlist-card__btn--atc" data-variant-id="${variantId}">
+          Move to Cart
+        </button>
+        <div class="rt-wishlist-card__secondary-actions">
+          <a href="${url}" class="rt-wishlist-card__btn rt-wishlist-card__btn--view">
+            View Product
+          </a>
+          <button type="button" class="rt-wishlist-card__btn rt-wishlist-card__btn--share" data-share-url="${absoluteUrl}" data-product-title="${title}">
+            Share
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
