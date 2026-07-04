@@ -285,6 +285,8 @@ product-recommendations,
   letter-spacing: 0.05em;
   border: none !important;
   padding: 12px 24px !important;
+  white-space: nowrap !important;
+  min-width: fit-content !important;
 }
 
 /* Luxury Breadcrumbs */

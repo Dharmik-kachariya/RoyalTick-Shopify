@@ -310,6 +310,7 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 8px !important;
   background: #151515 !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   color: #E8E8E8 !important;
@@ -580,6 +581,30 @@
   .rt-collection-content {
     padding: 2.5rem 1rem;
   }
+  
+  /* Hide desktop filters on mobile to let drawer take over */
+  .rt-filter-bar .facets-block-wrapper {
+    display: none !important;
+  }
+  
+  /* Hide the standalone sort if mobile drawer is used */
+  .rt-filter-bar .facets-mobile-wrapper--multiple-controls .sorting-filter {
+    display: none !important;
+  }
+  
+  /* Arrange mobile facet toggles */
+  .rt-filter-bar .facets__form {
+    gap: 1rem !important;
+    justify-content: space-between !important;
+  }
+  
+  .rt-filter-bar .mobile-facets__wrapper {
+    flex-grow: 1 !important;
+  }
+  
+  .rt-filter-bar .product-count {
+    margin: 0 !important;
+  }
 }
 
 /* --- COLLECTION TEMPLATE HEADER OVERRIDES --- */
@@ -792,11 +817,22 @@
   fill: currentColor !important;
 }
 
+/* Hide standard Dawn badges to avoid overlap with luxury badges */
+.product-card .product-badges {
+  display: none !important;
+}
+
+/* Make standard media wrappers transparent to fix white corners */
+.product-card .media,
+.product-card .card-gallery__image-wrapper {
+  background: transparent !important;
+}
+
 /* Badges (Top Left pills) */
 .rt-card-badges {
   position: absolute !important;
-  top: 15px !important;
-  left: 15px !important;
+  top: 60px !important; /* Positioned inside the image area */
+  left: 36px !important;
   display: flex !important;
   flex-direction: column !important;
   gap: 6px !important;

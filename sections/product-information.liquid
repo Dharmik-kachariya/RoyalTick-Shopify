@@ -55,7 +55,7 @@
     data-default-variant-title="{{ 'products.product.default_title' | t }}"
   >
     <div
-      class="sticky-add-to-cart__bar color-custom-popover"
+      class="sticky-add-to-cart__bar"
       data-stuck="false"
       ref="stickyBar"
       role="region"
@@ -216,18 +216,7 @@
       transform: translateX(-50%) translateY(calc(100% + 40px));
     }
 
-    &::before {
-      --border: 2px;
-      content: '';
-      position: absolute;
-      inset: calc(var(--border) * -1);
-      background: linear-gradient(var(--color-background) 0 100%), linear-gradient(hsl(0 0% 0% / 0.15) 0 100%);
-      background-clip: content-box, border-box;
-      border: var(--border) solid #0000;
-      border-radius: inherit;
-      z-index: -1;
-      backdrop-filter: blur(20px) saturate(180%) brightness(1.5);
-    }
+
   }
 
   @media (prefers-reduced-motion: no-preference) {

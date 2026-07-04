@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_jVaWmY": {
@@ -8,7 +17,6 @@
           "name": "t:names.heading",
           "settings": {
             "text": "<p>Browse our latest products</p>",
-            "text_color": "{{ settings.color_palette.background }}",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -19,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -40,6 +49,7 @@
             "custom_button_background": "rgba(0,0,0,0)",
             "custom_button_text": "{{ settings.color_palette.background }}",
             "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
@@ -54,16 +64,15 @@
       ],
       "name": "t:names.hero",
       "settings": {
-        "hero_layout_style": "luxury-split",
-        "eyebrow": "THE ART OF HIGH HOROLOGY",
-        "heading": "THE APEX OF LUXURY TIMEPIECES",
-        "description": "<p>Engineered with Swiss precision, the RoyalTick collection represents the pinnacle of watchmaking artistry. Indulge in chronographs that harmonize heritage with uncompromising modernity.</p>",
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/image2.png",
         "media_type_2": "image",
-        "stack_media_on_mobile": false,
+        "image_2": "shopify://shop_images/image1.png",
+        "stack_media_on_mobile": true,
         "custom_mobile_media": false,
         "media_type_1_mobile": "image",
         "media_type_2_mobile": "image",
+        "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -84,7 +93,26 @@
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 100,
-        "padding-block-end": 72
+        "padding-block-end": 72,
+        "hero_layout_style": "luxury-split",
+        "hero_bg_color": "#0b0b0b",
+        "eyebrow": "THE ART OF HIGH HOROLOGY",
+        "heading": "THE APEX OF LUXURY TIMEPIECES",
+        "description": "<p>Engineered with Swiss precision, the RoyalTick collection represents the pinnacle of watchmaking artistry. Indulge in chronographs that harmonize heritage with uncompromising modernity.</p>",
+        "desktop_image_position": "right",
+        "desktop_hero_height": 80,
+        "mobile_hero_height": 70,
+        "enable_scroll_indicator": true,
+        "enable_mouse_parallax": false,
+        "overlay_opacity": 40,
+        "content_max_width": 700,
+        "content_alignment": "left",
+        "primary_btn_label": "Explore Collection",
+        "primary_btn_link": "",
+        "primary_btn_style": "filled",
+        "secondary_btn_label": "Our Story",
+        "secondary_btn_link": "",
+        "secondary_btn_style": "outline"
       }
     },
     "featured_collections_rt": {
@@ -93,29 +121,41 @@
         "block_1": {
           "type": "collection_card",
           "settings": {
+            "collection": "luxury-watches",
             "title": "Luxury Watches",
-            "description": "High-end Swiss watch collection."
+            "description": "High-end Swiss watch collection.",
+            "button_text": "Explore",
+            "button_link": ""
           }
         },
         "block_2": {
           "type": "collection_card",
           "settings": {
-            "title": "Swiss Collection",
-            "description": "Crafted in Switzerland with precision."
+            "collection": "chronograph",
+            "title": "Chronograph Collection",
+            "description": "Crafted in Switzerland with precision.",
+            "button_text": "Explore",
+            "button_link": ""
           }
         },
         "block_3": {
           "type": "collection_card",
           "settings": {
+            "collection": "sports-watches",
             "title": "Sports Collection",
-            "description": "Rugged, durable and high-performing."
+            "description": "Rugged, durable and high-performing.",
+            "button_text": "Explore",
+            "button_link": ""
           }
         },
         "block_4": {
           "type": "collection_card",
           "settings": {
+            "collection": "frontpage",
             "title": "Classic Collection",
-            "description": "Elegant models for formal occasions."
+            "description": "Elegant models for formal occasions.",
+            "button_text": "Explore",
+            "button_link": ""
           }
         }
       },
@@ -151,33 +191,18 @@
         "rt_products_limit": 8,
         "rt_columns": 4,
         "rt_enable_slider": true,
+        "rt_enable_autoplay": false,
+        "rt_autoplay_speed": 5,
         "rt_enable_quickview": true,
         "rt_enable_wishlist": true,
         "rt_enable_compare_price": true,
         "rt_enable_rating": true,
         "rt_enable_badges": true,
         "rt_enable_hover_image": true,
-        "rt_enable_autoplay": false,
-        "rt_autoplay_speed": 5,
         "rt_show_brand": true,
         "rt_show_stock": true,
         "rt_background_color": "#0b0b0b",
         "rt_accent_color": "#c9a227"
-      }
-    },
-    "brand_story_rt": {
-      "type": "rt-brand-story",
-      "settings": {
-        "rt_eyebrow": "OUR HERITAGE",
-        "rt_heading": "Crafted With Passion.<br>Designed For Eternity.",
-        "rt_description": "<p>At RoyalTick, every watch represents decades of precision engineering, timeless craftsmanship, and uncompromising luxury. Every detail is refined to create a masterpiece that lasts generations.</p>",
-        "rt_enable_counters": true,
-        "rt_background_color": "#080808",
-        "rt_accent_color": "#c9a227",
-        "rt_enable_animation": true,
-        "rt_image_position": "left",
-        "rt_section_spacing_top": 80,
-        "rt_section_spacing_bottom": 80
       }
     },
     "brand_showcase_rt": {
@@ -186,12 +211,12 @@
         "rt_eyebrow": "TRUSTED WORLDWIDE",
         "rt_heading": "Authorized Luxury Watch Destination",
         "rt_description": "<p>We proudly curate the world's finest luxury timepieces from internationally recognized brands, backed by authenticity, premium service and worldwide delivery.</p>",
-        "rt_enable_marquee": true,
-        "rt_marquee_speed": "medium",
+        "rt_enable_marquee": false,
+        "rt_marquee_speed": "slow",
         "rt_pause_on_hover": true,
         "rt_enable_cards": true,
         "rt_show_icons": true,
-        "rt_card_radius": 12,
+        "rt_card_radius": 20,
         "rt_background_color": "#0b0b0b",
         "rt_enable_animation": true,
         "rt_section_spacing_top": 80,
@@ -201,15 +226,18 @@
     "limited_edition_rt": {
       "type": "rt-limited-edition",
       "settings": {
-        "rt_heading": "RoyalTick Signature Collection",
+        "rt_heading": "RoyalTick ExCollection",
         "rt_description": "<p>Experience uncompromising craftsmanship with our most exclusive timepiece, created in limited quantities for collectors who value precision and prestige.</p>",
-        "rt_price": "$4,950",
-        "rt_compare_price": "$7,500",
+        "rt_image": "shopify://shop_images/expensive.png",
+        "rt_price": "$4,95,000",
+        "rt_compare_price": "$7,50,000",
         "rt_inventory_left": 12,
         "rt_enable_countdown": true,
         "rt_countdown_date": "2026-12-31T23:59:59",
         "rt_button_primary": "Reserve Now",
+        "rt_button_primary_link": "",
         "rt_button_secondary": "Explore Collection",
+        "rt_button_secondary_link": "",
         "rt_background_color": "#060606",
         "rt_accent_color": "#c9a227",
         "rt_enable_animation": true,
@@ -222,7 +250,6 @@
     "hero_jVaWmY",
     "featured_collections_rt",
     "featured_products_rt",
-    "brand_story_rt",
     "brand_showcase_rt",
     "limited_edition_rt"
   ]

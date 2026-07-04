@@ -5,6 +5,8 @@
   fetchpriority="low"
 ></script>
 
+{{ 'rt-collections.css' | asset_url | stylesheet_tag }}
+
 {% liquid
   case section.settings.layout_type
     when 'grid'
@@ -94,7 +96,7 @@
       %}
       {% capture list_items %}
         {% for product in products limit: section.settings.max_products %}
-          <div class="resource-list__item">
+          <div class="resource-list__item rt-product-grid__item">
             {% content_for 'block',
               type: '_product-card',
               id: 'static-product-card',
@@ -122,7 +124,7 @@
 
       <div
         class="
-          resource-list
+          resource-list rt-product-grid
           {% if section.settings.layout_type == 'carousel' %}
             force-full-width
           {% endif %}
@@ -155,7 +157,7 @@
         %}
         <div
           class="
-            resource-list
+            resource-list rt-product-grid
             hidden--desktop
             force-full-width
           "
@@ -174,7 +176,7 @@
       {% endif %}
     {%- else -%}
       <div
-        class="resource-list resource-list--grid"
+        class="resource-list resource-list--grid rt-product-grid"
       >
         {% for i in (1..section.settings.columns) %}
           <div

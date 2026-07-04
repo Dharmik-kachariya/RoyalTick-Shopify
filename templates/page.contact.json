@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "luxury_contact": {
@@ -8,7 +17,7 @@
           "settings": {
             "icon": "whatsapp",
             "title": "WhatsApp Us",
-            "text": "+1 (555) 123-4567\nAvailable 24/7",
+            "text": "+91 99999 99999\nAvailable 24/7",
             "action_text": "Message Now",
             "link": "https://wa.me/15551234567"
           }
@@ -18,7 +27,7 @@
           "settings": {
             "icon": "email",
             "title": "Email Us",
-            "text": "info@royaltick.com\nWe reply within 24hrs",
+            "text": "test@gmail.com\nWe reply within 24hrs",
             "action_text": "Send Email",
             "link": "mailto:info@royaltick.com"
           }
@@ -28,7 +37,7 @@
           "settings": {
             "icon": "phone",
             "title": "Call Us",
-            "text": "+1 (800) 999-8888\nMon-Fri, 9am - 6pm",
+            "text": "+91 99999 99999\nMon-Fri, 9am - 6pm",
             "action_text": "Call Now",
             "link": "tel:+18009998888"
           }
@@ -38,7 +47,7 @@
           "settings": {
             "icon": "location",
             "title": "Visit Boutique",
-            "text": "123 Luxury Ave, Suite 100\nNew York, NY 10001",
+            "text": "123 silver stone , surat\nGujarat , India",
             "action_text": "Get Directions",
             "link": "#"
           }
