@@ -454,11 +454,7 @@
   {% endif %}
 {% endcapture %}
 
-{%- liquid
-  if section.settings.background_color != blank
-    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id, skip_contrast: true
-  endif
--%}
+
 
 <div
   id="Hero-{{ section.id }}"
