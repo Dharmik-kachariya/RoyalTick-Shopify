@@ -56,9 +56,12 @@ body.template-cart {
 .template-cart #shopify-section-cart,
 .template-cart #main-cart-footer,
 .template-cart .cart__blocks,
+.template-cart .cart-summary,
+.template-cart .cart-summary__inner,
 .luxury-cart-sidebar .shopify-block,
 .luxury-cart-sidebar [class*="shopify-"] {
   background: transparent !important;
+  background-color: transparent !important;
   box-shadow: none !important;
   border: none !important;
   margin: 0 !important;
