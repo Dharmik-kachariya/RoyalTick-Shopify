@@ -58,6 +58,7 @@ body.template-cart {
 .template-cart .cart__blocks,
 .template-cart .cart-summary,
 .template-cart .cart-summary__inner,
+.template-cart .section-background,
 .luxury-cart-sidebar .shopify-block,
 .luxury-cart-sidebar [class*="shopify-"] {
   background: transparent !important;

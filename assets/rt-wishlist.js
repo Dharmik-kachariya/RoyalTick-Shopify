@@ -135,11 +135,6 @@ class RTWishlistManager {
   }
 
   toggleProduct(button) {
-    if (!this.isCustomerLoggedIn()) {
-      this.showLoginModal();
-      return;
-    }
-
     const handle = button.getAttribute('data-product-handle');
     if (!handle) return;
 
@@ -158,6 +153,11 @@ class RTWishlistManager {
       this.saveWishlist(currentList);
       this.setButtonState(handle, true);
       this.showToast('Added to Wishlist');
+      
+      // Redirect to wishlist page immediately on add
+      setTimeout(() => {
+        window.location.href = '/pages/wishlist';
+      }, 500);
     }
   }
 
