@@ -91,12 +91,84 @@
           {%- assign url = routes.all_products_collection_url -%}
         {%- endif -%}
         
-        <a href="{{ url }}" class="rt-category-nav__link{% if is_active %} is-active{% endif %}">
+        <a href="{{ url }}" data-category="{{ handle }}" class="rt-category-nav__link{% if is_active %} is-active{% endif %}">
           {{ title }}
         </a>
       {%- endfor -%}
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const categoryLinks = document.querySelectorAll(".rt-category-nav__link");
+      const productItems = document.querySelectorAll(".rt-product-grid__item");
+
+      categoryLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          
+          // Remove active class from all links
+          categoryLinks.forEach(l => l.classList.remove("is-active"));
+          
+          // Add active class to clicked link
+          this.classList.add("is-active");
+
+          const selectedCategory = this.getAttribute("data-category").toLowerCase();
+
+          productItems.forEach(item => {
+            const tags = item.getAttribute("data-product-tags") || "";
+            const title = item.getAttribute("data-product-title").toLowerCase() || "";
+            const type = item.getAttribute("data-product-type") || "";
+            
+            // If 'all' is selected, show everything
+            if (selectedCategory === "all") {
+              item.style.display = "";
+            } else {
+              // Check if the category matches a tag, type, or is in the title
+              const matchesTag = tags.includes(selectedCategory);
+              const matchesType = type.includes(selectedCategory);
+              const matchesTitle = title.includes(selectedCategory);
+              const matchesSpecial = selectedCategory === "limited-edition" && (tags.includes("limited") || title.includes("limited"));
+              
+              if (matchesTag || matchesType || matchesTitle || matchesSpecial) {
+                item.style.display = "";
+              } else {
+                item.style.display = "none";
+              }
+            }
+          });
+        });
+      });
+
+      // Grid Layout Toggles
+      const gridBtns = document.querySelectorAll(".rt-grid-btn");
+      const productGrid = document.querySelector(".rt-product-grid");
+
+      // Update button colors on click and toggle grid classes
+      gridBtns.forEach(btn => {
+        btn.addEventListener("click", function() {
+          gridBtns.forEach(b => {
+            b.classList.remove("is-active");
+            b.style.color = "#888";
+          });
+          
+          this.classList.add("is-active");
+          this.style.color = "var(--rt-gold, #cfa85e)"; // Active gold color
+          
+          if (this.dataset.layout === "dense") {
+            productGrid.classList.add("rt-product-grid--dense");
+          } else {
+            productGrid.classList.remove("rt-product-grid--dense");
+          }
+        });
+      });
+      
+      // Initialize active state color
+      const activeBtn = document.querySelector(".rt-grid-btn.is-active");
+      if (activeBtn) activeBtn.style.color = "var(--rt-gold, #cfa85e)";
+
+    });
+  </script>
 
   <!-- SECTION 3: Premium Sticky Filter Bar & Product grid container -->
   <div id="rt-collection-list-main" class="rt-collections-wrapper">
@@ -123,21 +195,48 @@
               %}
             </div>
             
-            <!-- Live Instant Search Bar -->
-            <div class="rt-collection-search">
-              <span class="rt-search-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </span>
-              <input 
-                type="text" 
-                id="rt-collection-search-input" 
-                class="rt-search-input" 
-                placeholder="Search collection..."
-                aria-label="Search items in this collection"
-              />
+            <!-- Live Instant Search Bar & Grid Toggles -->
+            <div class="rt-collection-search-wrapper" style="display: flex; align-items: center; gap: 1rem;">
+              <div class="rt-collection-search">
+                <span class="rt-search-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </span>
+                <input 
+                  type="text" 
+                  id="rt-collection-search-input" 
+                  class="rt-search-input" 
+                  placeholder="Search collection..."
+                  aria-label="Search items in this collection"
+                />
+              </div>
+
+              <!-- Grid Density Toggles -->
+              <div class="rt-grid-toggles" style="display: flex; gap: 0.5rem; align-items: center;">
+                <button type="button" class="rt-grid-btn is-active" data-layout="default" aria-label="Default View" style="background: transparent; border: none; cursor: pointer; color: #888; padding: 0.25rem; transition: color 0.3s ease;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                  </svg>
+                </button>
+                <button type="button" class="rt-grid-btn" data-layout="dense" aria-label="Dense View" style="background: transparent; border: none; cursor: pointer; color: #888; padding: 0.25rem; transition: color 0.3s ease;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="6" r="1.5"></circle>
+                    <circle cx="12" cy="6" r="1.5"></circle>
+                    <circle cx="18" cy="6" r="1.5"></circle>
+                    <circle cx="6" cy="12" r="1.5"></circle>
+                    <circle cx="12" cy="12" r="1.5"></circle>
+                    <circle cx="18" cy="12" r="1.5"></circle>
+                    <circle cx="6" cy="18" r="1.5"></circle>
+                    <circle cx="12" cy="18" r="1.5"></circle>
+                    <circle cx="18" cy="18" r="1.5"></circle>
+                  </svg>
+                </button>
+              </div>
             </div>
 
           </div>
@@ -158,6 +257,8 @@
                   id="{{ section.id }}-{{ product.id }}"
                   class="rt-product-grid__item rt-collection-anim rt-fade-up"
                   data-product-title="{{ product.title | escape }}"
+                  data-product-tags="{{ product.tags | join: ',' | downcase | escape }}"
+                  data-product-type="{{ product.type | downcase | escape }}"
                   data-page="{{ paginate.current_page }}"
                   data-product-id="{{ product.id }}"
                   ref="cards[]"
