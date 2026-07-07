@@ -1,13 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "our-story-hero",
       "settings": {
+        "video_url": "",
         "eyebrow": "THE ART OF LUXURY WATCHMAKING",
         "heading": "Crafting Time Beyond Generations",
         "description": "RoyalTick represents timeless craftsmanship, uncompromising precision, and the world's finest luxury timepieces curated for collectors and visionaries.",
         "btn_1_text": "Explore Collection",
-        "btn_2_text": "Discover Heritage"
+        "btn_1_link": "",
+        "btn_2_text": "Discover Heritage",
+        "btn_2_link": ""
       }
     },
     "intro": {
@@ -49,8 +61,10 @@
         "stat_4"
       ],
       "settings": {
+        "image": "shopify://shop_images/who_we_are.png",
         "eyebrow": "WHO WE ARE",
-        "heading": "Every Timepiece Has A Story"
+        "heading": "Every Timepiece Has A Story",
+        "description": "<p>At RoyalTick, we believe a watch is more than an instrument of time; it is a legacy passed down through generations. Founded on the principles of authenticity, master craftsmanship, and timeless style, we curate only the world's most exceptional timepieces.</p>"
       }
     },
     "timeline": {
@@ -103,7 +117,11 @@
         "m_3",
         "m_4",
         "m_5"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "OUR PATH",
+        "heading": "The Journey of RoyalTick"
+      }
     },
     "philosophy": {
       "type": "our-story-philosophy",
@@ -111,25 +129,25 @@
         "p_1": {
           "type": "philosophy_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M12 6v6l4 2\"></path></svg>",
             "title": "Precision",
-            "description": "Every movement is selected with exceptional standards.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 6v6l4 2\" /></svg>"
+            "description": "Every movement is selected with exceptional standards."
           }
         },
         "p_2": {
           "type": "philosophy_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\"></path></svg>",
             "title": "Craftsmanship",
-            "description": "Only the finest timepieces deserve the RoyalTick name.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\" /></svg>"
+            "description": "Only the finest timepieces deserve the RoyalTick name."
           }
         },
         "p_3": {
           "type": "philosophy_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"></path></svg>",
             "title": "Legacy",
-            "description": "Luxury watches become heirlooms that transcend generations.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\" /></svg>"
+            "description": "Luxury watches become heirlooms that transcend generations."
           }
         }
       },
@@ -137,7 +155,11 @@
         "p_1",
         "p_2",
         "p_3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "OUR PHILOSOPHY",
+        "heading": "The Cornerstones of Heritage"
+      }
     },
     "features": {
       "type": "our-story-features",
@@ -145,65 +167,65 @@
         "f_1": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"m9 12 2 2 4-4\"></path></svg>",
             "title": "100% Authentic",
-            "description": "Every single piece is verified by our experienced experts before arriving at your doorstep.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg>"
+            "description": "Every single piece is verified by our experienced experts before arriving at your doorstep."
           }
         },
         "f_2": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"></path></svg>",
             "title": "Swiss Certified",
-            "description": "Offering authentic collections direct from certified horological hubs in Switzerland.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/></svg>"
+            "description": "Offering authentic collections direct from certified horological hubs in Switzerland."
           }
         },
         "f_3": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"></path></svg>",
             "title": "Worldwide Shipping",
-            "description": "Fully insured global courier transit guarantees your valuable delivery is completely safe.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\"/></svg>"
+            "description": "Fully insured global courier transit guarantees your valuable delivery is completely safe."
           }
         },
         "f_4": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\" ry=\"2\"></rect><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"></path></svg>",
             "title": "Secure Payments",
-            "description": "State-of-the-art multi-encrypted pathways ensure transaction security at every step.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"11\" width=\"18\" height=\"11\" rx=\"2\" ry=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/></svg>"
+            "description": "State-of-the-art multi-encrypted pathways ensure transaction security at every step."
           }
         },
         "f_5": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"></path><polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"></polyline><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"></line></svg>",
             "title": "Luxury Packaging",
-            "description": "Unbox a masterpiece inside customized premium leather cases crafted specifically for safekeeping.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/><polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"/><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"/></svg>"
+            "description": "Unbox a masterpiece inside customized premium leather cases crafted specifically for safekeeping."
           }
         },
         "f_6": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"></path></svg>",
             "title": "Lifetime Support",
-            "description": "Dedicated assistance for repair routing, valuation queries, and servicing throughout your ownership.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/></svg>"
+            "description": "Dedicated assistance for repair routing, valuation queries, and servicing throughout your ownership."
           }
         },
         "f_7": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"></path><polyline points=\"9 11 11 13 15 9\"></polyline></svg>",
             "title": "Premium Warranty",
-            "description": "Every watch carries an extended guarantee plan to secure internal gear functions for generations.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/><polyline points=\"9 11 11 13 15 9\"/></svg>"
+            "description": "Every watch carries an extended guarantee plan to secure internal gear functions for generations."
           }
         },
         "f_8": {
           "type": "feature_card",
           "settings": {
+            "svg_code": "<svg viewbox=\"0 0 24 24\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"></path><circle cx=\"12\" cy=\"7\" r=\"4\"></circle></svg>",
             "title": "Professional Service",
-            "description": "Our team of seasoned collectors offers advice tailored specifically to your portfolio goals.",
-            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>"
+            "description": "Our team of seasoned collectors offers advice tailored specifically to your portfolio goals."
           }
         }
       },
@@ -216,21 +238,75 @@
         "f_6",
         "f_7",
         "f_8"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "THE ROYALTICK DIFFERENCE",
+        "heading": "Why Collectors Choose Us"
+      }
     },
     "brands": {
       "type": "our-story-brands",
       "blocks": {
-        "b_1": { "type": "brand_logo", "settings": { "brand_name": "Rolex" } },
-        "b_2": { "type": "brand_logo", "settings": { "brand_name": "Patek Philippe" } },
-        "b_3": { "type": "brand_logo", "settings": { "brand_name": "Audemars Piguet" } },
-        "b_4": { "type": "brand_logo", "settings": { "brand_name": "Omega" } },
-        "b_5": { "type": "brand_logo", "settings": { "brand_name": "Breitling" } },
-        "b_6": { "type": "brand_logo", "settings": { "brand_name": "TAG Heuer" } },
-        "b_7": { "type": "brand_logo", "settings": { "brand_name": "Cartier" } },
-        "b_8": { "type": "brand_logo", "settings": { "brand_name": "Longines" } },
-        "b_9": { "type": "brand_logo", "settings": { "brand_name": "Tudor" } },
-        "b_10": { "type": "brand_logo", "settings": { "brand_name": "Vacheron Constantin" } }
+        "b_1": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Rolex"
+          }
+        },
+        "b_2": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Patek Philippe"
+          }
+        },
+        "b_3": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Audemars Piguet"
+          }
+        },
+        "b_4": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Omega"
+          }
+        },
+        "b_5": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Breitling"
+          }
+        },
+        "b_6": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "TAG Heuer"
+          }
+        },
+        "b_7": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Cartier"
+          }
+        },
+        "b_8": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Longines"
+          }
+        },
+        "b_9": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Tudor"
+          }
+        },
+        "b_10": {
+          "type": "brand_logo",
+          "settings": {
+            "brand_name": "Vacheron Constantin"
+          }
+        }
       },
       "block_order": [
         "b_1",
@@ -243,7 +319,8 @@
         "b_8",
         "b_9",
         "b_10"
-      ]
+      ],
+      "settings": {}
     },
     "craftsmanship": {
       "type": "our-story-craftsmanship",
@@ -285,7 +362,8 @@
       ],
       "settings": {
         "eyebrow": "HOROLOGICAL ARTISTRY",
-        "heading": "Uncompromising Standards of Horology"
+        "heading": "Uncompromising Standards of Horology",
+        "description": "<p>A true luxury timepiece is an intricate universe on your wrist. Our master watchmakers analyze and inspect every balance spring, gear train, and finishing detail to ensure mechanical perfection.</p>"
       }
     },
     "stats": {
@@ -329,7 +407,8 @@
         "s_2",
         "s_3",
         "s_4"
-      ]
+      ],
+      "settings": {}
     },
     "testimonials": {
       "type": "our-story-testimonials",
@@ -337,25 +416,28 @@
         "t_1": {
           "type": "testimonial",
           "settings": {
+            "rating": "5",
+            "text": "Acquiring my Nautilus through RoyalTick was an outstanding experience. Their verification standards and concierge approach set them apart from standard retailers.",
             "name": "Maximilian V.",
-            "title": "Patek Philippe Collector",
-            "text": "Acquiring my Nautilus through RoyalTick was an outstanding experience. Their verification standards and concierge approach set them apart from standard retailers."
+            "title": "Patek Philippe Collector"
           }
         },
         "t_2": {
           "type": "testimonial",
           "settings": {
+            "rating": "5",
+            "text": "The attention to detail in their packaging and presentation matches the quality of the Swiss timepieces. A trustworthy destination for true connoisseurs.",
             "name": "Elena Rostova",
-            "title": "Fine Art Consultant",
-            "text": "The attention to detail in their packaging and presentation matches the quality of the Swiss timepieces. A trustworthy destination for true connoisseurs."
+            "title": "Fine Art Consultant"
           }
         },
         "t_3": {
           "type": "testimonial",
           "settings": {
+            "rating": "5",
+            "text": "I value historical transparency. RoyalTick provided detailed certificates and full records of my vintage Chronograph. Unmatched client service.",
             "name": "David Sterling",
-            "title": "Legacy Collector",
-            "text": "I value historical transparency. RoyalTick provided detailed certificates and full records of my vintage Chronograph. Unmatched client service."
+            "title": "Legacy Collector"
           }
         }
       },
@@ -375,7 +457,8 @@
         "eyebrow": "OUR PROMISE",
         "heading": "Luxury That Lasts Forever",
         "text": "RoyalTick isn't simply about selling watches. It's about preserving heritage, celebrating craftsmanship, and helping every collector find the perfect timepiece.",
-        "btn_text": "Explore Collection"
+        "btn_text": "Explore Collection",
+        "btn_link": ""
       }
     },
     "quick_links": {
@@ -387,7 +470,8 @@
             "icon": "watch",
             "title": "Explore Collection",
             "text": "Browse every luxury timepiece in our collection.",
-            "btn_text": "Explore"
+            "btn_text": "Explore",
+            "link": ""
           }
         },
         "ql_2": {
@@ -396,7 +480,8 @@
             "icon": "sparkle",
             "title": "New Arrivals",
             "text": "Discover the newest additions to RoyalTick.",
-            "btn_text": "View Latest"
+            "btn_text": "View Latest",
+            "link": ""
           }
         },
         "ql_3": {
@@ -405,7 +490,8 @@
             "icon": "diamond",
             "title": "Limited Edition",
             "text": "Explore our rare collector pieces.",
-            "btn_text": "Discover"
+            "btn_text": "Discover",
+            "link": ""
           }
         },
         "ql_4": {
@@ -414,7 +500,8 @@
             "icon": "calendar",
             "title": "Book Appointment",
             "text": "Schedule a private luxury consultation.",
-            "btn_text": "Book Now"
+            "btn_text": "Book Now",
+            "link": ""
           }
         },
         "ql_5": {
@@ -423,7 +510,8 @@
             "icon": "user",
             "title": "Customer Account",
             "text": "Manage your profile, orders and wishlist.",
-            "btn_text": "My Account"
+            "btn_text": "My Account",
+            "link": ""
           }
         },
         "ql_6": {
@@ -432,7 +520,8 @@
             "icon": "shield",
             "title": "Warranty & Authenticity",
             "text": "Learn about our authenticity guarantee.",
-            "btn_text": "Learn More"
+            "btn_text": "Learn More",
+            "link": ""
           }
         },
         "ql_7": {
@@ -441,7 +530,8 @@
             "icon": "headset",
             "title": "Contact Concierge",
             "text": "Speak with our luxury watch specialists.",
-            "btn_text": "Contact"
+            "btn_text": "Contact",
+            "link": ""
           }
         },
         "ql_8": {
@@ -450,7 +540,8 @@
             "icon": "help",
             "title": "FAQ",
             "text": "Answers to common customer questions.",
-            "btn_text": "View FAQ"
+            "btn_text": "View FAQ",
+            "link": ""
           }
         }
       },
@@ -463,7 +554,11 @@
         "ql_6",
         "ql_7",
         "ql_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Continue Your Journey",
+        "description": "Discover the RoyalTick experience through our collections, services, and exclusive customer experiences."
+      }
     },
     "cta": {
       "type": "our-story-cta",
@@ -471,7 +566,9 @@
         "heading": "Discover Your Next Masterpiece",
         "description": "Explore one of the world's finest luxury watch collections.",
         "btn_1_text": "Browse Watches",
-        "btn_2_text": "Contact Concierge"
+        "btn_1_link": "",
+        "btn_2_text": "Contact Concierge",
+        "btn_2_link": ""
       }
     }
   },
