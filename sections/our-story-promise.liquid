@@ -1,0 +1,64 @@
+<div class="rt-story-wrapper">
+  <div class="rt-promise" style="background-image: url('{%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 1920 }}{%- else -%}{{ 'ourstory-Our-Promise .png' | asset_url }}{%- endif -%}');">
+    <div class="rt-promise-overlay"></div>
+    <div class="rt-story-container">
+      <div class="rt-promise-content rt-reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="rt-section-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading | escape }}</h2>
+        <p>{{ section.settings.text | escape }}</p>
+        {%- if section.settings.btn_text != blank -%}
+          <a href="{{ section.settings.btn_link | default: '#' }}" class="rt-btn rt-btn-primary">{{ section.settings.btn_text | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Promise Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "OUR PROMISE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Luxury That Lasts Forever"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text Content",
+      "default": "RoyalTick isn't simply about selling watches. It's about preserving heritage, celebrating craftsmanship, and helping every collector find the perfect timepiece."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Promise Banner"
+    }
+  ]
+}
+{% endschema %}

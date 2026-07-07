@@ -1,0 +1,118 @@
+<div class="rt-story-wrapper">
+  <div class="rt-craft">
+    <div class="rt-story-container">
+      <div class="rt-craft-grid">
+        <div class="rt-craft-img rt-reveal-left rt-scale-zoom">
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.image.alt | escape }}" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'ourstory-craft.png' | asset_url }}" alt="RoyalTick Luxury Craftsmanship" loading="lazy">
+          {%- endif -%}
+        </div>
+        
+        <div class="rt-intro-content-wrapper rt-reveal-right">
+          <span class="rt-section-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+          <h2 class="rt-section-title">{{ section.settings.heading | escape }}</h2>
+          <div class="rt-intro-desc">
+            {{ section.settings.description }}
+          </div>
+          
+          <ul class="rt-craft-list">
+            {%- for block in section.blocks -%}
+              <li class="rt-craft-item">
+                <h4>{{ block.settings.title | escape }}</h4>
+                <p>{{ block.settings.detail | escape }}</p>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Luxury Craftsmanship",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Craftsmanship Image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "HOROLOGICAL ARTISTRY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Uncompromising Standards of Horology"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>A true luxury timepiece is an intricate universe on your wrist. Our master watchmakers analyze and inspect every balance spring, gear train, and finishing detail to ensure mechanical perfection.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "craft_detail",
+      "name": "Craftsmanship Detail",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "detail",
+          "label": "Detail Description",
+          "default": "Explain this detail in depth."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury Craftsmanship",
+      "blocks": [
+        {
+          "type": "craft_detail",
+          "settings": {
+            "title": "Swiss Movements",
+            "detail": "Equipped with certified mechanical calibers built by standard Swiss heritage manufacture houses."
+          }
+        },
+        {
+          "type": "craft_detail",
+          "settings": {
+            "title": "Hand Finishing",
+            "detail": "Exquisite anglage, Côtes de Genève, and perlage applied meticulously by hand under magnification."
+          }
+        },
+        {
+          "type": "craft_detail",
+          "settings": {
+            "title": "Premium Materials",
+            "detail": "Structured in solid 18k gold, high-grade 904L steel, scratchproof sapphire crystals, and premium alligator leather straps."
+          }
+        },
+        {
+          "type": "craft_detail",
+          "settings": {
+            "title": "Rigorous Inspection",
+            "detail": "Multi-axis chronometer testing over 15 days inside environmental chambers to verify stability and precision."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

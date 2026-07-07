@@ -1,0 +1,87 @@
+<div class="rt-story-wrapper">
+  <div class="rt-stats">
+    <div class="rt-story-container">
+      <div class="rt-stats-grid">
+        {%- for block in section.blocks -%}
+          <div class="rt-stats-item rt-reveal" style="transition-delay: {{ forloop.index0 | times: 0.1 }}s;">
+            <h2 class="rt-counter" data-target="{{ block.settings.target_number | escape }}" data-suffix="{{ block.settings.suffix | escape }}">0</h2>
+            <p>{{ block.settings.label | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Premium Statistics",
+  "blocks": [
+    {
+      "type": "stat_counter",
+      "name": "Stat Counter",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "target_number",
+          "label": "Target Number",
+          "default": "5000",
+          "info": "Numbers only, no commas or symbols (e.g. 5000)"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix (e.g. +, %)",
+          "default": "+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Counter Label",
+          "default": "Collectors Satisfied"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Statistics",
+      "blocks": [
+        {
+          "type": "stat_counter",
+          "settings": {
+            "target_number": "5000",
+            "suffix": "+",
+            "label": "Satisfied Collectors"
+          }
+        },
+        {
+          "type": "stat_counter",
+          "settings": {
+            "target_number": "150",
+            "suffix": "+",
+            "label": "Luxury Brands"
+          }
+        },
+        {
+          "type": "stat_counter",
+          "settings": {
+            "target_number": "98",
+            "suffix": "%",
+            "label": "Customer Satisfaction"
+          }
+        },
+        {
+          "type": "stat_counter",
+          "settings": {
+            "target_number": "24",
+            "suffix": "/7",
+            "label": "Concierge Support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

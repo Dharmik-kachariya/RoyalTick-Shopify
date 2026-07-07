@@ -1,0 +1,68 @@
+<div class="rt-story-wrapper">
+  <div class="rt-cta">
+    <div class="rt-story-container">
+      <div class="rt-cta-banner rt-reveal">
+        <h2>{{ section.settings.heading | escape }}</h2>
+        <p>{{ section.settings.description | escape }}</p>
+        
+        <div class="rt-cta-buttons">
+          {%- if section.settings.btn_1_text != blank -%}
+            <a href="{{ section.settings.btn_1_link | default: '#' }}" class="rt-btn rt-btn-primary">{{ section.settings.btn_1_text | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.btn_2_text != blank -%}
+            <a href="{{ section.settings.btn_2_link | default: '#' }}" class="rt-btn rt-btn-secondary">{{ section.settings.btn_2_text | escape }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'rt-our-story.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Our Story CTA Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Discover Your Next Masterpiece"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore one of the world's finest luxury watch collections."
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Button 1 Text",
+      "default": "Browse Watches"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Button 2 Text",
+      "default": "Contact Concierge"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Button 2 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story CTA Banner"
+    }
+  ]
+}
+{% endschema %}

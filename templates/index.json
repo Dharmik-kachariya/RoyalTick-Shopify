@@ -96,6 +96,9 @@
         "padding-block-end": 72,
         "hero_layout_style": "luxury-video",
         "rt_video_asset": "video home.mp4",
+        "rt_video_overlay_color": "#000000",
+        "rt_video_overlay_opacity": 45,
+        "rt_video_hero_height": "100vh",
         "hero_bg_color": "#0b0b0b",
         "eyebrow": "THE ART OF HIGH HOROLOGY",
         "heading": "TIMELESS LUXURY",
@@ -112,7 +115,7 @@
         "primary_btn_link": "",
         "primary_btn_style": "filled",
         "secondary_btn_label": "Our Story",
-        "secondary_btn_link": "",
+        "secondary_btn_link": "/pages/our-story",
         "secondary_btn_style": "outline"
       }
     },
@@ -132,7 +135,7 @@
         "block_2": {
           "type": "collection_card",
           "settings": {
-            "collection": "chronograph",
+            "collection": "chronograph-watches",
             "title": "Chronograph Collection",
             "description": "Crafted in Switzerland with precision.",
             "button_text": "Explore",
@@ -152,8 +155,8 @@
         "block_4": {
           "type": "collection_card",
           "settings": {
-            "collection": "frontpage",
-            "title": "Classic Collection",
+            "collection": "smart-watches",
+            "title": "SmartCollection",
             "description": "Elegant models for formal occasions.",
             "button_text": "Explore",
             "button_link": ""

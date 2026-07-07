@@ -1,0 +1,145 @@
+<div class="rt-story-wrapper">
+  <div class="rt-testimonials">
+    <div class="rt-story-container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px auto;">
+        <span class="rt-section-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2 class="rt-section-title">{{ section.settings.heading | escape }}</h2>
+      </div>
+
+      <div class="rt-testimonials-grid">
+        {%- for block in section.blocks -%}
+          <div class="rt-testimonial-card rt-reveal" style="transition-delay: {{ forloop.index0 | times: 0.1 }}s;">
+            <div class="rt-testimonial-stars">
+              {%- assign rating = block.settings.rating | plus: 0 -%}
+              {%- for i in (1..5) -%}
+                {%- if i <= rating -%}
+                  ★
+                {%- else -%}
+                  ☆
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            
+            <blockquote class="rt-testimonial-text">
+              "{{ block.settings.text | escape }}"
+            </blockquote>
+            
+            <div class="rt-testimonial-user">
+              {%- if block.settings.avatar != blank -%}
+                <img class="rt-testimonial-avatar" src="{{ block.settings.avatar | image_url: width: 100, height: 100, crop: 'center' }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              {%- else -%}
+                {%- if forloop.index == 1 -%}
+                  <img class="rt-testimonial-avatar" src="{{ 'ourstory-testimonial-1.png' | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+                {%- elsif forloop.index == 2 -%}
+                  <img class="rt-testimonial-avatar" src="{{ 'ourstory-testimonial-2.png' | asset_url }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+                {%- else -%}
+                  <div class="rt-testimonial-avatar" style="background-color: var(--rt-gold); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #000;">
+                    {{ block.settings.name | slice: 0, 1 }}
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+              
+              <div>
+                <div class="rt-testimonial-name">{{ block.settings.name | escape }}</div>
+                <div class="rt-testimonial-title">{{ block.settings.title | escape }}</div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Luxury Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "COLLECTOR VOICES"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted By Connoisseurs Worldwide"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "select",
+          "id": "rating",
+          "label": "Star Rating",
+          "options": [
+            { "value": "5", "label": "5 Stars" },
+            { "value": "4", "label": "4 Stars" },
+            { "value": "3", "label": "3 Stars" }
+          ],
+          "default": "5"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testimonial Text",
+          "default": "The acquisition process was smooth and completely reassuring. The timepiece arrived in flawless condition, fully documented."
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Collector Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Collector Name",
+          "default": "Alexander Mercer"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Sub-title/Verification",
+          "default": "Verified Collector"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Maximilian V.",
+            "title": "Patek Philippe Collector",
+            "text": "Acquiring my Nautilus through RoyalTick was an outstanding experience. Their verification standards and concierge approach set them apart from standard retailers."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Elena Rostova",
+            "title": "Fine Art Consultant",
+            "text": "The attention to detail in their packaging and presentation matches the quality of the Swiss timepieces. A trustworthy destination for true connoisseurs."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "David Sterling",
+            "title": "Legacy Collector",
+            "text": "I value historical transparency. RoyalTick provided detailed certificates and full records of my vintage Chronograph. Unmatched client service."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

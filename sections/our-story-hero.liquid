@@ -1,0 +1,106 @@
+{{ 'rt-our-story.css' | asset_url | stylesheet_tag }}
+
+<div class="rt-story-wrapper">
+  <div class="rt-hero">
+    <div class="rt-hero-bg">
+      {%- if section.settings.video_url != blank -%}
+        <video autoplay muted loop playsinline src="{{ section.settings.video_url }}"></video>
+      {%- else -%}
+        <video autoplay muted loop playsinline src="{{ 'ourstory-sec1.mp4' | asset_url }}"></video>
+      {%- endif -%}
+    </div>
+    
+    <div class="rt-hero-overlay"></div>
+    
+    <div class="rt-hero-content">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="rt-hero-eyebrow rt-reveal">{{ section.settings.eyebrow | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="rt-hero-title rt-reveal" style="transition-delay: 0.1s;">{{ section.settings.heading | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="rt-hero-desc rt-reveal" style="transition-delay: 0.2s;">{{ section.settings.description | escape }}</p>
+      {%- endif -%}
+      
+      <div class="rt-hero-buttons rt-reveal" style="transition-delay: 0.3s;">
+        {%- if section.settings.btn_1_text != blank -%}
+          <a href="{{ section.settings.btn_1_link | default: '#' }}" class="rt-btn rt-btn-primary">{{ section.settings.btn_1_text | escape }}</a>
+        {%- endif -%}
+        {%- if section.settings.btn_2_text != blank -%}
+          <a href="{{ section.settings.btn_2_link | default: '#' }}" class="rt-btn rt-btn-secondary">{{ section.settings.btn_2_text | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <a href="#rt-intro" class="rt-hero-scroll">
+      <span>Scroll</span>
+      <div class="rt-hero-scroll-indicator"></div>
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Background Video URL",
+      "info": "Upload video to Files and paste URL here."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Fallback Image",
+      "info": "Displayed if video is not available."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "THE ART OF LUXURY WATCHMAKING"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Crafting Time Beyond Generations"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "RoyalTick represents timeless craftsmanship, uncompromising precision, and the world's finest luxury timepieces curated for collectors and visionaries."
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Button 1 Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Button 2 Text",
+      "default": "Discover Heritage"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Button 2 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story Hero"
+    }
+  ]
+}
+{% endschema %}

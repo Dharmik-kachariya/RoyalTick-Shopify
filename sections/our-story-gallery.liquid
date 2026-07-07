@@ -1,0 +1,75 @@
+<div class="rt-story-wrapper">
+  <div class="rt-gallery">
+    <div class="rt-story-container">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <span class="rt-section-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2 class="rt-section-title">{{ section.settings.heading | escape }}</h2>
+      </div>
+
+      <div class="rt-gallery-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image != blank -%}
+            <div class="rt-gallery-item rt-reveal" 
+                 data-src="{{ block.settings.image | image_url: width: 1200 }}" 
+                 style="transition-delay: {{ forloop.index0 | times: 0.05 }}s;">
+              <img src="{{ block.settings.image | image_url: width: 400 }}" alt="RoyalTick Instagram Image" loading="lazy">
+              <div class="rt-gallery-overlay">
+                <div class="rt-gallery-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal container -->
+  <div class="rt-lightbox">
+    <div class="rt-lightbox-content">
+      <button class="rt-lightbox-close" aria-label="Close lightbox">&times;</button>
+      <img class="rt-lightbox-img" src="" alt="Enlarged gallery view">
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Instagram Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "INSTAGRAM GALLERY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Curated Collector Lifestyle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Gallery Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Gallery"
+    }
+  ]
+}
+{% endschema %}

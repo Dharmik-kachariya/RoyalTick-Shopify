@@ -1,0 +1,144 @@
+/* rt-our-story-quick-links.css */
+:root {
+  --rt-ql-bg: #151515;
+  --rt-ql-border: rgba(255, 255, 255, 0.08);
+  --rt-ql-border-hover: #C8A96A;
+  --rt-ql-radius: 24px;
+  --rt-ql-padding: 36px;
+}
+
+.rt-ql-section {
+  padding: 120px 0;
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+}
+
+.rt-ql-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+}
+
+.rt-ql-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.rt-ql-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #8E8E93;
+  line-height: 1.6;
+}
+
+.rt-ql-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1199px) {
+  .rt-ql-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .rt-ql-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rt-ql-card {
+  background-color: var(--rt-ql-bg);
+  border: 1px solid var(--rt-ql-border);
+  border-radius: var(--rt-ql-radius);
+  padding: var(--rt-ql-padding);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.rt-ql-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rt-ql-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--rt-ql-border-hover);
+  box-shadow: 0 12px 30px rgba(200, 169, 106, 0.1);
+}
+
+.rt-ql-icon-wrapper {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.rt-ql-icon {
+  width: 32px;
+  height: 32px;
+  stroke: #C8A96A;
+  stroke-width: 1.2;
+  fill: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rt-ql-card:hover .rt-ql-icon {
+  transform: scale(1.1);
+}
+
+.rt-ql-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.rt-ql-card-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #8E8E93;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.rt-ql-card-action {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #C8A96A;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  transition: color 0.3s ease;
+}
+
+.rt-ql-card-arrow {
+  transition: transform 0.3s ease;
+}
+
+.rt-ql-card:hover .rt-ql-card-arrow {
+  transform: translateX(6px);
+}
+
+.rt-ql-card:hover .rt-ql-card-action {
+  color: #E3C88D;
+}

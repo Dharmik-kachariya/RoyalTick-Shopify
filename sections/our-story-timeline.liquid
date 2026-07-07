@@ -1,0 +1,118 @@
+<div class="rt-story-wrapper">
+  <div class="rt-timeline-section">
+    <div class="rt-story-container">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span class="rt-section-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2 class="rt-section-title">{{ section.settings.heading | escape }}</h2>
+      </div>
+
+      <div class="rt-timeline-wrapper">
+        <div class="rt-timeline-line"></div>
+        
+        {%- for block in section.blocks -%}
+          <div class="rt-timeline-item">
+            <div class="rt-timeline-dot"></div>
+            <div class="rt-timeline-year">{{ block.settings.year | escape }}</div>
+            <div class="rt-timeline-card">
+              <h3>{{ block.settings.title | escape }}</h3>
+              <p>{{ block.settings.description | escape }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story Timeline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "OUR PATH"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Journey of RoyalTick"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeline_milestone",
+      "name": "Timeline Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2026"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Milestone Title",
+          "default": "Milestone Achieved"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Milestone Description",
+          "default": "Brief description of the milestone achieved during this period."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story Timeline",
+      "blocks": [
+        {
+          "type": "timeline_milestone",
+          "settings": {
+            "year": "2015",
+            "title": "Brand Founded",
+            "description": "RoyalTick was established with a singular vision: to connect passionate watch collectors with authentic luxury watches."
+          }
+        },
+        {
+          "type": "timeline_milestone",
+          "settings": {
+            "year": "2017",
+            "title": "Swiss Partnerships",
+            "description": "Formed direct relationships with authorized watchmakers and experts in Switzerland to guarantee authenticity."
+          }
+        },
+        {
+          "type": "timeline_milestone",
+          "settings": {
+            "year": "2020",
+            "title": "Global Expansion",
+            "description": "Opened distribution hubs in key cities across Europe and Asia, establishing secure, insured worldwide shipping."
+          }
+        },
+        {
+          "type": "timeline_milestone",
+          "settings": {
+            "year": "2023",
+            "title": "Collector Community",
+            "description": "Launched the exclusive RoyalTick Club, offering curated watch showcases and VIP access to rare historical timepieces."
+          }
+        },
+        {
+          "type": "timeline_milestone",
+          "settings": {
+            "year": "2026",
+            "title": "RoyalTick Premium",
+            "description": "Unveiling our personalized 24/7 digital concierge service, bringing luxury bespoke watch advisory to your fingertips."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

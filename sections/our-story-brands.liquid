@@ -1,0 +1,48 @@
+<div class="rt-story-wrapper">
+  <div class="rt-brands">
+    <div class="rt-story-container">
+      <div class="rt-brands-grid">
+        {%- for block in section.blocks -%}
+          <div class="rt-brand-item">{{ block.settings.brand_name | escape }}</div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story Featured Brands",
+  "blocks": [
+    {
+      "type": "brand_logo",
+      "name": "Brand Name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "Rolex"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story Featured Brands",
+      "blocks": [
+        { "type": "brand_logo", "settings": { "brand_name": "Rolex" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Patek Philippe" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Audemars Piguet" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Omega" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Breitling" } },
+        { "type": "brand_logo", "settings": { "brand_name": "TAG Heuer" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Cartier" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Longines" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Tudor" } },
+        { "type": "brand_logo", "settings": { "brand_name": "Vacheron Constantin" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

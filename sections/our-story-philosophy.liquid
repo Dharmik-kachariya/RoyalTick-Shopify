@@ -1,0 +1,106 @@
+<div class="rt-story-wrapper">
+  <div class="rt-philosophy">
+    <div class="rt-story-container">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <span class="rt-section-eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2 class="rt-section-title">{{ section.settings.heading | escape }}</h2>
+      </div>
+
+      <div class="rt-philosophy-grid">
+        {%- for block in section.blocks -%}
+          <div class="rt-philosophy-card rt-reveal" style="transition-delay: {{ forloop.index0 | times: 0.1 }}s;">
+            <div class="rt-philosophy-icon">
+              {%- if block.settings.svg_code != blank -%}
+                {{ block.settings.svg_code }}
+              {%- else -%}
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              {%- endif -%}
+            </div>
+            <h3>{{ block.settings.title | escape }}</h3>
+            <p>{{ block.settings.description | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Story Philosophy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "OUR PHILOSOPHY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Cornerstones of Heritage"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "philosophy_card",
+      "name": "Philosophy Card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "html",
+          "id": "svg_code",
+          "label": "Custom SVG Icon Code",
+          "info": "Paste raw SVG code here."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Core Pillar"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Describe the philosophy pillar here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our Story Philosophy",
+      "blocks": [
+        {
+          "type": "philosophy_card",
+          "settings": {
+            "title": "Precision",
+            "description": "Every movement is selected with exceptional standards, ensuring micro-second accuracy and reliable horological heritage.",
+            "svg_code": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 6v6l4 2\" /></svg>"
+          }
+        },
+        {
+          "type": "philosophy_card",
+          "settings": {
+            "title": "Craftsmanship",
+            "description": "Only the finest timepieces deserve the RoyalTick name, reflecting centuries of hand-finished excellence.",
+            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z\" /></svg>"
+          }
+        },
+        {
+          "type": "philosophy_card",
+          "settings": {
+            "title": "Legacy",
+            "description": "Luxury watches become heirlooms that transcend generations, acting as custodians of precious personal milestones.",
+            "svg_code": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\" /></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
