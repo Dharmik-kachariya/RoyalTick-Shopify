@@ -242,9 +242,9 @@
                 {% endif %}
 
                 <div class="rt-product-card__price-wrap">
-                  <span class="rt-price">{{ product.price | money }}</span>
+                  <span class="rt-price">{{ product.price | money | replace: '$', '₹' }}</span>
                   {% if section.settings.rt_enable_compare_price and on_sale %}
-                    <span class="rt-compare-price">{{ product.compare_at_price | money }}</span>
+                    <span class="rt-compare-price">{{ product.compare_at_price | money | replace: '$', '₹' }}</span>
                     <span class="rt-discount-percent">-{{ percent_saved }}%</span>
                   {% endif %}
                 </div>
@@ -266,8 +266,8 @@
                   "vendor": {{ product.vendor | json }},
                   "url": {{ product.url | json }},
                   "description": {{ product.description | strip_html | truncatewords: 35 | json }},
-                  "price": "{{ product.price | money }}",
-                  "compare_at_price": {% if on_sale %}"{{ product.compare_at_price | money }}"{% else %}null{% endif %},
+                   "price": "{{ product.price | money | replace: '$', '₹' }}",
+                  "compare_at_price": {% if on_sale %}"{{ product.compare_at_price | money | replace: '$', '₹' }}"{% else %}null{% endif %},
                   "available": {{ product.available | json }},
                   "featured_image": "{{ product.featured_media | image_url: width: 800 }}",
                   "images": [
@@ -292,8 +292,8 @@
                         "option1": {{ variant.option1 | json }},
                         "option2": {{ variant.option2 | json }},
                         "option3": {{ variant.option3 | json }},
-                        "price": "{{ variant.price | money }}",
-                        "compare_at_price": {% if variant.compare_at_price %}"{{ variant.compare_at_price | money }}"{% else %}null{% endif %},
+                        "price": "{{ variant.price | money | replace: '$', '₹' }}",
+                        "compare_at_price": {% if variant.compare_at_price %}"{{ variant.compare_at_price | money | replace: '$', '₹' }}"{% else %}null{% endif %},
                         "available": {{ variant.available | json }},
                         "inventory_quantity": {{ variant.inventory_quantity | default: 0 }},
                         "featured_image": {% if variant.featured_image %}"{{ variant.featured_image | image_url: width: 800 }}"{% else %}null{% endif %}
@@ -317,7 +317,7 @@
                 <span class="rt-product-card__brand">RoyalTick</span>
                 <h3 class="rt-product-card__title">Luxury Timepiece {{ i }}</h3>
                 <div class="rt-product-card__price">
-                  <span class="rt-price">$9,500.00</span>
+                  <span class="rt-price">₹9,500.00</span>
                 </div>
               </div>
             </div>

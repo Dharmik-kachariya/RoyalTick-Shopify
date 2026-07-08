@@ -169,6 +169,9 @@ function formatCents(moneyValue, thousandsSeparator, decimalSeparator, precision
  * @returns {string} The formatted money value
  */
 export function formatMoney(moneyValue, format, currency) {
+  if (format && typeof format === 'string') {
+    format = format.replace(/\$/g, '₹');
+  }
   // Calculate divisor based on currency's native precision
   const currencyPrecision = getCurrencyPrecision(currency);
   const divisor = getCurrencyDivisor(currency);

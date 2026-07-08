@@ -35,7 +35,7 @@
     >
       <span class="facets__label">{{ filter.label }}</span>
       <facet-status-component class="facets__status">
-        <template ref="moneyFormat">{{ shop.money_format }}</template>
+        <template ref="moneyFormat">{{ shop.money_format | replace: '$', '₹' }}</template>
 
         <span
           class="hide-when-empty"
@@ -45,16 +45,16 @@
         >
           {%- if filter.min_value.value != null or filter.max_value.value != null %}
             {%- if filter.min_value.value != null and filter.max_value.value != null %}
-              {{- filter.min_value.value | money | strip_html -}}
+              {{- filter.min_value.value | money | replace: '$', '₹' | strip_html -}}
               –
-              {{- filter.max_value.value | money | strip_html -}}
+              {{- filter.max_value.value | money | replace: '$', '₹' | strip_html -}}
             {%- elsif filter.min_value.value != null -%}
-              {{ filter.min_value.value | money | strip_html }}–{{ filter.range_max | money | strip_html }}
+              {{ filter.min_value.value | money | replace: '$', '₹' | strip_html }}–{{ filter.range_max | money | replace: '$', '₹' | strip_html }}
 
             {%- elsif filter.max_value.value != null -%}
-              {{- 0 | money | strip_html -}}
+              {{- 0 | money | replace: '$', '₹' | strip_html -}}
               –
-              {{- filter.max_value.value | money | strip_html -}}
+              {{- filter.max_value.value | money | replace: '$', '₹' | strip_html -}}
             {%- endif -%}
           {%- endif -%}
         </span>
@@ -80,7 +80,7 @@
           {%- endif %}
         "
         id="facet-inputs-{{ filter.param_name | escape | replace: '.', '-' }}"
-        data-money-format="{{ shop.money_format | strip_html }}"
+        data-money-format="{{ shop.money_format | strip_html | replace: '$', '₹' }}"
         data-currency="{{ localization.country.currency.iso_code }}"
         on:change="/updatePriceFilterAndResults"
       >
@@ -110,7 +110,7 @@
                 class="field__label price-facet__label"
                 for="{{ filter.label | escape }}-GTE-{{ id_prefix }}"
               >
-                {{ cart.currency.symbol }}
+                {{ cart.currency.symbol | replace: '$', '₹' }}
               </label>
             </div>
 
@@ -137,7 +137,7 @@
                 class="field__label price-facet__label"
                 for="{{ filter.label | escape }}-LTE-{{ id_prefix }}"
               >
-                {{ cart.currency.symbol }}
+                {{ cart.currency.symbol | replace: '$', '₹' }}
               </label>
             </div>
           </div>
@@ -151,7 +151,7 @@
             {%- endif %}
           "
         >
-          {%- assign formatted_highest_price = filter.range_max | money -%}
+          {%- assign formatted_highest_price = filter.range_max | money | replace: '$', '₹' -%}
           {{ 'content.price_filter_html' | t: price: formatted_highest_price }}
         </div>
 

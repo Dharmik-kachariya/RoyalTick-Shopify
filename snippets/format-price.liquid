@@ -17,9 +17,9 @@
   assign show_currency = settings.currency_code_enabled_product_pages
 
   if show_currency
-    assign formatted_price = price_value | money_with_currency
+    assign formatted_price = price_value | money_with_currency | replace: '$', '₹'
   else
-    assign formatted_price = price_value | money
+    assign formatted_price = price_value | money | replace: '$', '₹'
   endif
 
   if price_type == 'per_item'

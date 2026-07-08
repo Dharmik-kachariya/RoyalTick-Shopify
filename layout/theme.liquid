@@ -71,6 +71,31 @@
 
       <!-- ROYAL TICK WISHLIST -->
       {{ 'rt-wishlist.css' | asset_url | stylesheet_tag }}
+      <!-- Override Shopify.formatMoney to use Rupees symbol -->
+      <script>
+        window.Shopify = window.Shopify || {};
+        let _formatMoney = window.Shopify.formatMoney;
+        Object.defineProperty(window.Shopify, 'formatMoney', {
+          get: function() {
+            return function(cents, format) {
+              if (format && typeof format === 'string') {
+                format = format.replace(/\$/g, '₹');
+              }
+              let result = _formatMoney ? _formatMoney(cents, format) : '₹' + (cents / 100).toFixed(2);
+              if (typeof result === 'string') {
+                result = result.replace(/\$/g, '₹');
+              }
+              return result;
+            };
+          },
+          set: function(val) {
+            _formatMoney = val;
+          },
+          configurable: true,
+          enumerable: true
+        });
+      </script>
+
       <script>
         window.RT_CUSTOMER_LOGGED_IN = {% if customer %}true{% else %}false{% endif %};
       </script>

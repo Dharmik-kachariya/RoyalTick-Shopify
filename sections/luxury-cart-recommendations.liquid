@@ -129,7 +129,7 @@
                   <span class="luxury-rec-vendor">{{ product.vendor }}</span>
                 {% endif %}
                   <h3 class="luxury-rec-title">{{ product.title }}</h3>
-                <span class="luxury-rec-price">{{ product.price | money }}</span>
+                <span class="luxury-rec-price">{{ product.price | money | replace: '$', '₹' }}</span>
               </div>
             </a>
             
@@ -154,7 +154,7 @@
                   <span class="luxury-rec-vendor">{{ product.vendor }}</span>
                 {% endif %}
                 <h3 class="luxury-rec-title">{{ product.title }}</h3>
-                <span class="luxury-rec-price">{{ product.price | money }}</span>
+                <span class="luxury-rec-price">{{ product.price | money | replace: '$', '₹' }}</span>
               </div>
             </a>
             
