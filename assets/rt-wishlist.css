@@ -364,17 +364,9 @@
 }
 
 /* Glassmorphism Heart Button on Cards */
-.rt-card-wishlist-btn {
-  background: rgba(21, 21, 21, 0.6) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.rt-card-wishlist-btn,
+.rt-btn-wishlist {
+  display: none !important;
 }
 
 .rt-card-wishlist-btn:hover {

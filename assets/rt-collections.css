@@ -1299,6 +1299,77 @@ product-swatches overflow-list::part(list) {
   }
 }
 
+/* --- Filter & Sort Dropdowns Redesign to Premium Dark Theme --- */
+.sorting-filter__options,
+.facets__inputs,
+.facets__panel-content,
+.color-custom-popover {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
+  border-radius: 8px !important;
+}
+
+.sorting-filter__options-inner,
+.facets__inputs-wrapper {
+  background-color: transparent !important;
+}
+
+/* Option Hover Effect */
+.sorting-filter__option:hover,
+.facets__display label:hover,
+.facets__inputs label:hover,
+.facets__panel-content label:hover,
+.color-custom-popover label:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Text Colors */
+.sorting-filter__label,
+.sorting-filter__option,
+.facets__label,
+.facets__status,
+.facets__panel-content label,
+.facets__inputs label,
+.color-custom-popover label,
+.color-custom-popover span {
+  color: #ffffff !important;
+}
+
+/* Active Gold / Checked Styles */
+.sorting-filter__option[aria-selected="true"] {
+  background-color: rgba(201, 162, 39, 0.12) !important;
+}
+
+.sorting-filter__option[aria-selected="true"] .sorting-filter__label {
+  color: var(--rt-accent-color, #c9a227) !important;
+  font-weight: 600 !important;
+}
+
+.sorting-filter__checkmark svg {
+  fill: var(--rt-accent-color, #c9a227) !important;
+  stroke: var(--rt-accent-color, #c9a227) !important;
+}
+
+.sorting-filter__checkmark svg path {
+  stroke: var(--rt-accent-color, #c9a227) !important;
+}
+
+/* Price Range Fields Style */
+.price-facet__field input {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 4px !important;
+}
+
+.price-facet__field label,
+.price-facet__field span {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+
 
 
 

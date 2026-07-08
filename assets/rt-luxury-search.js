@@ -59,7 +59,8 @@ class LuxurySearch {
     });
 
     // Form submit (Save recent search)
-    this.form.addEventListener('submit', () => {
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
       const query = this.input.value.trim();
       if (query) this.saveRecentSearch(query);
     });
